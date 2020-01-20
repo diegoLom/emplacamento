@@ -23,9 +23,9 @@ import org.springframework.eb.servlet.support.ServletUriComponentsBuilder;
 @Component
 public class BaseController<T extends BaseEntity<I>, I>  {
 
-		
-    private  JpaRepository<T, I> repository;
 	
+	private BaseS
+  	
 	public void setRepository( JpaRepository<T, I> arg0){
 		repository = arg0 ; 
 	}
@@ -35,19 +35,14 @@ public class BaseController<T extends BaseEntity<I>, I>  {
 		return repository.findAll();
 	};
 	
-	
-		
-	@GetMapping("{id}") 
 	public Optional<T> pegar(I i) {
 		return repository.findById(i);
 	};
-	
+	@GetMapping("{id}") 
 	public T pegarT(@RequestParam I id){
 		return pegar(id).get();
 	}
 	
-	
-	//@DeleteMapping("{id}") 
 	@RequestMapping(method=RequestMethod.DELETE)
 	public void deletarT(@RequestParam(required=true) I id){
 		deletar(id);

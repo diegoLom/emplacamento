@@ -7,11 +7,11 @@
 	<parent>
 		<groupId>com.losolved.emplacamento</groupId>
 		<artifactId>emplacamento</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>${project.version}</version>
 	</parent>
 	<groupId>com.losolved.emplacamento</groupId>
 	<artifactId>emplacamento-web</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${project.version}</version>
 	<name>emplacamento-web</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -29,6 +29,13 @@
 			<groupId>com.losolved.emplacamento</groupId>
 			<artifactId>emplacamento-domain</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>com.losolved.emplacamento</groupId>
+			<artifactId>emplacamento-services</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 
 	</dependencies>

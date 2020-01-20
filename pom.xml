@@ -9,13 +9,15 @@
 	</parent>
 	<groupId>com.losolved.emplacamento</groupId>
 	<artifactId>emplacamento</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${project.version}</version>
 	<name>emplacamento</name>
 	<packaging>pom</packaging>
 	<description>Api do sistema de emplacamento</description>
 
 	<properties>
 		<java.version>1.8</java.version>
+		<project.version>0.0.1-SNAPSHOT</project.version>
+	
 	</properties>
 
 	<dependencies>
