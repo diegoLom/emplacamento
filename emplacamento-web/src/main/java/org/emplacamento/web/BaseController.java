@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.emplacamento.domain.BaseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.eb.servlet.support.ServletUriComponentsBuilder;
 
+
+@Component
 public class BaseController<T extends BaseEntity<I>, I>  {
 
 		
-private  JpaRepository<T, I> repository;
+    private  JpaRepository<T, I> repository;
 	
 	public void setRepository( JpaRepository<T, I> arg0){
 		repository = arg0 ; 
@@ -33,6 +36,7 @@ private  JpaRepository<T, I> repository;
 	};
 	
 	
+		
 	@GetMapping("{id}") 
 	public Optional<T> pegar(I i) {
 		return repository.findById(i);

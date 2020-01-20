@@ -55,5 +55,6 @@
 		<module>emplacamento-services</module>
 		<module>emplacamento-domain</module>
 		<module>emplacamento-web</module>
+		<module>emplacamento-integration</module>
 	</modules>
 </project>
