@@ -5,6 +5,7 @@ import java.net.URI;
 import java.util.Optional;
 
 import org.emplacamento.domain.BaseEntity;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -31,8 +32,6 @@ public  abstract class BaseService<T extends BaseEntity<I>, I> {
 	}
 	
 	public Optional<T> atualizarT( T t,  I id) {
-		
-		
 		Optional<T> studentOptional = repository.findById( id);
 
 		if (!studentOptional.isPresent())
@@ -40,10 +39,10 @@ public  abstract class BaseService<T extends BaseEntity<I>, I> {
 
 		t.setId(id);
 		
-		repository.save(t);
-
-		return ResponseEntity.noContent().build();
+		t =  (T) repository.save(t);
+		Optional<T> retorno = Optional.of(t);
 		
+		return retorno;
 	}
 	
 	public Boolean deletar(I i) {
@@ -64,46 +63,6 @@ public  abstract class BaseService<T extends BaseEntity<I>, I> {
 
 	
 	
-	/*
-	 	@PostMapping 
-	public ResponseEntity<Object> createT(@RequestBody T t){
-		T savedT = repository.save(t);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedT).toUri();
-		
-		return ResponseEntity.created(location).build();
-		
-	}
-	
-	@PutMapping("{id}")
-	public ResponseEntity<Object> atualizarT(@RequestBody T t, @PathVariable I id) {
-		Optional<T> studentOptional = repository.findById( id);
-
-		if (!studentOptional.isPresent())
-			return ResponseEntity.notFound().build();
-
-		t.setId(id);
-		
-		repository.save(t);
-
-		return ResponseEntity.noContent().build();
-	}
-	
-	public Boolean deletar(I i) {
-		Boolean retorno = false; 
-		
-		if(i!= null) {
-			Optional<T> objetoRetornado = pegar(i); 
-			
-			if(objetoRetornado.isPresent()) {
-				repository.deleteById(i);
-				
-				retorno = true;
-			}
-		}
-		
-			return retorno;
-		}; 
-	 */
 	
 	
 	
