@@ -7,13 +7,13 @@ import javax.persistence.Entity;
 public class Emplacamento implements BaseEntity<Long> {
 	
 	@Column
-	private String numPedido;
+	private String cod;
 
-	public String getNumPedido() {
-		return numPedido;
+	public String getCod() {
+		return cod;
 	}
 
-	public void setNumPedido(String numPedido) {
+	public void setNumPedido(String ve_nr) {
 		this.numPedido = numPedido;
 	}
 
@@ -28,5 +28,19 @@ public class Emplacamento implements BaseEntity<Long> {
 		// TODO Auto-generated method stub
 
 	}
+	
+	
+	
+		cod
+		ve_nr
+		uf_cd
+		municipio_nm
+		nf_nota
+		emp_cd
+		tpVec
+		vl_receb
+		forma_pagto
+		dt_cad
+
 
 }
