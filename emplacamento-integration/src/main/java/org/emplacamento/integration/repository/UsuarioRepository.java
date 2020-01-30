@@ -1,4 +1,4 @@
-package org.emplacamento.integration;
+package org.emplacamento.integration.repository;
 
 import org.emplacamento.domain.Usuario;
 import org.springframework.data.repository.CrudRepository;
