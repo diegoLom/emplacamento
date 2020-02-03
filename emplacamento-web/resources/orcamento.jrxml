@@ -7,7 +7,23 @@
 			<![CDATA[]]>
 		</queryString>
 	</subDataset>
-	<parameter name="dep_" class="java.lang.String"/>
+	<parameter name="dept_venda" class="java.lang.String"/>
+	<parameter name="data_solicitacao" class="java.lang.String"/>
+	<parameter name="model_veiculo" class="java.lang.String"/>
+	<parameter name="munc_veiculo" class="java.lang.String"/>
+	<parameter name="vlr_proposta" class="java.math.BigDecimal"/>
+	<parameter name="obsv" class="java.lang.String"/>
+	<parameter name="vlr_total" class="java.math.BigDecimal"/>
+	<parameter name="total" class="java.math.BigDecimal"/>
+	<parameter name="tipo_emplacamento" class="java.lang.String"/>
+	<parameter name="dpvat" class="java.math.BigDecimal"/>
+	<parameter name="vlr_tipo" class="java.math.BigDecimal"/>
+	<parameter name="vlr_ipva" class="java.math.BigDecimal"/>
+	<parameter name="placa_refletiva" class="java.math.BigDecimal"/>
+	<parameter name="sind" class="java.math.BigDecimal"/>
+	<parameter name="central_dgltzacao" class="java.math.BigDecimal"/>
+	<parameter name="servico" class="java.math.BigDecimal"/>
+	<parameter name="alienacao" class="java.math.BigDecimal"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -18,7 +34,11 @@
 		<band height="79" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="30" width="550" height="30" uuid="da2ac3e2-3495-4e74-829b-b06b1b762345"/>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ORÇAMENTO PARA SERVIÇO DE EMPLACAMENTO \n"+
+"Veículo Novo"]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -28,7 +48,8 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="250" splitType="Stretch">
+		<band height="351" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<rectangle>
 				<reportElement x="0" y="0" width="554" height="98" uuid="955cfad4-a26b-40bb-adf7-91b7190c0902">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -134,7 +155,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[$P{dep_venda}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{dept_venda}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="190" y="16" width="364" height="13" uuid="e8d1e642-a1f9-418f-896d-7e444ad980c1">
@@ -142,7 +163,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{data_solicitacao}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="190" y="30" width="364" height="13" uuid="e8d1e642-a1f9-418f-896d-7e444ad980c1">
@@ -150,7 +171,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{model_veiculo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="190" y="44" width="364" height="13" uuid="e8d1e642-a1f9-418f-896d-7e444ad980c1">
@@ -158,7 +179,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{munc_veiculo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="190" y="58" width="364" height="13" uuid="e8d1e642-a1f9-418f-896d-7e444ad980c1">
@@ -166,7 +187,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{vlr_proposta}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="190" y="72" width="364" height="13" uuid="e8d1e642-a1f9-418f-896d-7e444ad980c1">
@@ -174,7 +195,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{obsv}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="190" y="86" width="364" height="13" uuid="e8d1e642-a1f9-418f-896d-7e444ad980c1">
@@ -182,7 +203,85 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{vlr_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="101" width="180" height="110" uuid="751eebb0-914b-42d1-a53a-2beede676f08">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["DPVAT \n"+
+"Emplacamento " +$P{tipo_emplacamento}+ " \n"+
+"IPVA Veículo Passeio Gás/Flex \n"+
+"Placa Refletiva \n"+
+"Sindicato \n"+
+"Central Sol/Digitalização \n"+
+"Serviço Emplacamento \n"+
+"Alienação "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="211" width="550" height="12" uuid="cd5e8c75-09de-497b-a92c-269026ab8261">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Autorizo a realização do Serviço de Emplacamento conforme acima descriminado."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="505" y="101" width="43" height="90" uuid="6d88d359-6e41-4332-9e88-6098d650b2b3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[""+$P{dpvat}+"\n"+
+""+$P{vlr_tipo}+"\n"+
+""+$P{vlr_ipva}+"\n"+
+""+$P{placa_refletiva}+"\n"+
+""+$P{sind}+"\n"+
+""+$P{central_dgltzacao}+"\n"+
+""+$P{servico}+"\n"+
+""+$P{alienacao}+"\n"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="230" width="182" height="12" uuid="b4b4552b-2bd2-45d6-b5c1-ddc49f8d3540">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["___________________________________________________________"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="371" y="230" width="182" height="12" uuid="56910a4c-8f95-4217-a4a2-68c1fc9854e4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["________________________________________________________________"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="245" width="182" height="12" uuid="c1bf6eca-f6f0-425d-b793-fbeb03c58320">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Local e Data"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="246" width="182" height="12" uuid="81751484-ef1f-460c-8f38-1bdb562ca6e6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Assinatura conforme documento de Identidade"]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
@@ -192,7 +291,9 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch"/>
