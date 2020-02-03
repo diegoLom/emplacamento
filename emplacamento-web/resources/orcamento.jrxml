@@ -295,7 +295,7 @@
 				<textFieldExpression><![CDATA["O Serviço proporciona maior comodidade ao cliente, todavia, fica este ciente que qualquer cidadão pode realizar o emplacamento do veículo perante as repartições públicas competentes ou através de profissionais autônomos. Dispenso os comprovantes de pagamentos dos valores referentes aos serviços acima descriminados. "]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement x="0" y="320" width="554" height="200" uuid="0d22385e-febb-4f59-b56b-786af3e284f4">
+				<reportElement x="0" y="320" width="554" height="120" uuid="0d22385e-febb-4f59-b56b-786af3e284f4">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -306,7 +306,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center">
-					<font size="10" isBold="true"/>
+					<font size="7" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["PARA USO EXCLUSIVO, NÃO PREENCHER"]]></textFieldExpression>
 			</textField>
@@ -316,9 +316,9 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left">
-					<font size="10" isBold="true"/>
+					<font size="7" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["PESSOA FÍSICA"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[" PESSOA FÍSICA"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="350" y="348" width="205" height="12" uuid="c6e5d22a-207c-464a-84d7-6d9b3d0a7d9f">
@@ -326,9 +326,39 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left">
-					<font size="10" isBold="true"/>
+					<font size="7" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["PESSOA JURÍDICA"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="360" width="350" height="70" uuid="ca0435fe-10ea-4fc8-b799-421acf8bd898">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" (   ) COPIA AC/TT\n\n"+
+" (   ) CÓPIA RG\n\n"+
+" (   ) CÓPIA CPF\n\n"+         
+" (   ) Autorização de Primeiro Emplacamento\n\n"+
+" (   ) Declaração de Residência\n\n"+
+" (   ) Cópia comprovante de Endereço (LF: Cônjuge, Certidão de Casamento,\n"+
+"       Aluguel, Certidão de Locação com firma reconhecida de Locador e Locatário   "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="360" width="200" height="70" uuid="ff3e3458-5db1-445f-9f78-9fb46dfdb207">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(   ) COPIA AC/TT \n \n  "+
+"(   ) CÓPIA RG e CPF dos sócios, ou procurador\n \n "+
+"(   ) Cartão CNPJ\n \n "+
+"(   ) Autorização de Primeiro Emplacamento\n \n "+
+"(   ) Declaração de Residência\n \n "+
+"(   ) Contrato Social Consolidado e autenticado"+
+"(sindicato/associação, Ata e Estatuto Social)  "]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
