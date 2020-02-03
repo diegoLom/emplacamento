@@ -1,4 +1,4 @@
-package com.losolved.clientapi;
+package org.emplacamento.integration.client;
 
 import javax.xml.soap.*;
 

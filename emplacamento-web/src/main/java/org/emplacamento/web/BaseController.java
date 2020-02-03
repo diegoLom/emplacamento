@@ -53,6 +53,8 @@ public class BaseController<T extends BaseEntity<I>, I>  {
 		T savedT = repository.save(t);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedT).toUri();
 		
+		
+		
 		return ResponseEntity.created(location).build();
 		
 	}

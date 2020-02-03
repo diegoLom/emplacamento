@@ -14,7 +14,7 @@ public class Emplacamento implements BaseEntity<Long> {
 	}
 
 	public void setNumPedido(String ve_nr) {
-		this.numPedido = numPedido;
+		this.cod = cod;
 	}
 
 	@Override
@@ -31,16 +31,6 @@ public class Emplacamento implements BaseEntity<Long> {
 	
 	
 	
-		cod
-		ve_nr
-		uf_cd
-		municipio_nm
-		nf_nota
-		emp_cd
-		tpVec
-		vl_receb
-		forma_pagto
-		dt_cad
 
 
 }
