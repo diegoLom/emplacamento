@@ -1,33 +1,34 @@
 package com.losolved.emplacamento.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
-public class Emplacamento implements BaseEntity<Long> {
+@Table(name = "emplacamento")
+public class Emplacamento extends BaseEntity<Integer> {
+	
+	
+	@OneToOne
+	@JoinColumn(name ="veiculoid")
+	private Veiculo veiculo;
+	
+	@OneToMany
+	@JoinColumn
+	private List<Incidente> incidentes;
+	
+	@OneToMany
+	@JoinColumn
+	private List<FormaPagamento> pagamentos;
 	
 	@Column
-	private String cod;
-
-	public String getCod() {
-		return cod;
-	}
-
-	public void setNumPedido(String ve_nr) {
-		this.cod = cod;
-	}
-
-	@Override
-	public Long getId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setId(Long o) {
-		// TODO Auto-generated method stub
-
-	}
+	private String observacao;
 	
 	
 	

@@ -2,14 +2,25 @@ package com.losolved.emplacamento.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 
 @MappedSuperclass
-public interface BaseEntity<T> extends Serializable {
+public class BaseEntity<T> implements Serializable {
 	
 	
-	public T getId();
-	public void setId(T o);
+	@Id
+	private T id; 
+	
+	public T getId() {
+		return id; 
+	}
+	public void setId(T o) {
+		this.id = o;
+	}
+	
+	
+	
 
 }

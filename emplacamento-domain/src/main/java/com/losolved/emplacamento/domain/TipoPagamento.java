@@ -6,8 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tipo_incidente")
-public class TipoIncidente extends BaseEntity<Byte> {
+@Table(name = "tipo_pagamento")
+public class TipoPagamento extends BaseEntity<Byte> {
 	
 	
 	@Column(unique = true, nullable = false)
