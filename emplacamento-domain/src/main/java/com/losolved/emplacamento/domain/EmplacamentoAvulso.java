@@ -1,19 +1,45 @@
 package com.losolved.emplacamento.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.ibm.icu.math.BigDecimal;
 
 @Entity
 @Table(name = "emplacamento_avulso")
 public class EmplacamentoAvulso extends BaseEntity<Integer>{
-	
-	
+		
 	@OneToOne @MapsId
 	private Emplacamento emplacamento;
 
+		
+	@Column
+	private String veiculo;
+	
+	@Column
+	private BigDecimal vlVeiculo;
+	
+	@Column
+	private String estoque;
+	
+	@Column
+	@Temporal(value = TemporalType.TIMESTAMP)
+	private java.util.Date data_emplacamento;
+	
+	
+	@Column
+	private String potencia;
+	
+	@Column
+	private String classificacao;
+	
+	
 	public Emplacamento getEmplacamento() {
 		return emplacamento;
 	}
@@ -21,6 +47,7 @@ public class EmplacamentoAvulso extends BaseEntity<Integer>{
 	public void setEmplacamento(Emplacamento emplacamento) {
 		this.emplacamento = emplacamento;
 	}
+
 
 	@Override
 	public int hashCode() {
