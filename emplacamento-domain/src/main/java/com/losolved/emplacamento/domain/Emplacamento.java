@@ -29,6 +29,12 @@ public class Emplacamento extends BaseEntity<Integer> {
 	
 	@Column
 	private String observacao;
+
+	@Override
+	public String toString() {
+		return "Emplacamento [veiculo=" + veiculo + ", incidentes=" + incidentes + ", pagamentos=" + pagamentos
+				+ ", observacao=" + observacao + "]";
+	}
 	
 	
 	

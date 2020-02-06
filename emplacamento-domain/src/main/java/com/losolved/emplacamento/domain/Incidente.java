@@ -32,7 +32,7 @@ public class Incidente extends BaseEntity<Integer>{
 	
 	
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = false, name = "emplacaid")
 	private Emplacamento emplacamento; 
 	
 	@ManyToOne
