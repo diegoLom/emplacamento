@@ -6,19 +6,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.ibm.icu.math.BigDecimal;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "forma_pagamento")
 public class FormaPagamento extends BaseEntity<Integer> {
 	
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "emplacaid")
+	@ManyToOne
+	@JoinColumn(name = "emplacaid", nullable=false)
 	private Emplacamento emplacamento;
 	
 	
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "tpPagamentoId")
+	@ManyToOne
+	@JoinColumn(name = "tpPagamentoId", nullable=false)
 	private TipoPagamento tipoPagamento;
 	
 	

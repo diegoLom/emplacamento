@@ -11,6 +11,5 @@ import java.util.List;
 public interface EmplacamentoRepository extends CrudRepository<Emplacamento, Long> {
 	
 	
-  public Emplacamento findByNumPedido(String numpedido);
-
+ 
 }

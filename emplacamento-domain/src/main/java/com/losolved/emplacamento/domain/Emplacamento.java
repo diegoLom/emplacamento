@@ -19,19 +19,31 @@ public class Emplacamento extends BaseEntity<Integer> {
 	@JoinColumn(name ="veiculoid")
 	private Veiculo veiculo;
 	
-	@OneToMany
-	@JoinColumn
+	
+	@ManyToOne
+	@JoinColumn(name ="municipioId")
+	private Municipio municipio;
+	
+	
+
+	@OneToMany(targetEntity = com.losolved.emplacamento.domain.Incidente.class, mappedBy = "emplacamento")
 	private List<Incidente> incidentes;
 	
-	@OneToMany
-	@JoinColumn
+	
+	@OneToMany(targetEntity = com.losolved.emplacamento.domain.FormaPagamento.class, mappedBy = "emplacamento")
 	private List<FormaPagamento> pagamentos;
 	
 	@Column
 	private String observacao;
+
+	@Override
+	public String toString() {
+		return "Emplacamento [veiculo=" + veiculo + ", incidentes=" + incidentes + ", pagamentos=" + pagamentos
+				+ ", observacao=" + observacao + "]";
+	}
 	
 	
-	
+	 
 
 
 }
