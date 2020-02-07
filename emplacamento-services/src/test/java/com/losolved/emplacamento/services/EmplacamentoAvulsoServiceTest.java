@@ -21,12 +21,12 @@ public class EmplacamentoAvulsoServiceTest {
 	 private EmplacamentoAvulso emplacamento;
 	
 	
-	@Teste
+	@Test
 	public void prepareEmplacamento() {
 		
+	EmplacamentoAvulso emplacamento = new EmplacamentoAvulso();	
 		
-		
-		when(emplacamentoServiceAvulso.salvar(emplacamento)).then
+		when(emplacamentoServiceAvulso.salvar(emplacamento)).thenThrow(EmplacamentoAvulsoWithoutVeiculoExcpetion)
 	}
 
 
