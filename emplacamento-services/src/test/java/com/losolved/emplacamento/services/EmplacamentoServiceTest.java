@@ -17,11 +17,6 @@ public class EmplacamentoServiceTest {
 	private final static  Long ESDRUXULO_PEDIDO = Long.MAX_VALUE;
 
 	
-	@Test
-	public void emptyPedido() {
-		
-		when(emplacamentoService.findByNumPedido(ESDRUXULO_PEDIDO+"")).thenThrow(NotFoundEmplacamentoException.class);
-		
-	}
+
 
 }

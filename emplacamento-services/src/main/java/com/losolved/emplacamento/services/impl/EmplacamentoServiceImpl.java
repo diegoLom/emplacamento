@@ -8,10 +8,6 @@ import com.losolved.emplacamento.services.EmplacamentoService;
 public class EmplacamentoServiceImpl implements EmplacamentoService {
 
 
-	@Override
-	public Emplacamento findByNumPedido(String numpedido) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }
