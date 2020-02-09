@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Fri Feb 07 15:58:31 BRT 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-0170-2104-8c9b-00000c5ac0b8 
+on database directory memory:/home/adn/workspace/de/emplacamento/emplacamento-services/testdb with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Loaded from file:/home/adn/.m2/repository/com/innoventsolutions/birt/runtime/org.apache.derby_10.11.1.1_v201605202053/4.8.0/org.apache.derby_10.11.1.1_v201605202053-4.8.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_221-b11
+user.dir=/home/adn/workspace/de/emplacamento/emplacamento-services
+os.name=Linux
+os.arch=amd64
+os.version=5.3.0-28-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
