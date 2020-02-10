@@ -56,7 +56,13 @@
 		    <artifactId>org.eclipse.birt.runtime_4.8.0-20180626</artifactId>
 		    <version>4.8.0</version>
 		</dependency>
+		
+		<dependency>
+		<groupId>org.postgresql</groupId>
+		<artifactId>postgresql</artifactId>
+	</dependency>
 	</dependencies>
+
 
 	<build>
 		<plugins>

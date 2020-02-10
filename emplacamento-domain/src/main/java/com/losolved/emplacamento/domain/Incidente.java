@@ -11,12 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "incidente")
-public class Incidente {
-	
-	
-	
-	@Id
-	private Long id; 
+public class Incidente extends BaseEntity<Integer>{
 	
 	
 	@Column
@@ -37,20 +32,14 @@ public class Incidente {
 	
 	
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = false, name = "emplacaid")
 	private Emplacamento emplacamento; 
 	
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private TipoIncidente tipoIncidente;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 
 	public BigDecimal getValor() {
 		return valor;
@@ -116,7 +105,6 @@ public class Incidente {
 		result = prime * result + ((dtPagamento == null) ? 0 : dtPagamento.hashCode());
 		result = prime * result + ((dtRecebimento == null) ? 0 : dtRecebimento.hashCode());
 		result = prime * result + ((emplacamento == null) ? 0 : emplacamento.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((obs == null) ? 0 : obs.hashCode());
 		result = prime * result + ((tipoIncidente == null) ? 0 : tipoIncidente.hashCode());
 		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
@@ -152,11 +140,6 @@ public class Incidente {
 				return false;
 		} else if (!emplacamento.equals(other.emplacamento))
 			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
 		if (obs == null) {
 			if (other.obs != null)
 				return false;
@@ -174,6 +157,8 @@ public class Incidente {
 			return false;
 		return true;
 	}
+
+	
 	
 	
 	

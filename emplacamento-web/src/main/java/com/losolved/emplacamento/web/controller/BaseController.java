@@ -1,4 +1,4 @@
-package com.losolved.emplacamento.web;
+package com.losolved.emplacamento.web.controller;
 
 import java.net.URI;
 import java.util.List;
