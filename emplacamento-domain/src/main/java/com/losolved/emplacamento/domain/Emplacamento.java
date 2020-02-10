@@ -103,6 +103,7 @@ public class Emplacamento extends BaseEntity<Integer> {
 		if(pagamentos == null)
 			pagamentos = new HashSet<FormaPagamento>();
 			
+		 pagamentos.add(pagamento);
 			
 		this.pagamentos = pagamentos;
 	}

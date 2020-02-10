@@ -8,21 +8,22 @@ import com.losolved.emplacamento.commons.exceptions.BiggestCortesiaException;
 import com.losolved.emplacamento.domain.Emplacamento;
 import com.losolved.emplacamento.domain.EmplacamentoAvulso;
 import com.losolved.emplacamento.domain.FormaPagamento;
+import com.losolved.emplacamento.integration.repository.EmplacamentoAvulsoRepository;
 import com.losolved.emplacamento.services.BaseService;
 import com.losolved.emplacamento.services.EmplacamentoAvulsoService;
 import com.losolved.emplacamento.services.EmplacamentoService;
 
-public class EmplacamentoAvulsoServiceImpl extends BaseService<EmplacamentoAvulso, Integer>
+public class EmplacamentoAvulsoServiceImpl extends BaseService<EmplacamentoAvulso, Integer, EmplacamentoAvulsoRepository>
 		implements EmplacamentoAvulsoService {
 
 	public EmplacamentoAvulso salvar(EmplacamentoAvulso toSave) {
 			
 		if(!validaCortesia(toSave))
-			new BiggestCortesiaException("");
+			throw new BiggestCortesiaException("");
 		
 		
 		
-		return null;
+		return createT(toSave);
 	}
 	
 	
@@ -35,7 +36,7 @@ public class EmplacamentoAvulsoServiceImpl extends BaseService<EmplacamentoAvuls
 		
 		BigDecimal valorCortesia =  oPagamento.isPresent() ? oPagamento.get().getValor() : new BigDecimal(0);
 		
-		if(valorCortesia.compareTo(toSave.getEmplacamento().getValorEmplacamento()) > 1 ) {
+		if(valorCortesia.compareTo(toSave.getEmplacamento().getValorEmplacamento()) > 0 ) {
 			return false;
 		}
 		

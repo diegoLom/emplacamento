@@ -1,13 +1,16 @@
 package com.losolved.emplacamento.services;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -22,8 +25,15 @@ import com.losolved.emplacamento.services.impl.*;
 public class EmplacamentoAvulsoServiceTest  extends BaseServiceTest {
 	
 	
-	 private EmplacamentoAvulso emplacamento;
+	
+//		 Inject the mock
+//	Define the behavior of the mock
+//	 Test
+//	 Validate the executio
 
+	 //Declare and create the mock
+
+	 private EmplacamentoAvulsoServiceImpl mockServiceEmplacamento = new EmplacamentoAvulsoServiceImpl();
 	
 	
 	 private EmplacamentoAvulso emplacamento;
@@ -32,13 +42,22 @@ public class EmplacamentoAvulsoServiceTest  extends BaseServiceTest {
 	@Test
 	public void prepareEmplacamento() {
 		
-		EmplacamentoAvulsoServiceImpl mockServiceEmplacamento = mock(EmplacamentoAvulsoServiceImpl.class);
 		
 		emplacamento = getEmplacamentoCortesia();
-		when(mockServiceEmplacamento.salvar(emplacamento)).thenThrow( new BiggestCortesiaException(""));
 		
+		
+		Boolean highCortesia = false ; 
+		
+		try {
+			mockServiceEmplacamento.salvar(emplacamento);
+		}catch(BiggestCortesiaException e) {
+			highCortesia = true ; 
+		}
+		
+		assertEquals( highCortesia , true);
 		
 	
+		
 		
 	}
 
