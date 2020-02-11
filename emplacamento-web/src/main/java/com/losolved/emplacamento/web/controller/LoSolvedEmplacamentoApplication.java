@@ -5,11 +5,13 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication
-@EntityScan(value = "com.losolved.emplacamento.domain")
-@ComponentScan({ "com.losolved.emplacamento" })
+import com.losolved.emplacamento.web.configuration.AppConfig;
+
+@SpringBootApplication(scanBasePackages = "com.losolved.emplacamento.*")
+@Import(AppConfig.class)
 public class LoSolvedEmplacamentoApplication {
 
 	public static void main(String[] args) {

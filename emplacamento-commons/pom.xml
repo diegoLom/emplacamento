@@ -7,20 +7,18 @@
     <artifactId>emplacamento</artifactId>
     <version>${project.version}</version>
   </parent>
-  <groupId>com.losolved.emplacamento</groupId>
   <artifactId>emplacamento-commons</artifactId>
-  <version>${project.version}</version>
-  <name>emplacamento-commons</name>
+    <name>emplacamento-commons</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+     <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
   </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
+       <scope>test</scope>
     </dependency>
   </dependencies>
 </project>

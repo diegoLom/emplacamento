@@ -5,8 +5,11 @@
 
 # Package Files #
 *.jar
+/*.jar
 *.war
+/*.war
 *.ear
+/*.ear
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
@@ -15,7 +18,13 @@ hs_err_pid*
 
 
 HELP.md
-target/*
+target/
+emplacamento-commons/target/*
+emplacamento-services/target/*
+emplacamento-integration/target/*
+emplacamento-domain/target/*
+emplacamento-web/target/*
+
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**

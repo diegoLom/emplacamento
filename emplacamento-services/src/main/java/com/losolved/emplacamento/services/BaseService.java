@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
-@Component
+
 public  abstract class BaseService<T extends BaseEntity<I>, I  > {
 	
 	

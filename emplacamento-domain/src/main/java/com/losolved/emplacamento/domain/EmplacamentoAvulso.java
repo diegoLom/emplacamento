@@ -1,5 +1,7 @@
 package com.losolved.emplacamento.domain;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,7 +11,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.ibm.icu.math.BigDecimal;
 
 @Entity
 @Table(name = "emplacamento_avulso")

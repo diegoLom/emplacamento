@@ -51,11 +51,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<dependency>
-		    <groupId>com.innoventsolutions.birt.runtime</groupId>
-		    <artifactId>org.eclipse.birt.runtime_4.8.0-20180626</artifactId>
-		    <version>4.8.0</version>
-		</dependency>
 		
 		<dependency>
 		<groupId>org.postgresql</groupId>
@@ -69,9 +64,29 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+			       <execution>
+			           <goals>
+			               <goal>repackage</goal>
+			           </goals>
+			           <configuration>
+		                <classifier>exec</classifier>
+		            </configuration>
+		           
+			       </execution>
+			   </executions>
+			    <dependencies>
+					<dependency>
+						<groupId>org.apache.maven.scm</groupId>
+						<artifactId>maven-scm-provider-gitexe</artifactId>
+						<version>1.9.4</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 	</plugins>
 	</build>
+	
+	
 
 	<modules>
 		<module>emplacamento-services</module>
