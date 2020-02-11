@@ -30,7 +30,7 @@ public class EmplacamentoAvulso extends BaseEntity<Integer>{
 	
 	@Column
 	@Temporal(value = TemporalType.TIMESTAMP)
-	private java.sql.Date data_emplacamento;
+	private java.util.Date data_emplacamento;
 	
 	
 	@Column

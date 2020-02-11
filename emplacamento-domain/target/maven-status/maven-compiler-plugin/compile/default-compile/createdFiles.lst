@@ -1,0 +1,10 @@
+com/losolved/emplacamento/domain/Uf.class
+com/losolved/emplacamento/domain/Emplacamento.class
+com/losolved/emplacamento/domain/TipoIncidente.class
+com/losolved/emplacamento/domain/BaseEntity.class
+com/losolved/emplacamento/domain/TipoPagamento.class
+com/losolved/emplacamento/domain/Municipio.class
+com/losolved/emplacamento/domain/FormaPagamento.class
+com/losolved/emplacamento/domain/Incidente.class
+com/losolved/emplacamento/domain/Veiculo.class
+com/losolved/emplacamento/domain/EmplacamentoAvulso.class
