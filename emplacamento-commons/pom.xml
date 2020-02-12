@@ -5,14 +5,15 @@
   <parent>
     <groupId>com.losolved.emplacamento</groupId>
     <artifactId>emplacamento</artifactId>
-    <version>${project.version}</version>
+    <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>emplacamento-commons</artifactId>
     <name>emplacamento-commons</name>
+    <packaging>jar</packaging>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-     <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+
   </properties>
   <dependencies>
     <dependency>
@@ -21,4 +22,8 @@
        <scope>test</scope>
     </dependency>
   </dependencies>
+  
+  
+  
+	
 </project>

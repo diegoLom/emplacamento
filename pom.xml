@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.3.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
 	<groupId>com.losolved.emplacamento</groupId>
 	<artifactId>emplacamento</artifactId>
-	<version>${project.version}</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>emplacamento</name>
 	<packaging>pom</packaging>
 	<description>Api do sistema de emplacamento</description>
 
-	<properties>
-		<java.version>1.8</java.version>
-		<project.version>0.0.1-SNAPSHOT</project.version>
-		 <start-class>com.losolved.emplacamento.web.controller.LoSolvedEmplacamentoApplication</start-class>
-	</properties>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.2.3.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+
 
 	<dependencies>
 		<dependency>
@@ -51,31 +50,50 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
-		<dependency>
-		<groupId>org.postgresql</groupId>
-		<artifactId>postgresql</artifactId>
-	</dependency>
-	</dependencies>
 
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+		
+		
+	
+	</dependencies>
+	
+	<dependencyManagement>
+		<dependencies>
+		
+			<dependency>
+			<groupId>com.losolved.emplacamento</groupId>
+			<artifactId>emplacamento-domain</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+		
+		</dependencies>
+	
+	</dependencyManagement>
+	
+	
+	<modules>
+		<module>emplacamento-services</module>
+		<module>emplacamento-domain</module>
+		<module>emplacamento-web</module>
+		<module>emplacamento-integration</module>
+		<module>emplacamento-commons</module>
+	</modules>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
-			       <execution>
-			           <goals>
-			               <goal>repackage</goal>
-			           </goals>
-			           <configuration>
-		                <classifier>exec</classifier>
-		            </configuration>
-		           
-			       </execution>
-			   </executions>
-			    <dependencies>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.2</version>
+				<configuration>
+					<tagNameFormat>v@{project.version}-RC</tagNameFormat>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<pushChanges>false</pushChanges>
+				</configuration>
+				<dependencies>
 					<dependency>
 						<groupId>org.apache.maven.scm</groupId>
 						<artifactId>maven-scm-provider-gitexe</artifactId>
@@ -83,16 +101,17 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-	</plugins>
+		</plugins>
 	</build>
 	
 	
+	<properties>
+		<java.version>1.8</java.version>
+		<project.version>0.0.1-SNAPSHOT</project.version>
+		<start-class>com.losolved.emplacamento.web.controller.LoSolvedEmplacamentoApplication</start-class>
+	</properties>
+	
 
-	<modules>
-		<module>emplacamento-services</module>
-		<module>emplacamento-domain</module>
-		<module>emplacamento-web</module>
-		<module>emplacamento-integration</module>
-    <module>emplacamento-commons</module>
-  </modules>
+
+	
 </project>

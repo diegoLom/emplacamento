@@ -7,14 +7,14 @@
 	<parent>
 		<groupId>com.losolved.emplacamento</groupId>
 		<artifactId>emplacamento</artifactId>
-		<version>${project.version}</version>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>emplacamento-web</artifactId>
 	<name>emplacamento-web</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		 <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+		  
 	</properties>
 	<dependencies>
 		<dependency>
@@ -23,29 +23,24 @@
 			<scope>test</scope>
 		</dependency>
 
+		
+		
+		<dependency>
+			<groupId>com.losolved.emplacamento</groupId>
+			<artifactId>emplacamento-services</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>com.losolved.emplacamento</groupId>
 			<artifactId>emplacamento-domain</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		
-		
-		<dependency>
-			<groupId>com.losolved.emplacamento</groupId>
-			<artifactId>emplacamento-services</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.losolved.emplacamento</groupId>
-			<artifactId>emplacamento-domain</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		
 		<dependency>
 			<groupId>com.losolved.emplacamento</groupId>
 			<artifactId>emplacamento-integration</artifactId>
-			<version>${project.version}</version>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		
 				
