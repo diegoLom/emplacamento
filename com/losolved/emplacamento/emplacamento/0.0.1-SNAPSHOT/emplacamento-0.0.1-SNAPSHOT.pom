@@ -82,95 +82,57 @@
 		<module>emplacamento-commons</module>
 	</modules>
 
-	<build>
-<!-- 		<plugins> -->
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
-<!-- 				<artifactId>maven-release-plugin</artifactId> -->
-<!-- 				<version>2.5.2</version> -->
-<!-- 				<configuration> -->
-<!-- 					<tagNameFormat>v@{project.version}-RC</tagNameFormat> -->
-<!-- 					<autoVersionSubmodules>true</autoVersionSubmodules> -->
-<!-- 					<pushChanges>false</pushChanges> -->
-<!-- 				</configuration> -->
-<!-- 				<dependencies> -->
-<!-- 					<dependency> -->
-<!-- 						<groupId>org.apache.maven.scm</groupId> -->
-<!-- 						<artifactId>maven-scm-provider-gitexe</artifactId> -->
-<!-- 						<version>1.9.4</version> -->
-<!-- 					</dependency> -->
-<!-- 				</dependencies> -->
-<!-- 			</plugin> -->
-<!-- 		</plugins>                     -->
-
-
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.0.1</version>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>package</phase>
-                        <goals><goal>copy-dependencies</goal></goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
+<build>
+  <plugins>
+    <plugin>
+      <groupId>com.heroku.sdk</groupId>
+      <artifactId>heroku-maven-plugin</artifactId>
+      <configuration>
+        <processTypes>
+          <web>java $JAVA_OPTS -cp target/classes:target/dependency/* com.losolved.emplacamento.web.controller.LoSolvedEmplacamentoApplication</web>
+        </processTypes>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+<profiles>
+  <profile>
+    <id>test</id>
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>com.heroku.sdk</groupId>
+          <artifactId>heroku-maven-plugin</artifactId>
+          <configuration>
+            <appName>emplaca</appName>
+          </configuration>
+        </plugin>
+      </plugins>
     </build>
-	
-	
-	
+  </profile>
+  <profile>
+    <id>prod</id>
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>com.heroku.sdk</groupId>
+          <artifactId>heroku-maven-plugin</artifactId>
+          <configuration>
+            <appName>emplaca</appName>
+          </configuration>
+        </plugin>
+      </plugins>
+    </build>
+  </profile>
+</profiles>
 
-	<profiles>
-		<profile>
-		<id>heroku</id>
-			<activation>
-				<property>
-					<name>heroku</name>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>com.heroku.sdk</groupId>
-						<artifactId>heroku-maven-plugin</artifactId>
-						<version>1.1.1</version>
-						<configuration>
-							<appName>emplaca</appName>
-						<includeTarget>false</includeTarget>
-						                        <includes>
-					      
-                        </includes>
-								     <jdkVersion>1.8</jdkVersion>
-							         <processTypes>
-    						                            <web>java $JAVA_OPTS -jar ${full-artifact-name} --spring.profiles.active=heroku</web>
-
-                    
-    					</processTypes>
-						</configuration>
-						<executions>
-							<execution>
-								<phase>verify</phase>
-								<goals>
-									<goal>deploy</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-	
 		
 	
 	<properties>
 		<java.version>1.8</java.version>
 		<project.version>0.0.1-SNAPSHOT</project.version>
 		<start-class>com.losolved.emplacamento.web.controller.LoSolvedEmplacamentoApplication</start-class>
-		   <full-artifact-name>target/${project.artifactId}-${project.version}.jar</full-artifact-name>
+		   <full-artifact-name>${project.artifactId}/target/${project.artifactId}-${project.version}.jar</full-artifact-name>
 
 		
 	</properties>

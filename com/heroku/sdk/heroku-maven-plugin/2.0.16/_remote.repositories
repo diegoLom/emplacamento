@@ -1,3 +1,4 @@
 #NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
-#Thu Feb 13 17:10:11 BRT 2020
-maven-metadata-central.xml.lastUpdated=1581624611885
+#Thu Feb 13 17:14:03 BRT 2020
+heroku-maven-plugin-2.0.16.jar>central=
+heroku-maven-plugin-2.0.16.pom>central=
