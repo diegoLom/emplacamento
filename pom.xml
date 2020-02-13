@@ -104,22 +104,21 @@
 <!-- 		</plugins>                     -->
 
 
-  <plugins>
-    <plugin>
-      <artifactId>maven-assembly-plugin</artifactId>
-      <configuration>
-        <archive>
-          <manifest>
-            <mainClass>com.losolved.emplacamento.web.controller.LoSolvedEmplacamentoApplication</mainClass>
-          </manifest>
-        </archive>
-        <descriptorRefs>
-          <descriptorRef>jar-with-dependencies</descriptorRef>
-        </descriptorRefs>
-      </configuration>
-    </plugin>
-  </plugins>
-	</build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals><goal>copy-dependencies</goal></goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 	
 	
 	
@@ -140,18 +139,12 @@
 						<version>1.1.1</version>
 						<configuration>
 							<appName>emplaca</appName>
-							<includeTarget>false</includeTarget>
-							<includes>
-								<include>emplacamento-services</include>
-								<include>emplacamento-domain</include>
-								<include>emplacamento-integration</include>
-								<include>emplacamento-commons</include>
-							</includes>
-							<jdkVersion>1.8</jdkVersion>
-							<processTypes>
-								<web>java $JAVA_OPTS -jar emplacamento-web
-									--spring.profiles.active=heroku</web>
-							</processTypes>
+						<includeTarget>false</includeTarget>
+								     <jdkVersion>1.8</jdkVersion>
+							         <processTypes>
+    						  <web>java $JAVA_OPTS -cp target/classes:target/dependency/* com.losolved.emplacamento.web.controller.LoSolvedEmplacamentoApplication</web>
+       
+    					</processTypes>
 						</configuration>
 						<executions>
 							<execution>
