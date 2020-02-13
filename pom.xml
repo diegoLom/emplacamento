@@ -101,7 +101,7 @@
 <!-- 					</dependency> -->
 <!-- 				</dependencies> -->
 <!-- 			</plugin> -->
-<!-- 		</plugins> -->
+<!-- 		</plugins>                     -->
 
 
   <plugins>
@@ -139,18 +139,17 @@
 						<artifactId>heroku-maven-plugin</artifactId>
 						<version>1.1.1</version>
 						<configuration>
-							<appName>emplacamento</appName>
+							<appName>emplacamento-web</appName>
 							<includeTarget>false</includeTarget>
 							<includes>
 								<include>emplacamento-services</include>
 								<include>emplacamento-domain</include>
-								<include>emplacamento-web</include>
 								<include>emplacamento-integration</include>
 								<include>emplacamento-commons</include>
 							</includes>
 							<jdkVersion>1.8</jdkVersion>
 							<processTypes>
-								<web>java $JAVA_OPTS -jar emplacamento
+								<web>java $JAVA_OPTS -jar emplacamento-web
 									--spring.profiles.active=heroku</web>
 							</processTypes>
 						</configuration>
