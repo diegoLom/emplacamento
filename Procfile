@@ -1,1 +1,1 @@
-web:java $JAVA_OPTS -jar emplacamento --spring.profiles.active=heroku 
+web: java  -jar    emplacamento-web-0.0.1-SNAPSHOT.jar

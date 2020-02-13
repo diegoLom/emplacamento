@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.losolved.emplacamento</groupId>
+  <artifactId>emplacamento-web</artifactId>
+  <versioning>
+    <versions>
+      <version>0.0.1-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20200213163158</lastUpdated>
+  </versioning>
+</metadata>
