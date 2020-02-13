@@ -83,38 +83,23 @@
 	</modules>
 
 	<build>
- 		<plugins> 
-			<plugins>
-    <plugin>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-maven-plugin</artifactId>
-    </plugin>
-
-  				</configuration> 
- 				<dependencies> 
- 					<dependency> 
- 						<groupId>org.apache.maven.scm</groupId> 
- 						<artifactId>maven-scm-provider-gitexe</artifactId> 
- 						<version>1.9.4</version> 
- 					</dependency> 
- 				</dependencies> 
- 			</plugin> 
- 		</plugins>                     
+		<plugins>
+			<plugin>
+				 <groupId>org.springframework.boot</groupId>
+     		 <artifactId>spring-boot-maven-plugin</artifactId>
+				
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.scm</groupId>
+						<artifactId>maven-scm-provider-gitexe</artifactId>
+						<version>1.9.4</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>                    
 
 
-        <plugins>
-        <plugin>
-  <artifactId>maven-assembly-plugin</artifactId>
-  <version>3.0.0</version>
-  <configuration>
-    <descriptorRefs>
-      <descriptorRef>jar-with-dependencies</descriptorRef>
-    </descriptorRefs>
-    <finalName>program</finalName>
-  </configuration>
-</plugin>
-
-        </plugins>
+      
     </build>
 	
 	
