@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.losolved.emplacamento</groupId>
-	<artifactId>emplacamento</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>emplacamento</name>
-	<packaging>pom</packaging>
-	<description>Api do sistema de emplacamento</description>
-
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.3.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	<groupId>com.losolved.emplacamento</groupId>
+	<artifactId>emplacamento</artifactId>
+	<version>${project.version}</version>
+	<name>emplacamento</name>
+	<packaging>pom</packaging>
+	<description>Api do sistema de emplacamento</description>
 
-
+	<properties>
+		<java.version>1.8</java.version>
+		<project.version>0.0.1-SNAPSHOT</project.version>
+	
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -50,74 +51,33 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
+		    <groupId>com.innoventsolutions.birt.runtime</groupId>
+		    <artifactId>org.eclipse.birt.runtime_4.8.0-20180626</artifactId>
+		    <version>4.8.0</version>
 		</dependency>
 		
-		
-	
+		<dependency>
+		<groupId>org.postgresql</groupId>
+		<artifactId>postgresql</artifactId>
+	</dependency>
 	</dependencies>
-	
-	<dependencyManagement>
-		<dependencies>
-		
-			<dependency>
-			<groupId>com.losolved.emplacamento</groupId>
-			<artifactId>emplacamento-domain</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			</dependency>
-		
-		</dependencies>
-	
-	</dependencyManagement>
-	
-	
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+	</plugins>
+	</build>
+
 	<modules>
 		<module>emplacamento-services</module>
 		<module>emplacamento-domain</module>
 		<module>emplacamento-web</module>
 		<module>emplacamento-integration</module>
-		<module>emplacamento-commons</module>
-	</modules>
-
-	<build>
-		<plugins>
-			<plugin>
-				 <groupId>org.springframework.boot</groupId>
-     		 <artifactId>spring-boot-maven-plugin</artifactId>
-				
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.scm</groupId>
-						<artifactId>maven-scm-provider-gitexe</artifactId>
-						<version>1.9.4</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-		</plugins>                    
-
-
-      
-    </build>
-	
-	
-	
-
-
-		
-	
-	<properties>
-		<java.version>1.8</java.version>
-		<project.version>0.0.1-SNAPSHOT</project.version>
-		<start-class>com.losolved.emplacamento.web.controller.LoSolvedEmplacamentoApplication</start-class>
-		   <full-artifact-name>${project.artifactId}/projtarget/${project.artifactId}-${project.version}.jar</full-artifact-name>
-
-		
-	</properties>
-	
-
-
-	
+    <module>emplacamento-commons</module>
+  </modules>
 </project>

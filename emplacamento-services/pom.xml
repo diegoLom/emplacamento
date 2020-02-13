@@ -5,20 +5,21 @@
   <parent>
     <groupId>com.losolved.emplacamento</groupId>
     <artifactId>emplacamento</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${project.version}</version>
   </parent>
-   <artifactId>emplacamento-services</artifactId>
- <name>emplacamento-services</name>
+  <groupId>com.losolved.emplacamento</groupId>
+  <artifactId>emplacamento-services</artifactId>
+  <version>${project.version}</version>
+  <name>emplacamento-services</name>
   <url>http://maven.apache.org</url>
-  <packaging>jar</packaging>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
   </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+      <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
     
@@ -27,14 +28,14 @@
 	 <dependency>
 	  <groupId>com.losolved.emplacamento</groupId>
 	  <artifactId>emplacamento-domain</artifactId>
-	  <version>0.0.1-SNAPSHOT</version>
+	  <version>${project.version}</version>
 	</dependency>
 	
 	
 	 <dependency>
 	  <groupId>com.losolved.emplacamento</groupId>
 	  <artifactId>emplacamento-integration</artifactId>
-	  <version>0.0.1-SNAPSHOT</version>
+	  <version>${project.version}</version>
 	</dependency>
 	
 
@@ -42,7 +43,7 @@
 	 <dependency>
 	  <groupId>com.losolved.emplacamento</groupId>
 	  <artifactId>emplacamento-commons</artifactId>
-	  <version>0.0.1-SNAPSHOT</version>
+	  <version>${project.version}</version>
 	</dependency>
 	
 	<dependency>
@@ -50,11 +51,5 @@
          <artifactId>powermock-module-junit4</artifactId>
          <version>2.0.4</version>
         </dependency>
-
-	 <dependency>
-       <groupId>net.sf.jasperreports</groupId>
-       <artifactId>jasperreports</artifactId>
-       <version>6.7.0</version>
-    </dependency>
   </dependencies>
 </project>

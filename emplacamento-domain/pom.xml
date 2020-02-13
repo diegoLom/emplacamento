@@ -5,25 +5,22 @@
   <parent>
     <groupId>com.losolved.emplacamento</groupId>
     <artifactId>emplacamento</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${project.version}</version>
   </parent>
+  <groupId>com.losolved.emplacamento</groupId>
   <artifactId>emplacamento-domain</artifactId>
+  <version>${project.version}</version>
   <name>emplacamento-domain</name>
   <url>http://maven.apache.org</url>
-  <packaging>jar</packaging>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
   </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-       <scope>test</scope>
+      <version>3.8.1</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
-  
-  
-
-  
 </project>

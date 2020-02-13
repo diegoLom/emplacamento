@@ -1,22 +1,26 @@
 package com.losolved.emplacamento.services;
 
 
+import java.net.URI;
 import java.util.Optional;
+
 import com.losolved.emplacamento.domain.BaseEntity;
 
-
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
-
-public  abstract class BaseService<T extends BaseEntity<I>, I  > {
+@Service
+public  abstract class BaseService<T extends BaseEntity<I>, I, R  extends CrudRepository  > {
 	
 	
-	private CrudRepository repository;
-	
-	
+	private R repository;
 	
 	public Optional<T> pegar(I i){
 		return repository.findById(i);
@@ -58,15 +62,6 @@ public  abstract class BaseService<T extends BaseEntity<I>, I  > {
 			return retorno;
 	}
 
-	public CrudRepository getRepository() {
-		return repository;
-	}
-
-	public void setRepository(CrudRepository repository) {
-		this.repository = repository;
-	}
-
-	
 	
 	
 	
