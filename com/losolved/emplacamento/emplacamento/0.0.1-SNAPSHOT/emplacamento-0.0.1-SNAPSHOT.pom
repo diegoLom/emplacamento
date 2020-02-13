@@ -97,7 +97,7 @@
 </build>
 <profiles>
   <profile>
-    <id>test</id>
+    <id>heroku</id>
     <build>
       <plugins>
         <plugin>
