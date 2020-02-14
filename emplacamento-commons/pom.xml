@@ -5,11 +5,11 @@
   <parent>
     <groupId>com.losolved.emplacamento</groupId>
     <artifactId>emplacamento</artifactId>
-    <version>${project.version}</version>
+    <version>0.0.1-SNAPSHOT</version>
   </parent>
   <groupId>com.losolved.emplacamento</groupId>
   <artifactId>emplacamento-commons</artifactId>
-  <version>${project.version}</version>
+  <version>0.0.1-SNAPSHOT</version>
   <name>emplacamento-commons</name>
   <url>http://maven.apache.org</url>
   <properties>

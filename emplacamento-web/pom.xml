@@ -7,11 +7,11 @@
 	<parent>
 		<groupId>com.losolved.emplacamento</groupId>
 		<artifactId>emplacamento</artifactId>
-		<version>${project.version}</version>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>com.losolved.emplacamento</groupId>
 	<artifactId>emplacamento-web</artifactId>
-	<version>${project.version}</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>emplacamento-web</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -27,7 +27,7 @@
 
 		<dependency>
 			<groupId>com.losolved.emplacamento</groupId>
-			<artifactId>emplacamento-domain</artifactId>
+			<artifactId>emplacamento-integration</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		
@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>com.losolved.emplacamento</groupId>
 			<artifactId>emplacamento-services</artifactId>
-			<version>${project.version}</version>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		
 		  <dependency>
@@ -45,6 +45,30 @@
 		
 		
 	</dependencies>
+	
+	
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+
+				<configuration>
+<!-- 					<excludes> -->
+<!-- 							<exclude>**/*WebProperties.*</exclude> -->
+<!--                                                 <exclude>**/*Config.*</exclude> -->
+<!--                                                 <exclude>**/*Dev.*</exclude> -->
+<!--                                                 <exclude>**/*Environment.*</exclude> -->
+<!--                                                 <exclude>**/emplacamento*/**.class</exclude> -->
+                                              
+						
+<!-- 						</excludes> -->
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
 
 
 </project>
