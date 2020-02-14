@@ -1,8 +1,13 @@
 package com.losolved.emplacamento.services.impl;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+
+import org.springframework.stereotype.Service;
 
 import com.losolved.emplacamento.commons.exceptions.BiggestCortesiaException;
 import com.losolved.emplacamento.domain.Emplacamento;
@@ -13,7 +18,15 @@ import com.losolved.emplacamento.services.BaseService;
 import com.losolved.emplacamento.services.EmplacamentoAvulsoService;
 import com.losolved.emplacamento.services.EmplacamentoService;
 
-public class EmplacamentoAvulsoServiceImpl extends BaseService<EmplacamentoAvulso, Integer, EmplacamentoAvulsoRepository>
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+
+
+@Service
+public class EmplacamentoAvulsoServiceImpl extends BaseService<EmplacamentoAvulso, Integer>
 		implements EmplacamentoAvulsoService {
 
 	public EmplacamentoAvulso salvar(EmplacamentoAvulso toSave) {
@@ -23,7 +36,7 @@ public class EmplacamentoAvulsoServiceImpl extends BaseService<EmplacamentoAvuls
 		
 		
 		
-		return createT(toSave);
+		return toSave;
 	}
 	
 	
@@ -42,6 +55,32 @@ public class EmplacamentoAvulsoServiceImpl extends BaseService<EmplacamentoAvuls
 		
 		return true ;
 	}
+	
+	
+	   public byte[] generateReport() throws IOException {
+			 
+	       byte[] reportData = null;
+	       
+	       try {
+	    	   Map parameters = new HashMap();
+	           JasperPrint jasperPrint = 
+	        		   JasperFillManager.fillReport( this.getClass().getClassLoader().getResource("orcamento.jasper").getPath() , parameters, new JREmptyDataSource());
+           reportData = JasperExportManager.exportReportToPdf(jasperPrint);
+	       } catch (JRException e) {
+	           e.printStackTrace();
+	       } catch (Exception e) {
+	           e.printStackTrace();
+	       }
+	       
+	    
+	     
+	 
+	       return reportData;
+	   }
+
+	   
+	   
+	  
 
 }
 
