@@ -25,50 +25,62 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>com.losolved.emplacamento</groupId>
-			<artifactId>emplacamento-integration</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+		 <dependency>
+		  <groupId>com.losolved.emplacamento</groupId>
+		  <artifactId>emplacamento-integration</artifactId>
+		  <version>0.0.1-SNAPSHOT</version>
+		  <exclusions>
+					<exclusion>
+						<groupId>com.losolved.emplacamento</groupId>
+						<artifactId>emplacamento-domain</artifactId>
+					</exclusion>
+				</exclusions>
+		  
 		</dependency>
-		
-		
+
+
 		<dependency>
 			<groupId>com.losolved.emplacamento</groupId>
 			<artifactId>emplacamento-services</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+			<exclusions>
+					<exclusion>
+						<groupId>com.losolved.emplacamento</groupId>
+						<artifactId>emplacamento-integration</artifactId>
+					</exclusion>
+				</exclusions>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
 		
-		  <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-        </dependency>
-		
-		
-	</dependencies>
-	
-	
-	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		</dependencies>
+
+
+
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-
-				<configuration>
-<!-- 					<excludes> -->
-<!-- 							<exclude>**/*WebProperties.*</exclude> -->
-<!--                                                 <exclude>**/*Config.*</exclude> -->
-<!--                                                 <exclude>**/*Dev.*</exclude> -->
-<!--                                                 <exclude>**/*Environment.*</exclude> -->
-<!--                                                 <exclude>**/emplacamento*/**.class</exclude> -->
-                                              
-						
-<!-- 						</excludes> -->
-				</configuration>
+			
 			</plugin>
+
 		</plugins>
 	</build>
-	
 
 
 </project>
