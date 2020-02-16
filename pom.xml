@@ -20,19 +20,48 @@
 		<java.version>1.8</java.version>
 		<project.version>0.0.1-SNAPSHOT</project.version>
 		 <start-class>com.losolved.emplacamento.web.controller.LoSolvedEmplacamentoApplication</start-class>
+		 	<spring.data.source>jdbc:postgres://apnptlywwgifag:998aac0ee1d5852a2c3a0c858afcb9bfa26fd8d30d00890ce5475b9940b4ac2c@ec2-18-213-176-229.compute-1.amazonaws.com:5432/d6b28q10ms6rtq</spring.data.source>
+ 			<spring.data.username></spring.data.username>
+			<spring.data.password></spring.data.password>
 	</properties>
 
-		
-	
 
 	<build>
+	
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-		</plugins>
+	</plugins>
 	</build>
+	
+	<profiles>
+
+ 	<profile>
+ 		<id>prod</id>
+ 		<properties>
+ 			<spring.data.source>jdbc:postgres://apnptlywwgifag:998aac0ee1d5852a2c3a0c858afcb9bfa26fd8d30d00890ce5475b9940b4ac2c@ec2-18-213-176-229.compute-1.amazonaws.com:5432/d6b28q10ms6rtq</spring.data.source>
+ 			<spring.data.username></spring.data.username>
+			<spring.data.password></spring.data.password>
+ 		</properties>	
+ 	</profile>
+ 	<profile>
+ 		<id>dev</id>
+ 		<properties>
+ 			<spring.data.source>jdbc:postgresql://127.0.0.1:5432/emplacamento</spring.data.source>
+ 			<spring.data.username></spring.data.username>
+			<spring.data.password></spring.data.password>
+			    
+ 		</properties>	
+ 		
+ 		<activation>
+      				<activeByDefault>true</activeByDefault>
+    			</activation>
+ 	</profile>	
+ 	
+ </profiles>
+
 
 	<modules>
 		<module>emplacamento-services</module>

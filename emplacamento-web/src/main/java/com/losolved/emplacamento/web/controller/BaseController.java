@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ import com.losolved.emplacamento.services.BaseService;
 
 
 
-@Component
+
 public class BaseController<T extends BaseEntity<I> ,  I>  {
 
 	
@@ -39,8 +40,15 @@ public class BaseController<T extends BaseEntity<I> ,  I>  {
 		return baseService.pegar(i);
 	};
 	@GetMapping("{id}") 
-	public T pegarT(@RequestParam I id){
-		return pegar(id).get();
+	public ResponseEntity<T> pegarT(@PathVariable(value="id") I  id ){
+		
+	    Optional<T> retorno =  pegar(id);
+		
+	    if(retorno.isPresent()) {
+	     	return ResponseEntity.status(HttpStatus.OK).body(retorno.get());
+	    }
+		
+		return ResponseEntity.notFound().build();
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE)

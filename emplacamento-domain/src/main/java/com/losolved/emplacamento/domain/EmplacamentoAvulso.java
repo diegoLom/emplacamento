@@ -78,6 +78,54 @@ public class EmplacamentoAvulso extends BaseEntity<Integer>{
 	@Override
 	public String toString() {
 		return "EmplacamentoAvulso [emplacamento=" + emplacamento + "]";
+	}
+
+	public String getVeiculo() {
+		return veiculo;
+	}
+
+	public void setVeiculo(String veiculo) {
+		this.veiculo = veiculo;
+	}
+
+	public BigDecimal getVlVeiculo() {
+		return vlVeiculo;
+	}
+
+	public void setVlVeiculo(BigDecimal vlVeiculo) {
+		this.vlVeiculo = vlVeiculo;
+	}
+
+	public String getEstoque() {
+		return estoque;
+	}
+
+	public void setEstoque(String estoque) {
+		this.estoque = estoque;
+	}
+
+	public java.util.Date getData_emplacamento() {
+		return data_emplacamento;
+	}
+
+	public void setData_emplacamento(java.util.Date data_emplacamento) {
+		this.data_emplacamento = data_emplacamento;
+	}
+
+	public String getPotencia() {
+		return potencia;
+	}
+
+	public void setPotencia(String potencia) {
+		this.potencia = potencia;
+	}
+
+	public String getClassificacao() {
+		return classificacao;
+	}
+
+	public void setClassificacao(String classificacao) {
+		this.classificacao = classificacao;
 	} 
 	
 	

@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "municipio")
-public class Municipio extends BaseEntity<Byte> {
+public class Municipio extends BaseEntity<Integer> {
 
 	
 	@Column

@@ -1,5 +1,7 @@
 package com.losolved.emplacamento.web.configuration;
 
+import java.util.TimeZone;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -7,8 +9,14 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -19,16 +27,25 @@ import com.zaxxer.hikari.HikariDataSource;
 
 public class AppConfig {
 	
-	
-	 @Value("${spring.datasource.url}")
-	  private String dbUrl;
+	 @Primary
+	    @Bean
+	    public ObjectMapper objectMapper() {
+	        // serializar via field ao inves de getters/setters (JSON)
+	        ObjectMapper mapper = new ObjectMapper();
+	        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+	        mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, false);
+	        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+	        mapper.setVisibility(PropertyAccessor.ALL, Visibility.NONE);
+	        mapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
+	        
+//	        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+//	        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+//	        mapper.setTimeZone(TimeZone.getTimeZone(""));
+	      //  mapper.registerModule(new Jackson2HalModule());
+	        return mapper;
+	    }
 
-	  @Bean
-	  public DataSource dataSource() {
-	      HikariConfig config = new HikariConfig();
-	      config.setJdbcUrl(dbUrl);
-	      return new HikariDataSource(config);
-	  }
+	
 
 
 }
