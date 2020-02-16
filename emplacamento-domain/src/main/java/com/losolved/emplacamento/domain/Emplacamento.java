@@ -117,6 +117,55 @@ public class Emplacamento extends BaseEntity<Integer> {
 		this.observacao = observacao;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((incidentes == null) ? 0 : incidentes.hashCode());
+		result = prime * result + ((municipio == null) ? 0 : municipio.hashCode());
+		result = prime * result + ((observacao == null) ? 0 : observacao.hashCode());
+		result = prime * result + ((pagamentos == null) ? 0 : pagamentos.hashCode());
+		result = prime * result + ((veiculo == null) ? 0 : veiculo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Emplacamento other = (Emplacamento) obj;
+		if (incidentes == null) {
+			if (other.incidentes != null)
+				return false;
+		} else if (!incidentes.equals(other.incidentes))
+			return false;
+		if (municipio == null) {
+			if (other.municipio != null)
+				return false;
+		} else if (!municipio.equals(other.municipio))
+			return false;
+		if (observacao == null) {
+			if (other.observacao != null)
+				return false;
+		} else if (!observacao.equals(other.observacao))
+			return false;
+		if (pagamentos == null) {
+			if (other.pagamentos != null)
+				return false;
+		} else if (!pagamentos.equals(other.pagamentos))
+			return false;
+		if (veiculo == null) {
+			if (other.veiculo != null)
+				return false;
+		} else if (!veiculo.equals(other.veiculo))
+			return false;
+		return true;
+	}
+
 	 
 
 
