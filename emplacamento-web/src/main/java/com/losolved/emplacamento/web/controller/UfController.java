@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.losolved.emplacamento.domain.EmplacamentoAvulso;
 import com.losolved.emplacamento.domain.Uf;
 import com.losolved.emplacamento.integration.repository.EmplacamentoAvulsoRepository;
-
+import com.losolved.emplacamento.integration.repository.UfRepository;
 import com.losolved.emplacamento.services.impl.EmplacamentoAvulsoServiceImpl;
 import com.losolved.emplacamento.services.impl.UfServiceImpl;
 
