@@ -9,6 +9,8 @@ public class UsuarioResult {
 	private String codigo_funcionario;
 	private String nome;
 	private String login_funcionario;
+	
+	private String senha;
 	private String tipo;
 	private String supervisor;
 	public String getCodigo_funcionario() {
