@@ -2,12 +2,22 @@ package com.losolved.emplacamento.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tipo_pagamento")
-public class TipoPagamento extends BaseEntity<Byte> {
+@SequenceGenerator(name = "TP_SEQ", sequenceName = "TIPO_SEQ", initialValue = 1, allocationSize = 1)
+public class TipoPagamento extends BaseEntity<Integer> {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TP_SEQ")
+	private Integer id; 
+
+	
 	
 	
 	@Column(unique = true, nullable = false)

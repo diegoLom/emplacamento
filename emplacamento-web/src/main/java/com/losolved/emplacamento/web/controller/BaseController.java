@@ -31,10 +31,10 @@ public class BaseController<T extends BaseEntity<I> ,  I>  {
   	
 	
 	
-//	@GetMapping 
-//	public List<T> pegarTodos() {
-//		return baseService.;
-//	};
+	@GetMapping 
+	public List<T> pegarTodos() {
+		return baseService.pegar();
+	};
 	
 	public Optional<T> pegar(I i) {
 		return baseService.pegar(i);
@@ -84,34 +84,20 @@ public class BaseController<T extends BaseEntity<I> ,  I>  {
 		
 		if(i!= null) {
 			Optional<T> objetoRetornado = pegar(i); 
-			
 			if(objetoRetornado.isPresent()) {
 				baseService.deletar(i);
-				
 				retorno = true;
 			}
 		}
 		
-			return retorno;
-		}
+		return retorno;
+	}
+	
 	public BaseService<T, I> getBaseService() {
 		return baseService;
 	}
 	public void setBaseService(BaseService<T, I> baseService) {
 		this.baseService = baseService;
 	}
-	
-	
-	
-	
-	
-		
-		
-		
-		
-		
-		
-		
-		
 	
 }

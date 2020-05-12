@@ -2,18 +2,37 @@ package com.losolved.emplacamento.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "forma_pagamento")
+@SequenceGenerator(name = "PAGA_SEQ", sequenceName = "PAGAMENTO_SEQ", initialValue = 1, allocationSize = 1)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+property = "id")
 public class FormaPagamento extends BaseEntity<Integer> {
+	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PAGA_SEQ")
+	private Integer id; 
+
 	
 	@ManyToOne
 	@JoinColumn(name = "emplacaid", nullable=false)
+	@JsonIgnore
 	private Emplacamento emplacamento;
 	
 	

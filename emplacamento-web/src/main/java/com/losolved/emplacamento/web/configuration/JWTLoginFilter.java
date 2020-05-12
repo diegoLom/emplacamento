@@ -7,17 +7,23 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.losolved.emplacamento.web.controller.DeController;
 
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
+	@Autowired
+	private DeController de;
+	
 	protected JWTLoginFilter(String url, AuthenticationManager authManager) {
 		super(new AntPathRequestMatcher(url));
 		setAuthenticationManager(authManager);
@@ -30,7 +36,14 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 		AccountCredentials credentials = new ObjectMapper()
 				.readValue(request.getInputStream(), AccountCredentials.class);
 		
-		return getAuthenticationManager().authenticate(
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String hashedPassword = passwordEncoder.encode(credentials.getPassword());
+		
+		
+		de.getUsuario(credentials.getUsername()); 
+		
+
+		return getAuthenticationManager().   authenticate(
 				new UsernamePasswordAuthenticationToken(
 						credentials.getUsername(), 
 						credentials.getPassword(), 

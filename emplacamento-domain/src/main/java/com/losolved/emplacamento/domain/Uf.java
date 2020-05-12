@@ -2,9 +2,21 @@ package com.losolved.emplacamento.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
-public class Uf extends BaseEntity<Byte> {
+@SequenceGenerator(name = "U_SEQ", sequenceName = "UF_SEQ", initialValue = 1, allocationSize = 1)
+public class Uf extends BaseEntity<Integer> {
+	
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "U_SEQ")
+	private Integer id; 
+
+	
 	
 	@Column
 	private String nome;

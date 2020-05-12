@@ -46,10 +46,9 @@ public class UsuarioResult {
 	
 	@Override
 	public String toString() {
-		return "UsuarioResult [codigo_funcionario=" + codigo_funcionario + ", nome=" + nome + ", login_funcionario="
-				+ login_funcionario + ", tipo=" + tipo + ", supervisor=" + supervisor + "]";
+		return "UsuarioResult [codigo_funcionario:" + codigo_funcionario + ", nome:" + nome + ", login_funcionario:"
+				+ login_funcionario + ", tipo:" + tipo + ", supervisor:" + supervisor + "]";
 	}
-	
 	
 	
 	

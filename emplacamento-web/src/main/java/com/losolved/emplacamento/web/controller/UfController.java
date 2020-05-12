@@ -18,7 +18,7 @@ import com.losolved.emplacamento.services.impl.UfServiceImpl;
 
 @RestController 
 @RequestMapping("/uf")
-public class UfController extends BaseController<Uf, Byte>  {
+public class UfController extends BaseController<Uf, Integer>  {
 	
 	
 	@Autowired
