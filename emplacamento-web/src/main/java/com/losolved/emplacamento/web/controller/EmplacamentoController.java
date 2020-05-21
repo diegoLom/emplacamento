@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.losolved.emplacamento.domain.Emplacamento;
@@ -29,13 +30,13 @@ public class EmplacamentoController extends BaseController<Emplacamento, Integer
 	}
 	
 	@GetMapping(
-			  value = "/get-file",
+			  value = "/get-file/{id}",
 			  produces = MediaType.APPLICATION_PDF_VALUE
 			)
-	public byte[] generatePdfA() throws IOException {
+	public byte[] generatePdfA(@PathVariable("id") Integer id) throws IOException {
 		
 		
-		return ((EmplacamentoServiceImpl) getBaseService()).generateReport() ;
+		return ((EmplacamentoServiceImpl) getBaseService()).generateReport(id) ;
 	}
 	
 	

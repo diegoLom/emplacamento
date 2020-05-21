@@ -21,7 +21,7 @@ public class BaseServiceTest  {
 		
 		forma.setValor(BigDecimal.valueOf(1000_000_000));
 		forma.setTipoPagamento(tpPagamento);
-		empl.setPagamentos(forma);
+		empl.setPagamentos(forma, true);
 		
 		emplA.setEmplacamento(empl);
 		

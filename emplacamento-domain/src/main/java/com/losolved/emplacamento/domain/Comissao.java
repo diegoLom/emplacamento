@@ -12,15 +12,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "comissao")
-@SequenceGenerator(name = "COM_SEQ", sequenceName = "COMISSAO_SEQ", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "default_seq", sequenceName = "COMISSAO_SEQ", initialValue = 1, allocationSize = 1)
 public class Comissao extends BaseEntity<Integer> {
 	
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "COM_SEQ")
-	private Integer id; 
-
-	
+		
 	@Column
     private Integer comissao_cd;
 	

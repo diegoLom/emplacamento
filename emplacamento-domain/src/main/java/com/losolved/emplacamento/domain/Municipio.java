@@ -13,13 +13,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "municipio")
-@SequenceGenerator(name = "MUNC_SEQ", sequenceName = "MUNICIPIO_SEQ", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "default_seq", sequenceName = "MUNICIPIO_SEQ", initialValue = 1, allocationSize = 1)
 public class Municipio extends BaseEntity<Integer> {
 
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MUNC_SEQ")
-	private Integer id; 
 
 	
 	

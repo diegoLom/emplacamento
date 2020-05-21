@@ -18,14 +18,12 @@ import javax.persistence.TemporalType;
 //
 @Entity
 @Table(name = "emplacamento_avulso")
-@SequenceGenerator(name = "EMPLCAA_SEQ", sequenceName = "EMPLACAMENTA_SEQ", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "default_seq", sequenceName = "EMPLACAMENTA_SEQ", initialValue = 1, allocationSize = 1)
 
 public class EmplacamentoAvulso extends BaseEntity<Integer>{
 	
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EMPLCAA_SEQ")
-	private Integer id; 
+
 
 		
 	@OneToOne

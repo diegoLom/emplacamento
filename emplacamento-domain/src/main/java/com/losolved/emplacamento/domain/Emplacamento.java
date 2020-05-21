@@ -1,23 +1,31 @@
 package com.losolved.emplacamento.domain;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -25,15 +33,13 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "emplacamento")
-@SequenceGenerator(name = "EMPLC_SEQ", sequenceName = "EMPLACA_SEQ", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "default_seq", sequenceName = "EMPLACA_SEQ", initialValue = 1, allocationSize = 1)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
 property = "id")
 public class Emplacamento extends BaseEntity<Integer> {
 	
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EMPLC_SEQ")
-	private Integer id; 
+
 	
 //	@OneToOne(mappedBy = "emplacamento")
 //	private EmplacamentoAvulso emplacamentoA;
@@ -72,21 +78,35 @@ public class Emplacamento extends BaseEntity<Integer> {
 //	private Municipio municipio;
 //	
 	
-	@OneToMany(targetEntity = com.losolved.emplacamento.domain.FormaPagamento.class, mappedBy = "emplacamento")
-	@JsonIgnore
+//	@OneToMany(targetEntity = com.losolved.emplacamento.domain.FormaPagamento.class, mappedBy = "emplacamento" , fetch = FetchType.LAZY)
+	@Transient
 	private Set<FormaPagamento> pagamentos;
 
 	
 	@Column
 	private String observacao;
 	
-	
-	 @ManyToMany(mappedBy = "emplacamentos")
-	 private Set<Taxa> taxas;
-	 
 
-	 
+//  @OneToMany(targetEntity = com.losolved.emplacamento.domain.EmplacamentoTaxa.class, mappedBy = "taxa", fetch = FetchType.LAZY)
+	@Transient
+  	private Set<EmplacamentoTaxa> taxas;
+	  
 	
+
+	public Set<EmplacamentoTaxa> getTaxas() {
+		return taxas;
+	}
+
+	public void setTaxas(Set<EmplacamentoTaxa> taxas) {
+		
+		for (EmplacamentoTaxa empl_taxa : taxas) {
+			if(empl_taxa != null && empl_taxa.getTaxa() != null)
+				valorEmplacamento = valorEmplacamento.add(empl_taxa.getTaxa().getVl_final());
+		}
+	
+		this.taxas = taxas;
+	}
+
 	public String getNumero_proposta() {
 		return numero_proposta;
 	}
@@ -231,23 +251,17 @@ public class Emplacamento extends BaseEntity<Integer> {
 		this.vendedor_proposta = vendedor_proposta;
 	}
 
-	public Set<Taxa> getTaxas() {
-		return taxas;
+	
+	@Transient
+	private BigDecimal valorEmplacamento = new BigDecimal(0);
+	
+	
+	
+	public void setValorEmplacamento(BigDecimal valorEmplacamento) {
+		this.valorEmplacamento = valorEmplacamento;
 	}
 
-	public void setTaxas(Set<Taxa> taxas) {
-		this.taxas = taxas;
-	}
-
-	@JsonIgnore
 	public BigDecimal getValorEmplacamento() {
-		BigDecimal valorEmplacamento = new BigDecimal(0); 
-		  
-		if(taxas != null)
-			for (Taxa taxa : taxas) {
-				valorEmplacamento = valorEmplacamento.add(taxa.getVl_final());
-			}
-			
 		return valorEmplacamento;
 		
 	}
@@ -279,7 +293,7 @@ public class Emplacamento extends BaseEntity<Integer> {
 		this.pagamentos = pagamentos;
 	}
 	
-	public void setPagamentos(FormaPagamento pagamento) {
+	public void setPagamentos(FormaPagamento pagamento, Boolean t) {
 		if(pagamentos == null)
 			pagamentos = new HashSet<FormaPagamento>();
 			
@@ -307,7 +321,6 @@ public class Emplacamento extends BaseEntity<Integer> {
 		result = prime * result + ((combustivel == null) ? 0 : combustivel.hashCode());
 		result = prime * result + ((cor_externa == null) ? 0 : cor_externa.hashCode());
 		result = prime * result + ((estqoue == null) ? 0 : estqoue.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((modelo_veiculo == null) ? 0 : modelo_veiculo.hashCode());
 		result = prime * result + ((nome_cliente == null) ? 0 : nome_cliente.hashCode());
 		result = prime * result + ((numero_motor == null) ? 0 : numero_motor.hashCode());
@@ -364,11 +377,6 @@ public class Emplacamento extends BaseEntity<Integer> {
 			if (other.estqoue != null)
 				return false;
 		} else if (!estqoue.equals(other.estqoue))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
 			return false;
 		if (modelo_veiculo == null) {
 			if (other.modelo_veiculo != null)
@@ -450,7 +458,7 @@ public class Emplacamento extends BaseEntity<Integer> {
 
 	@Override
 	public String toString() {
-		return "Emplacamento [id=" + id + ", numero_proposta=" + numero_proposta + ", numero_pedido=" + numero_pedido
+		return "Emplacamento [numero_proposta=" + numero_proposta + ", numero_pedido=" + numero_pedido
 				+ ", valor_proposta=" + valor_proposta + ", valor_nf=" + valor_nf + ", valor_financiado="
 				+ valor_financiado + ", nome_cliente=" + nome_cliente + ", codigo_veiculo=" + codigo_veiculo
 				+ ", modelo_veiculo=" + modelo_veiculo + ", placa=" + placa + ", uf_placa=" + uf_placa + ", chassi="
@@ -459,6 +467,8 @@ public class Emplacamento extends BaseEntity<Integer> {
 				+ ", vendedor_proposta=" + vendedor_proposta + ", pagamentos=" + pagamentos + ", observacao="
 				+ observacao + ", taxas=" + taxas + "]";
 	}
+
+	
 
 
 

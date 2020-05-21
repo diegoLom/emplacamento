@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,18 +15,19 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "parametro")
-@SequenceGenerator(name = "PARAM_SEQ", sequenceName = "PARAMETRO_SEQ", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "default_seq", sequenceName = "PARAMETRO_SEQ", initialValue = 1, allocationSize = 1)
 public class Parametro extends BaseEntity<Integer> {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PARAM_SEQ")
-	private Integer id; 
 
 	
 	
@@ -40,7 +42,11 @@ public class Parametro extends BaseEntity<Integer> {
 	@Temporal(value = TemporalType.DATE)
 	private java.util.Date data_per;
 	
-	@OneToMany(targetEntity = com.losolved.emplacamento.domain.Taxa.class, mappedBy = "parametro")
+	
+	
+	@Transient
+//	@OneToMany(targetEntity = com.losolved.emplacamento.domain.Taxa.class, mappedBy = "parametro", fetch = FetchType.LAZY)
+//	@Fetch(value=FetchMode.SELECT)
 	private Set<Taxa> taxas;
 
 	
@@ -84,7 +90,7 @@ public class Parametro extends BaseEntity<Integer> {
 		result = prime * result + ((data_per == null) ? 0 : data_per.hashCode());
 		result = prime * result + ((emp_cd == null) ? 0 : emp_cd.hashCode());
 		result = prime * result + ((municipio == null) ? 0 : municipio.hashCode());
-		result = prime * result + ((taxas == null) ? 0 : taxas.hashCode());
+		//result = prime * result + ((taxas == null) ? 0 : taxas.hashCode());
 		return result;
 	}
 

@@ -8,13 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-@SequenceGenerator(name = "U_SEQ", sequenceName = "UF_SEQ", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "default_seq", sequenceName = "UF_SEQ", initialValue = 1, allocationSize = 1)
 public class Uf extends BaseEntity<Integer> {
 	
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "U_SEQ")
-	private Integer id; 
 
 	
 	

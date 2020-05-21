@@ -9,12 +9,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "veiculo")
-@SequenceGenerator(name = "VCL_SEQ", sequenceName = "VEICULO_SEQ", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "default_seq", sequenceName = "VEICULO_SEQ", initialValue = 1, allocationSize = 1)
 public class Veiculo extends BaseEntity<Integer> {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VCL_SEQ")
-	private Integer id; 
 
 	
 

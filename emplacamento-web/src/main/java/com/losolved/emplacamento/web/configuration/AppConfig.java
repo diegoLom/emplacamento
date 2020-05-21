@@ -37,9 +37,11 @@ public class AppConfig {
 	        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
 	        mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, false);
 	        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-	        mapper.setVisibility(PropertyAccessor.ALL, Visibility.NONE);
+	        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+	           mapper.setVisibility(PropertyAccessor.ALL, Visibility.NONE);
 	        mapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
 	        
+	     
 //	        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 //	        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
 //	        mapper.setTimeZone(TimeZone.getTimeZone(""));
