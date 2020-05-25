@@ -1,5 +1,6 @@
 package com.losolved.emplacamento.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -23,7 +24,7 @@ public class Municipio extends BaseEntity<Integer> {
 	private String nome;
 	
 	
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, cascade = {CascadeType.ALL})
 	@JoinColumn(updatable = false)
 	private Uf uf;
 

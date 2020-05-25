@@ -3,10 +3,12 @@ package com.losolved.emplacamento.services.impl;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.losolved.emplacamento.commons.exceptions.BiggestCortesiaException;
@@ -16,6 +18,7 @@ import com.losolved.emplacamento.domain.FormaPagamento;
 import com.losolved.emplacamento.domain.Municipio;
 import com.losolved.emplacamento.domain.Uf;
 import com.losolved.emplacamento.integration.repository.EmplacamentoAvulsoRepository;
+import com.losolved.emplacamento.integration.repository.MunicipioRepository;
 import com.losolved.emplacamento.services.BaseService;
 import com.losolved.emplacamento.services.EmplacamentoAvulsoService;
 import com.losolved.emplacamento.services.EmplacamentoService;
@@ -32,9 +35,20 @@ public class MunicipioServiceImpl extends BaseService<Municipio, Integer> {
 		 
 
 
-	   
+	   @Autowired 
+	   MunicipioRepository munc; 
 	   
 	  
+	   
+	   
+	   public List<Municipio> getMunicipioByUf(Integer ufId){
+		   
+		   Uf uf = new Uf(); 
+		   uf.setId(ufId);
+		   
+		   List<Municipio> listMunc =   munc.findByUf(uf);
+		   return listMunc;
+	   }
 
 }
 

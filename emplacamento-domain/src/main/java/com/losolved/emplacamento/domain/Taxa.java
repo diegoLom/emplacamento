@@ -66,6 +66,22 @@ public class Taxa extends BaseEntity<Integer> {
 	
 	@Transient
 	@JsonInclude
+	private Boolean atualiza;
+	
+	
+	
+	
+	
+	public Boolean getAtualiza() {
+		return atualiza;
+	}
+
+	public void setAtualiza(Boolean atualiza) {
+		this.atualiza = atualiza;
+	}
+
+	@Transient
+	@JsonInclude
 	private BigDecimal vl_calculado;
 	
 		public BigDecimal getVl_calculado() {
@@ -169,6 +185,7 @@ public class Taxa extends BaseEntity<Integer> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
+		result = prime * result + ((atualiza == null) ? 0 : atualiza.hashCode());
 		result = prime * result + ((descr == null) ? 0 : descr.hashCode());
 		result = prime * result + ((emplacamentos == null) ? 0 : emplacamentos.hashCode());
 		result = prime * result + ((parametro == null) ? 0 : parametro.hashCode());
@@ -192,6 +209,11 @@ public class Taxa extends BaseEntity<Integer> {
 		if (getClass() != obj.getClass())
 			return false;
 		Taxa other = (Taxa) obj;
+		if (atualiza == null) {
+			if (other.atualiza != null)
+				return false;
+		} else if (!atualiza.equals(other.atualiza))
+			return false;
 		if (descr == null) {
 			if (other.descr != null)
 				return false;
@@ -254,8 +276,8 @@ public class Taxa extends BaseEntity<Integer> {
 	public String toString() {
 		return "Taxa [descr=" + descr + ", per_taxa=" + per_taxa + ", tp_veic=" + tp_veic + ", tp_valor=" + tp_valor
 				+ ", vl_custo=" + vl_custo + ", vl_final=" + vl_final + ", vl_iof=" + vl_iof + ", vl_bilhete="
-				+ vl_bilhete + ", vl_calculado=" + vl_calculado + ", parametro=" + parametro + ", emplacamentos="
-				+ emplacamentos + "]";
+				+ vl_bilhete + ", atualiza=" + atualiza + ", vl_calculado=" + vl_calculado + ", parametro=" + parametro
+				+ ", emplacamentos=" + emplacamentos + "]";
 	}
 
 }

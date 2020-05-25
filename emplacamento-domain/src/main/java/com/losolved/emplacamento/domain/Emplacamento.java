@@ -64,19 +64,10 @@ public class Emplacamento extends BaseEntity<Integer> {
 	private String estqoue;
 	private String vendedor_proposta;
 	
+	private String propdata;
+	private String cidadeplaca;
 	
 	
-//	@OneToOne
-//	@JoinColumn(name ="veiculoid")
-//	private Veiculo veiculo;
-//	
-//	
-//
-//	
-//	@ManyToOne
-//	@JoinColumn(name ="municipioId")
-//	private Municipio municipio;
-//	
 	
 //	@OneToMany(targetEntity = com.losolved.emplacamento.domain.FormaPagamento.class, mappedBy = "emplacamento" , fetch = FetchType.LAZY)
 	@Transient
@@ -316,6 +307,7 @@ public class Emplacamento extends BaseEntity<Integer> {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((chassi == null) ? 0 : chassi.hashCode());
+		result = prime * result + ((cidadeplaca == null) ? 0 : cidadeplaca.hashCode());
 		result = prime * result + ((classificacao == null) ? 0 : classificacao.hashCode());
 		result = prime * result + ((codigo_veiculo == null) ? 0 : codigo_veiculo.hashCode());
 		result = prime * result + ((combustivel == null) ? 0 : combustivel.hashCode());
@@ -329,15 +321,19 @@ public class Emplacamento extends BaseEntity<Integer> {
 		result = prime * result + ((observacao == null) ? 0 : observacao.hashCode());
 		result = prime * result + ((pagamentos == null) ? 0 : pagamentos.hashCode());
 		result = prime * result + ((placa == null) ? 0 : placa.hashCode());
+		result = prime * result + ((propdata == null) ? 0 : propdata.hashCode());
 		result = prime * result + ((renavam == null) ? 0 : renavam.hashCode());
 		result = prime * result + ((taxas == null) ? 0 : taxas.hashCode());
 		result = prime * result + ((uf_placa == null) ? 0 : uf_placa.hashCode());
+		result = prime * result + ((valorEmplacamento == null) ? 0 : valorEmplacamento.hashCode());
 		result = prime * result + ((valor_financiado == null) ? 0 : valor_financiado.hashCode());
 		result = prime * result + ((valor_nf == null) ? 0 : valor_nf.hashCode());
 		result = prime * result + ((valor_proposta == null) ? 0 : valor_proposta.hashCode());
 		result = prime * result + ((vendedor_proposta == null) ? 0 : vendedor_proposta.hashCode());
 		return result;
 	}
+	
+	
 
 	@Override
 	public boolean equals(Object obj) {
@@ -352,6 +348,11 @@ public class Emplacamento extends BaseEntity<Integer> {
 			if (other.chassi != null)
 				return false;
 		} else if (!chassi.equals(other.chassi))
+			return false;
+		if (cidadeplaca == null) {
+			if (other.cidadeplaca != null)
+				return false;
+		} else if (!cidadeplaca.equals(other.cidadeplaca))
 			return false;
 		if (classificacao == null) {
 			if (other.classificacao != null)
@@ -418,6 +419,11 @@ public class Emplacamento extends BaseEntity<Integer> {
 				return false;
 		} else if (!placa.equals(other.placa))
 			return false;
+		if (propdata == null) {
+			if (other.propdata != null)
+				return false;
+		} else if (!propdata.equals(other.propdata))
+			return false;
 		if (renavam == null) {
 			if (other.renavam != null)
 				return false;
@@ -432,6 +438,11 @@ public class Emplacamento extends BaseEntity<Integer> {
 			if (other.uf_placa != null)
 				return false;
 		} else if (!uf_placa.equals(other.uf_placa))
+			return false;
+		if (valorEmplacamento == null) {
+			if (other.valorEmplacamento != null)
+				return false;
+		} else if (!valorEmplacamento.equals(other.valorEmplacamento))
 			return false;
 		if (valor_financiado == null) {
 			if (other.valor_financiado != null)
@@ -455,6 +466,24 @@ public class Emplacamento extends BaseEntity<Integer> {
 			return false;
 		return true;
 	}
+	
+	
+
+	public String getPropdata() {
+		return propdata;
+	}
+
+	public void setPropdata(String propdata) {
+		this.propdata = propdata;
+	}
+
+	public String getCidadeplaca() {
+		return cidadeplaca;
+	}
+
+	public void setCidadeplaca(String cidadeplaca) {
+		this.cidadeplaca = cidadeplaca;
+	}
 
 	@Override
 	public String toString() {
@@ -464,8 +493,9 @@ public class Emplacamento extends BaseEntity<Integer> {
 				+ ", modelo_veiculo=" + modelo_veiculo + ", placa=" + placa + ", uf_placa=" + uf_placa + ", chassi="
 				+ chassi + ", numero_motor=" + numero_motor + ", renavam=" + renavam + ", combustivel=" + combustivel
 				+ ", cor_externa=" + cor_externa + ", classificacao=" + classificacao + ", estqoue=" + estqoue
-				+ ", vendedor_proposta=" + vendedor_proposta + ", pagamentos=" + pagamentos + ", observacao="
-				+ observacao + ", taxas=" + taxas + "]";
+				+ ", vendedor_proposta=" + vendedor_proposta + ", propdata=" + propdata + ", cidadeplaca=" + cidadeplaca
+				+ ", pagamentos=" + pagamentos + ", observacao=" + observacao + ", taxas=" + taxas
+				+ ", valorEmplacamento=" + valorEmplacamento + "]";
 	}
 
 	

@@ -45,6 +45,10 @@ public  abstract class BaseService<T extends BaseEntity<I>, I  > {
 		t =  (T) repository.save(t);
 		Optional<T> retorno = Optional.of(t);
 		
+		
+		
+		                                    //     t
+		
 		return retorno;
 	}
 	

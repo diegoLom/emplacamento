@@ -3,6 +3,7 @@ package com.losolved.emplacamento.integration.repository;
 
 import com.losolved.emplacamento.domain.Emplacamento;
 import com.losolved.emplacamento.domain.FormaPagamento;
+import com.losolved.emplacamento.domain.Parametro;
 import com.losolved.emplacamento.domain.Taxa;
 
 import java.util.List;
@@ -23,4 +24,8 @@ public interface TaxasRepository extends CrudRepository<Taxa, Integer> {
 	  Set<Taxa> findByEmplacamento(Integer emplacamentoId);
 	
  
+	  Set<Taxa> findByParametro(Parametro parametro);
+		
+	 
+	 
 }

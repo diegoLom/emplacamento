@@ -21,11 +21,15 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "parametro")
 @SequenceGenerator(name = "default_seq", sequenceName = "PARAMETRO_SEQ", initialValue = 1, allocationSize = 1)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+property = "id")
 public class Parametro extends BaseEntity<Integer> {
 	
 
@@ -45,8 +49,6 @@ public class Parametro extends BaseEntity<Integer> {
 	
 	
 	@Transient
-//	@OneToMany(targetEntity = com.losolved.emplacamento.domain.Taxa.class, mappedBy = "parametro", fetch = FetchType.LAZY)
-//	@Fetch(value=FetchMode.SELECT)
 	private Set<Taxa> taxas;
 
 	
