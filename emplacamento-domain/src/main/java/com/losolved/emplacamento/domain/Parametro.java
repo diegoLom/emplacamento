@@ -1,5 +1,6 @@
 package com.losolved.emplacamento.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -22,25 +23,28 @@ import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "parametro")
+@JsonIgnoreProperties(ignoreUnknown = true)
 @SequenceGenerator(name = "default_seq", sequenceName = "PARAMETRO_SEQ", initialValue = 1, allocationSize = 1)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
 property = "id")
 public class Parametro extends BaseEntity<Integer> {
 	
-
-	
-	
 	@Column
 	private String emp_cd;
 	
+	@Column
+	private String emp_ds;
+	
+	
 	@ManyToOne
-	@JoinColumn(name ="municipioId")
-	private Municipio municipio;
+	@JoinColumn(name ="ufid")
+	private Uf uf;
 	
 	@Column
 	@Temporal(value = TemporalType.DATE)
@@ -49,7 +53,18 @@ public class Parametro extends BaseEntity<Integer> {
 	
 	
 	@Transient
-	private Set<Taxa> taxas;
+	private String ufnome;
+	
+	public String getUfnome() {
+		return ufnome;
+	}
+
+	public void setUfnome(String ufnome) {
+			this.ufnome = ufnome;
+	}
+
+	@Transient
+	private Set<Taxa> taxas = new HashSet<Taxa>();
 
 	
 
@@ -61,13 +76,6 @@ public class Parametro extends BaseEntity<Integer> {
 		this.emp_cd = emp_cd;
 	}
 
-	public Municipio getMunicipio() {
-		return municipio;
-	}
-
-	public void setMunicipio(Municipio municipio) {
-		this.municipio = municipio;
-	}
 
 	public java.util.Date getData_per() {
 		return data_per;
@@ -85,14 +93,35 @@ public class Parametro extends BaseEntity<Integer> {
 		this.taxas = taxas;
 	}
 
+	public String getEmp_ds() {
+		return emp_ds;
+	}
+
+	public void setEmp_ds(String emp_ds) {
+		this.emp_ds = emp_ds;
+	}
+
+	public Uf getUf() {
+		return uf;
+	}
+
+	public void setUf(Uf uf) {
+		
+		if(uf != null )
+			ufnome = uf.getNome();
+		
+		this.uf = uf;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((data_per == null) ? 0 : data_per.hashCode());
 		result = prime * result + ((emp_cd == null) ? 0 : emp_cd.hashCode());
-		result = prime * result + ((municipio == null) ? 0 : municipio.hashCode());
-		//result = prime * result + ((taxas == null) ? 0 : taxas.hashCode());
+		result = prime * result + ((emp_ds == null) ? 0 : emp_ds.hashCode());
+		result = prime * result + ((uf == null) ? 0 : uf.hashCode());
+		result = prime * result + ((ufnome == null) ? 0 : ufnome.hashCode());
 		return result;
 	}
 
@@ -100,7 +129,7 @@ public class Parametro extends BaseEntity<Integer> {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -115,24 +144,31 @@ public class Parametro extends BaseEntity<Integer> {
 				return false;
 		} else if (!emp_cd.equals(other.emp_cd))
 			return false;
-		if (municipio == null) {
-			if (other.municipio != null)
+		if (emp_ds == null) {
+			if (other.emp_ds != null)
 				return false;
-		} else if (!municipio.equals(other.municipio))
+		} else if (!emp_ds.equals(other.emp_ds))
 			return false;
-		if (taxas == null) {
-			if (other.taxas != null)
+		if (uf == null) {
+			if (other.uf != null)
 				return false;
-		} else if (!taxas.equals(other.taxas))
+		} else if (!uf.equals(other.uf))
+			return false;
+		if (ufnome == null) {
+			if (other.ufnome != null)
+				return false;
+		} else if (!ufnome.equals(other.ufnome))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Parametro [emp_cd=" + emp_cd + ", municipio=" + municipio + ", data_per=" + data_per + ", taxas="
-				+ taxas + "]";
+		return "Parametro [emp_cd=" + emp_cd + ", emp_ds=" + emp_ds + ", uf=" + uf + ", data_per=" + data_per
+				+ ", ufnome=" + ufnome + "]";
 	}
+
+	
 
 	
 	

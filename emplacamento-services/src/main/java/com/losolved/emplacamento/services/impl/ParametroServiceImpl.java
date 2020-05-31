@@ -51,6 +51,7 @@ public class ParametroServiceImpl extends BaseService<Parametro, Integer> {
 		params.forEach(e -> {
 			Set<Taxa> taxas = tRepository.findByParametro(e);
 			e.setTaxas(taxas);
+			e.setUfnome(e.getUf() != null ? e.getUf().getNome() : "");
 		});
 
 		return params;
@@ -66,7 +67,7 @@ public class ParametroServiceImpl extends BaseService<Parametro, Integer> {
 			Parametro parametro = oParametro.get();
 			Set<Taxa> taxas = tRepository.findByParametro(parametro);
 			parametro.setTaxas(taxas);
-
+			parametro.setUfnome(parametro.getUf() != null ? parametro.getUf().getNome() : "");
 		}
 
 		return oParametro;
@@ -75,52 +76,68 @@ public class ParametroServiceImpl extends BaseService<Parametro, Integer> {
 	@Override
 	public Optional<Parametro> atualizarT(Parametro t, Integer id) {
 		// TODO Auto-generated method stub
-		
-		Optional<Parametro> oParametro =   super.atualizarT(t, id); 
-		
-		if(oParametro.isPresent()) {
-			
-			Parametro param = oParametro.get();
-			
-			Set<Taxa> taxasAtualizar = t.getTaxas().stream().filter(		taxa ->  taxa.getAtualiza() == true	).collect(Collectors.toSet());
-			
-	/*	
-			Set<Taxa> taxasVerificar  = t.getTaxas().stream().filter(taxa ->  taxa.getAtualiza() == false).collect(Collectors.toSet());
-	  
-	  	Set<Taxa> taxasPersistidas = tRepository.findByParametro(param);
-			
+
+	//	Optional<Parametro> oParametro = super.atualizarT(t, id);
+
+		if (true) {
+
+			Parametro param = t;
+
+
+			Set<Taxa> taxasPersistidas = tRepository.findByParametro(param);
+
 			Set<Taxa> taxasRemover = new HashSet<Taxa>();
+			Set<Taxa> taxasAtualizar = new HashSet<Taxa>();
 			Set<Taxa> taxasInserir = new HashSet<Taxa>();
-			
-			
-			List<Integer> idVerificar =  taxasVerificar.stream().map( ta -> ta.getId()).collect(Collectors.toList());
-			List<Integer> idAtualizar =  taxasAtualizar.stream().map( ta -> ta.getId()).collect(Collectors.toList());
-	 taxasPersistidas.forEach(to -> {
-				
-				System.out.println(); 
-				
-				if(!idVerificar.contains(to.getId())  &&  idAtualizar.contains(to.getId())) {
+
+			List<Integer> idVerificar = t.getTaxas().stream().filter(ts -> ts.getId() != 0).map(ta -> ta.getId()).collect(Collectors.toList());
+			taxasPersistidas.forEach(to -> {
+
+				System.out.println();
+
+				if (!idVerificar.contains(to.getId())) {
 					taxasRemover.add(to);
 				}
 			});
-			
-			
-			List<Integer> idPersistidas =  taxasPersistidas.stream().map( ta -> ta.getId()).collect(Collectors.toList());
-			
-			taxasVerificar.forEach(to -> {
-				if(!idPersistidas.contains(to.getId())) {
+
+			List<Integer> idPersistidas = taxasPersistidas.stream().map(ta -> ta.getId()).collect(Collectors.toList());
+
+			t.getTaxas().forEach(to -> {
+				if (!idPersistidas.contains(to.getId())) {
 					taxasInserir.add(to);
 				}
 			});
+
+			taxasRemover.forEach(taxa -> {
+				tRepository.delete(taxa);
+			});
+			taxasInserir.forEach(taxa -> {
+				taxa.setParametro(new Parametro()); 
+				taxa.getParametro().setId(id); 
+				tRepository.save(taxa);
+			});
 			
-			taxasRemover.forEach(taxa -> { tRepository.delete(taxa);});
-			taxasInserir.forEach(taxa -> { tRepository.save(taxa);}); **/
-			taxasAtualizar.forEach(taxa -> { tRepository.save(taxa);});
+			List<Integer> idRemover = taxasRemover.stream().map(ta -> ta.getId()).collect(Collectors.toList());
+			List<Integer> idInserir = taxasInserir.stream().map(ta -> ta.getId()).collect(Collectors.toList());
+			
+			t.getTaxas().forEach(to -> {
+
+				System.out.println();
+
+				if (!idRemover.contains(to.getId()) && !idInserir.contains(to.getId() ) ) {
+					taxasAtualizar.add(to);
+				}
+			});
+			
+			taxasAtualizar.forEach(taxa -> {
+				taxa.setId(taxa.getId());
+				taxa.setParametro(new Parametro()); 
+				taxa.getParametro().setId(id); 
+				tRepository.save(taxa);
+			});
 		}
-		
-		return oParametro;
+
+		return Optional.of(t);
 	}
 
-	
-	
 }

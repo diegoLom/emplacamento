@@ -150,11 +150,8 @@ public class EmplacamentoTaxa {
 
 	@Override
 	public String toString() {
-		return "EmplacamentoTaxa [taxaKey=" + taxaKey + ", taxa=" + taxa + ", emplacamento=" + emplacamento
-				+ ", taxa_Id=" + taxa_Id + ", valor_final=" + valor_final + ", getValor_final()=" + getValor_final()
-				+ ", getTaxa_Id()=" + getTaxa_Id() + ", getTaxa()=" + getTaxa() + ", getEmplacamento()="
-				+ getEmplacamento() + ", getTaxaKey()=" + getTaxaKey() + ", hashCode()=" + hashCode() + ", getClass()="
-				+ getClass() + ", toString()=" + super.toString() + "]";
+		return "EmplacamentoTaxa "
+				;
 	}
 
 

@@ -183,15 +183,7 @@ public class EmplacamentoServiceImpl extends BaseService<Emplacamento, Integer> 
 			Map parameters = new HashMap();
 			
 		 Optional<Emplacamento> oEmplacamento = 	this.pegar(id); 
-			
-			if(oEmplacamento.isPresent()) {System.out.println(oEmplacamento.get());
-			
-			
-				
 		
-
-			
-			}
 			Emplacamento emplacamento = oEmplacamento.get(); 
 			
 			
@@ -199,6 +191,13 @@ public class EmplacamentoServiceImpl extends BaseService<Emplacamento, Integer> 
 			parameters.put("data_solicitacao", "16/05/2020");
 			parameters.put("model_veiculo", emplacamento.getModelo_veiculo());
 			parameters.put("munc_veiculo", "Salvador");
+			
+			parameters.put("vlr_proposta", emplacamento.getValorEmplacamento());
+			parameters.put("obsv", emplacamento.getObservacao());
+			parameters.put("vlr_total", emplacamento.getValorEmplacamento());
+
+			
+			System.out.println(emplacamento.getValorEmplacamento());
 		//	parameters.put("vlr_proposta", emplacamento.getValor_proposta().toString());
 			
 //			parameters.put("obsv", emplacamento.getValorEmplacamento().toString());
