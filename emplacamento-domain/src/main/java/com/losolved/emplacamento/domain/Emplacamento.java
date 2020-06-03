@@ -68,7 +68,9 @@ public class Emplacamento extends BaseEntity<Integer> {
 	private String cidadeplaca;
 	
 	
-	
+	private String emp_cd;
+	private String emp_ds; 
+
 //	@OneToMany(targetEntity = com.losolved.emplacamento.domain.FormaPagamento.class, mappedBy = "emplacamento" , fetch = FetchType.LAZY)
 	@Transient
 	private Set<FormaPagamento> pagamentos;
@@ -83,6 +85,24 @@ public class Emplacamento extends BaseEntity<Integer> {
   	private Set<EmplacamentoTaxa> taxas;
 	  
 	
+	
+	
+
+	public String getEmp_cd() {
+		return emp_cd;
+	}
+
+	public void setEmp_cd(String emp_cd) {
+		this.emp_cd = emp_cd;
+	}
+
+	public String getEmp_ds() {
+		return emp_ds;
+	}
+
+	public void setEmp_ds(String emp_ds) {
+		this.emp_ds = emp_ds;
+	}
 
 	public Set<EmplacamentoTaxa> getTaxas() {
 		return taxas;
@@ -312,6 +332,8 @@ public class Emplacamento extends BaseEntity<Integer> {
 		result = prime * result + ((codigo_veiculo == null) ? 0 : codigo_veiculo.hashCode());
 		result = prime * result + ((combustivel == null) ? 0 : combustivel.hashCode());
 		result = prime * result + ((cor_externa == null) ? 0 : cor_externa.hashCode());
+		result = prime * result + ((emp_cd == null) ? 0 : emp_cd.hashCode());
+		result = prime * result + ((emp_ds == null) ? 0 : emp_ds.hashCode());
 		result = prime * result + ((estqoue == null) ? 0 : estqoue.hashCode());
 		result = prime * result + ((modelo_veiculo == null) ? 0 : modelo_veiculo.hashCode());
 		result = prime * result + ((nome_cliente == null) ? 0 : nome_cliente.hashCode());
@@ -323,7 +345,6 @@ public class Emplacamento extends BaseEntity<Integer> {
 		result = prime * result + ((placa == null) ? 0 : placa.hashCode());
 		result = prime * result + ((propdata == null) ? 0 : propdata.hashCode());
 		result = prime * result + ((renavam == null) ? 0 : renavam.hashCode());
-		result = prime * result + ((taxas == null) ? 0 : taxas.hashCode());
 		result = prime * result + ((uf_placa == null) ? 0 : uf_placa.hashCode());
 		result = prime * result + ((valorEmplacamento == null) ? 0 : valorEmplacamento.hashCode());
 		result = prime * result + ((valor_financiado == null) ? 0 : valor_financiado.hashCode());
@@ -373,6 +394,16 @@ public class Emplacamento extends BaseEntity<Integer> {
 			if (other.cor_externa != null)
 				return false;
 		} else if (!cor_externa.equals(other.cor_externa))
+			return false;
+		if (emp_cd == null) {
+			if (other.emp_cd != null)
+				return false;
+		} else if (!emp_cd.equals(other.emp_cd))
+			return false;
+		if (emp_ds == null) {
+			if (other.emp_ds != null)
+				return false;
+		} else if (!emp_ds.equals(other.emp_ds))
 			return false;
 		if (estqoue == null) {
 			if (other.estqoue != null)
@@ -428,11 +459,6 @@ public class Emplacamento extends BaseEntity<Integer> {
 			if (other.renavam != null)
 				return false;
 		} else if (!renavam.equals(other.renavam))
-			return false;
-		if (taxas == null) {
-			if (other.taxas != null)
-				return false;
-		} else if (!taxas.equals(other.taxas))
 			return false;
 		if (uf_placa == null) {
 			if (other.uf_placa != null)
@@ -494,8 +520,8 @@ public class Emplacamento extends BaseEntity<Integer> {
 				+ chassi + ", numero_motor=" + numero_motor + ", renavam=" + renavam + ", combustivel=" + combustivel
 				+ ", cor_externa=" + cor_externa + ", classificacao=" + classificacao + ", estqoue=" + estqoue
 				+ ", vendedor_proposta=" + vendedor_proposta + ", propdata=" + propdata + ", cidadeplaca=" + cidadeplaca
-				+ ", pagamentos=" + pagamentos + ", observacao=" + observacao + ", taxas=" + taxas
-				+ ", valorEmplacamento=" + valorEmplacamento + "]";
+				+ ", emp_cd=" + emp_cd + ", emp_ds=" + emp_ds + ", pagamentos=" + pagamentos + ", observacao="
+				+ observacao + ", valorEmplacamento=" + valorEmplacamento + "]";
 	}
 
 	
