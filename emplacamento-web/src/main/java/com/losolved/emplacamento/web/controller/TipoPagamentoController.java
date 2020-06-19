@@ -11,7 +11,7 @@ import com.losolved.emplacamento.services.impl.TaxasServiceImpl;
 import com.losolved.emplacamento.services.impl.TipoPagamentoServiceImpl;
 
 
-@RestController 
+@RestController("tipoPagamento") 
 @RequestMapping("/tipoPagamento")
 public class TipoPagamentoController  extends BaseController<TipoPagamento, Integer>{
 	

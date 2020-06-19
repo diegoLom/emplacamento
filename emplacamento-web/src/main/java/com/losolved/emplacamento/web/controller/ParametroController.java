@@ -16,7 +16,7 @@ import com.losolved.emplacamento.services.impl.EmplacamentoServiceImpl;
 import com.losolved.emplacamento.services.impl.ParametroServiceImpl;
 
 
-@RestController 
+@RestController("parametro") 
 @RequestMapping("/parametro")
 public class ParametroController extends BaseController<Parametro, Integer>  {
 	

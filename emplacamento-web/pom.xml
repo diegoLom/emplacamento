@@ -173,10 +173,17 @@
 							but obfuscate all in domain and service packages. -->
 						<option>-keep
 							class
+							com.losolved.emplacamento.web.**, 
 							com.losolved.emplacamento.web.controller.LoSolvedEmplacamentoApplication
 							{
 							public static void main(java.lang.String[]);
 							}
+							
+							
+							<!-- .controller.LoSolvedEmplacamentoApplication
+							{
+							public static void main(java.lang.String[]);
+							}-->  
 						</option>
 						<!-- This option ignore warnings such as duplicate class definitions 
 							and classes in incorrectly named files -->

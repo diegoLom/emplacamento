@@ -52,6 +52,8 @@ public class Parametro extends BaseEntity<Integer> {
 	
 	
 	
+	
+	
 	@Transient
 	private String ufnome;
 	

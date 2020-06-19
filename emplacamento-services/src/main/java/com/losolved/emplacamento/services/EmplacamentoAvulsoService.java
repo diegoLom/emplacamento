@@ -9,7 +9,7 @@ public interface EmplacamentoAvulsoService {
      public EmplacamentoAvulso salvar(EmplacamentoAvulso emplAvulso);
      
      
-     public Object generateReport() throws IOException;
+     public Object generateReport(Integer id) throws IOException;
      
 
 }

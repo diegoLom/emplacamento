@@ -21,7 +21,7 @@ import com.losolved.emplacamento.services.impl.MunicipioServiceImpl;
 import com.losolved.emplacamento.services.impl.TaxasServiceImpl;
 
 
-@RestController 
+@RestController("taxas") 
 @RequestMapping("/taxas")
 public class TaxasController extends BaseController<Taxa, Integer>  {
 	

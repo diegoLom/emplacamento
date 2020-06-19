@@ -58,6 +58,10 @@ public class Taxa extends BaseEntity<Integer> {
 
 	@Column
 	private BigDecimal vl_final;
+	
+	@Transient
+	private String vl_final_formatado = "";
+	
 
 	@Column
 	private BigDecimal vl_iof;
@@ -110,6 +114,14 @@ public class Taxa extends BaseEntity<Integer> {
 		return descr;
 	}
 
+	public String getVl_final_formatado() {
+		return vl_final_formatado;
+	}
+
+	public void setVl_final_formatado(String vl_final_formatado) {
+		this.vl_final_formatado = vl_final_formatado;
+	}
+
 	public void setDescr(String descr) {
 		this.descr = descr;
 	}
@@ -155,6 +167,10 @@ public class Taxa extends BaseEntity<Integer> {
 	}
 
 	public void setVl_final(BigDecimal vl_final) {
+		
+		if(vl_final != null)
+			setVl_final_formatado(new java.text.DecimalFormat("R$ #,##0.00").format(vl_final));
+			
 		this.vl_final = vl_final;
 		
 	}

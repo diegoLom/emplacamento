@@ -13,7 +13,7 @@ import com.losolved.emplacamento.integration.repository.EmplacamentoRepository;
 import com.losolved.emplacamento.services.impl.EmplacamentoServiceImpl;
 
 
-@RestController 
+@RestController("emplacamento") 
 @RequestMapping("/emplacamento")
 public class EmplacamentoController extends BaseController<Emplacamento, Integer>  {
 	

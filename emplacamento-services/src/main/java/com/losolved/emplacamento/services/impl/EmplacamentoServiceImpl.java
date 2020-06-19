@@ -192,9 +192,9 @@ public class EmplacamentoServiceImpl extends BaseService<Emplacamento, Integer> 
 			parameters.put("model_veiculo", emplacamento.getModelo_veiculo());
 			parameters.put("munc_veiculo", "Salvador");
 			
-			parameters.put("vlr_proposta", emplacamento.getValorEmplacamento());
+			parameters.put("vlr_proposta", new java.text.DecimalFormat("R$ #,##0.00").format( emplacamento.getValor_nf()));
 			parameters.put("obsv", emplacamento.getObservacao());
-			parameters.put("vlr_total", emplacamento.getValorEmplacamento());
+			parameters.put("vlr_total", new java.text.DecimalFormat("R$ #,##0.00").format(emplacamento.getValorEmplacamento()));
 
 			
 			System.out.println(emplacamento.getValorEmplacamento());

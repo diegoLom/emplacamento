@@ -21,6 +21,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.FetchMode;
@@ -38,13 +40,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 property = "id")
 public class Emplacamento extends BaseEntity<Integer> {
 	
-	
-
-	
-//	@OneToOne(mappedBy = "emplacamento")
-//	private EmplacamentoAvulso emplacamentoA;
-
-	
 	private String	numero_proposta;
 	private String numero_pedido;
 	private BigDecimal valor_proposta;
@@ -59,17 +54,16 @@ public class Emplacamento extends BaseEntity<Integer> {
 	private String numero_motor;
 	private String renavam;
 	private String combustivel;
-	private String cor_externa;
+	private String estado;
 	private String classificacao;
-	private String estqoue;
+	private String cor_externa;
 	private String vendedor_proposta;
-	
 	private String propdata;
 	private String cidadeplaca;
-	
-	
 	private String emp_cd;
-	private String emp_ds; 
+	private String emp_ds;
+	
+
 
 //	@OneToMany(targetEntity = com.losolved.emplacamento.domain.FormaPagamento.class, mappedBy = "emplacamento" , fetch = FetchType.LAZY)
 	@Transient
@@ -85,8 +79,29 @@ public class Emplacamento extends BaseEntity<Integer> {
   	private Set<EmplacamentoTaxa> taxas;
 	  
 	
+	@Column
+	@Temporal(value = TemporalType.DATE)
+	private java.util.Date dtemissao_nf;
 	
 	
+	
+	
+	
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	public java.util.Date getDtemissao_nf() {
+		return dtemissao_nf;
+	}
+
+	public void setDtemissao_nf(java.util.Date dtemissao_nf) {
+		this.dtemissao_nf = dtemissao_nf;
+	}
 
 	public String getEmp_cd() {
 		return emp_cd;
@@ -246,12 +261,12 @@ public class Emplacamento extends BaseEntity<Integer> {
 		this.classificacao = classificacao;
 	}
 
-	public String getEstqoue() {
-		return estqoue;
+	public String getestado() {
+		return estado;
 	}
 
-	public void setEstqoue(String estqoue) {
-		this.estqoue = estqoue;
+	public void setestado(String estado) {
+		this.estado = estado;
 	}
 
 	public String getVendedor_proposta() {
@@ -334,7 +349,7 @@ public class Emplacamento extends BaseEntity<Integer> {
 		result = prime * result + ((cor_externa == null) ? 0 : cor_externa.hashCode());
 		result = prime * result + ((emp_cd == null) ? 0 : emp_cd.hashCode());
 		result = prime * result + ((emp_ds == null) ? 0 : emp_ds.hashCode());
-		result = prime * result + ((estqoue == null) ? 0 : estqoue.hashCode());
+		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
 		result = prime * result + ((modelo_veiculo == null) ? 0 : modelo_veiculo.hashCode());
 		result = prime * result + ((nome_cliente == null) ? 0 : nome_cliente.hashCode());
 		result = prime * result + ((numero_motor == null) ? 0 : numero_motor.hashCode());
@@ -405,10 +420,10 @@ public class Emplacamento extends BaseEntity<Integer> {
 				return false;
 		} else if (!emp_ds.equals(other.emp_ds))
 			return false;
-		if (estqoue == null) {
-			if (other.estqoue != null)
+		if (estado == null) {
+			if (other.estado != null)
 				return false;
-		} else if (!estqoue.equals(other.estqoue))
+		} else if (!estado.equals(other.estado))
 			return false;
 		if (modelo_veiculo == null) {
 			if (other.modelo_veiculo != null)
@@ -518,7 +533,7 @@ public class Emplacamento extends BaseEntity<Integer> {
 				+ valor_financiado + ", nome_cliente=" + nome_cliente + ", codigo_veiculo=" + codigo_veiculo
 				+ ", modelo_veiculo=" + modelo_veiculo + ", placa=" + placa + ", uf_placa=" + uf_placa + ", chassi="
 				+ chassi + ", numero_motor=" + numero_motor + ", renavam=" + renavam + ", combustivel=" + combustivel
-				+ ", cor_externa=" + cor_externa + ", classificacao=" + classificacao + ", estqoue=" + estqoue
+				+ ", cor_externa=" + cor_externa + ", classificacao=" + classificacao + ", estado=" + estado
 				+ ", vendedor_proposta=" + vendedor_proposta + ", propdata=" + propdata + ", cidadeplaca=" + cidadeplaca
 				+ ", emp_cd=" + emp_cd + ", emp_ds=" + emp_ds + ", pagamentos=" + pagamentos + ", observacao="
 				+ observacao + ", valorEmplacamento=" + valorEmplacamento + "]";

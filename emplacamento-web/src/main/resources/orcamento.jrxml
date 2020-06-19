@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="orcamento" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="6e779ab3-35c0-4b93-bc86-3c6deba00f65">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="orcamento" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="6e779ab3-35c0-4b93-bc86-3c6deba00f65">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<subDataset name="Dataset1" uuid="007ff50f-0f15-42ce-9fdf-7d7b56626d89">
 		<queryString>
@@ -11,9 +11,9 @@
 	<parameter name="data_solicitacao" class="java.lang.String"/>
 	<parameter name="model_veiculo" class="java.lang.String"/>
 	<parameter name="munc_veiculo" class="java.lang.String"/>
-	<parameter name="vlr_proposta" class="java.math.BigDecimal"/>
+	<parameter name="vlr_proposta" class="java.lang.String"/>
 	<parameter name="obsv" class="java.lang.String"/>
-	<parameter name="vlr_total" class="java.math.BigDecimal"/>
+	<parameter name="vlr_total" class="java.lang.String"/>
 	<parameter name="total" class="java.math.BigDecimal"/>
 	<parameter name="tipo_emplacamento" class="java.lang.String"/>
 	<parameter name="dpvat" class="java.math.BigDecimal"/>
@@ -32,6 +32,7 @@
 	<parameter name="setor" class="java.lang.String"/>
 	<parameter name="codigo" class="java.lang.String"/>
 	<parameter name="placa" class="java.lang.String"/>
+	<parameter name="hasCortesia" class="java.lang.Boolean"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -41,6 +42,9 @@
 	<field name="taxa.vl_final" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[taxa.vl_final]]></fieldDescription>
 	</field>
+	<field name="taxa.vl_final_formatado" class="java.lang.String">
+		<fieldDescription><![CDATA[taxa.vl_final_formatado]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -49,7 +53,7 @@
 			<textField>
 				<reportElement x="0" y="30" width="550" height="30" uuid="da2ac3e2-3495-4e74-829b-b06b1b762345"/>
 				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["ORÇAMENTO PARA SERVIÇO DE EMPLACAMENTO \n"+
 "Veículo Novo"]]></textFieldExpression>
@@ -222,25 +226,31 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="18" splitType="Stretch">
+		<band height="12" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField>
-				<reportElement x="261" y="0" width="181" height="12" uuid="9501f5a9-6b03-4bab-87ca-2a48700e9d09">
+				<reportElement x="261" y="0" width="181" height="11" uuid="9501f5a9-6b03-4bab-87ca-2a48700e9d09">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{taxa.descr}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="454" y="0" width="100" height="12" uuid="b28bad16-75fb-4485-b88a-e3281a28d5fb">
+				<reportElement x="454" y="0" width="100" height="11" uuid="b28bad16-75fb-4485-b88a-e3281a28d5fb">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{taxa.vl_final}]]></textFieldExpression>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{taxa.vl_final_formatado}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="400" splitType="Stretch">
+		<band height="381" splitType="Immediate">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField>
 				<reportElement x="5" y="3" width="554" height="12" uuid="4a2a0765-5577-46ff-a743-9a9f374bb3e3">
@@ -253,7 +263,7 @@
 				<textFieldExpression><![CDATA["Autorizo a realização do Serviço de Emplacamento conforme acima descriminado."]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="6" y="24" width="169" height="12" uuid="e2ceb4b8-6562-4738-94ea-a2e34d4cbafa">
+				<reportElement x="6" y="17" width="169" height="12" uuid="e2ceb4b8-6562-4738-94ea-a2e34d4cbafa">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -263,7 +273,7 @@
 				<textFieldExpression><![CDATA["___________________________________________________________"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="315" y="24" width="242" height="12" uuid="2de6ef4a-d91a-4956-8284-d26b2de37db4">
+				<reportElement x="315" y="17" width="242" height="12" uuid="2de6ef4a-d91a-4956-8284-d26b2de37db4">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -273,9 +283,10 @@
 				<textFieldExpression><![CDATA["________________________________________________________________"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="5" y="24" width="169" height="12" uuid="493a4b3b-1f83-4022-aa7b-23a4e2570776">
+				<reportElement x="5" y="26" width="169" height="12" uuid="493a4b3b-1f83-4022-aa7b-23a4e2570776">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="8" isBold="false"/>
@@ -283,9 +294,10 @@
 				<textFieldExpression><![CDATA["Local e Data"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="325" y="24" width="232" height="12" uuid="2ceef6cb-7a11-4aa8-92fe-f6c8570b96fa">
+				<reportElement x="325" y="27" width="232" height="12" uuid="2ceef6cb-7a11-4aa8-92fe-f6c8570b96fa">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="8" isBold="false"/>
@@ -403,15 +415,17 @@
 				<textFieldExpression><![CDATA["DATA___/___/______ _____:_____       ASSINATURA DO EMPLACAMENTO: _______________________________________"]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement x="2" y="299" width="554" height="56" uuid="b6126e5e-e767-4d45-81f4-cbe5d4096d7b">
+				<reportElement x="3" y="289" width="554" height="56" uuid="b6126e5e-e767-4d45-81f4-cbe5d4096d7b">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$P{hasCortesia} == true]]></printWhenExpression>
 				</reportElement>
 			</rectangle>
 			<textField>
-				<reportElement x="5" y="301" width="554" height="9" uuid="834a395a-a68a-4d5e-a685-b76a8832a310">
+				<reportElement x="6" y="291" width="554" height="9" uuid="834a395a-a68a-4d5e-a685-b76a8832a310">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$P{hasCortesia} == true]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center">
 					<font size="7" isBold="true"/>
@@ -419,8 +433,9 @@
 				<textFieldExpression><![CDATA["CORTESIA EMPLACAMENTO"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="13" y="312" width="90" height="40" uuid="153ba70d-cf30-4f32-a41e-af636769666f">
+				<reportElement x="14" y="305" width="90" height="40" uuid="153ba70d-cf30-4f32-a41e-af636769666f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$P{hasCortesia} == true]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left">
 					<font size="7"/>
@@ -431,16 +446,18 @@
 "VALOR:"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="103" y="312" width="90" height="40" uuid="f9f6c332-8981-4fd2-8837-e25ad8b51a9a">
+				<reportElement x="104" y="305" width="90" height="40" uuid="f9f6c332-8981-4fd2-8837-e25ad8b51a9a">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$P{hasCortesia} == true]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left">
 					<font size="7"/>
 				</textElement>
 			</textField>
 			<textField>
-				<reportElement x="368" y="312" width="90" height="40" uuid="c79d9e19-b686-4a2a-8a63-686b8b4f27a0">
+				<reportElement x="369" y="305" width="90" height="40" uuid="c79d9e19-b686-4a2a-8a63-686b8b4f27a0">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$P{hasCortesia} == true]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left">
 					<font size="7"/>
@@ -451,15 +468,16 @@
 "PLACA:"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="458" y="312" width="90" height="40" uuid="e62d2ecd-d548-4451-a39b-fdf62713b57c">
+				<reportElement x="459" y="305" width="90" height="40" uuid="e62d2ecd-d548-4451-a39b-fdf62713b57c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$P{hasCortesia} == true]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left">
 					<font size="7"/>
 				</textElement>
 			</textField>
 			<textField>
-				<reportElement x="168" y="371" width="232" height="12" uuid="0345ea95-cf57-4a9b-b3f5-7ccdd15f52e4">
+				<reportElement x="160" y="364" width="232" height="12" uuid="86a589bc-c881-48e3-b13a-34d63d44ec16">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -469,7 +487,7 @@
 				<textFieldExpression><![CDATA["Assinatura Gerente"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="158" y="359" width="242" height="12" uuid="fc8c62cf-cd61-430f-b84a-462725e860ca">
+				<reportElement x="150" y="353" width="242" height="12" uuid="5c43dd0f-5461-4446-b713-47f0b7acbd9c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>

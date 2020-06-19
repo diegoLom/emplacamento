@@ -16,7 +16,7 @@ import com.losolved.emplacamento.services.impl.EmplacamentoAvulsoServiceImpl;
 import com.losolved.emplacamento.services.impl.UfServiceImpl;
 
 
-@RestController 
+@RestController("uf") 
 @RequestMapping("/uf")
 public class UfController extends BaseController<Uf, Integer>  {
 	

@@ -23,7 +23,7 @@ import com.losolved.emplacamento.services.impl.MunicipioServiceImpl;
 import com.losolved.emplacamento.services.impl.UfServiceImpl;
 
 
-@RestController 
+@RestController("municipio") 
 @RequestMapping("/municipio")
 public class MunicipioController extends BaseController<Municipio, Integer>  {
 	

@@ -13,7 +13,7 @@ import com.losolved.emplacamento.integration.repository.ComissaoRepository;
 import com.losolved.emplacamento.services.impl.ComissaoServiceImpl;
 
 
-@RestController 
+@RestController("comissao") 
 @RequestMapping("/comissao")
 public class ComissaoController extends BaseController<Comissao, Integer>  {
 	

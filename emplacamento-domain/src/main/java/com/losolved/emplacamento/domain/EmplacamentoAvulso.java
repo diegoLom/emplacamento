@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -36,7 +37,7 @@ public class EmplacamentoAvulso extends BaseEntity<Integer>{
 	
 	private BigDecimal vlVec;
 	
-	private String estoque;
+	private String estado;
 	
 	@Column
 	@Temporal(value = TemporalType.TIMESTAMP)
@@ -49,8 +50,6 @@ public class EmplacamentoAvulso extends BaseEntity<Integer>{
 	private String descritivo;
 	
 	private String placa;
-	
-	private String estadoUF;
 	
 	private String chassi;
 	
@@ -69,6 +68,21 @@ public class EmplacamentoAvulso extends BaseEntity<Integer>{
 	private String status;
 	
 	private String vendedor;
+	
+	@ManyToOne
+	@JoinColumn(name ="municipioId")
+	private Municipio municipio;
+	
+
+	
+
+	public Municipio getMunicipio() {
+		return municipio;
+	}
+
+	public void setMunicipio(Municipio municipio) {
+		this.municipio = municipio;
+	}
 
 	public Emplacamento getEmplacamento() {
 		return emplacamento;
@@ -102,13 +116,7 @@ public class EmplacamentoAvulso extends BaseEntity<Integer>{
 		this.vlVec = vlVec;
 	}
 
-	public String getEstoque() {
-		return estoque;
-	}
 
-	public void setEstoque(String estoque) {
-		this.estoque = estoque;
-	}
 
 	public Date getData() {
 		return data;
@@ -150,14 +158,7 @@ public class EmplacamentoAvulso extends BaseEntity<Integer>{
 		this.placa = placa;
 	}
 
-	public String getEstadoUF() {
-		return estadoUF;
-	}
-
-	public void setEstadoUF(String estadoUF) {
-		this.estadoUF = estadoUF;
-	}
-
+	
 	public String getChassi() {
 		return chassi;
 	}
@@ -230,14 +231,12 @@ public class EmplacamentoAvulso extends BaseEntity<Integer>{
 		this.vendedor = vendedor;
 	}
 
-	@Override
-	public String toString() {
-		return "EmplacamentoAvulso [emplacamento=" + emplacamento + ", codigo_cliente=" + codigo_cliente + ", nome="
-				+ nome + ", vlVec=" + vlVec + ", estoque=" + estoque + ", data=" + data + ", observacoes=" + observacoes
-				+ ", codigo=" + codigo + ", descritivo=" + descritivo + ", placa=" + placa + ", estadoUF=" + estadoUF
-				+ ", chassi=" + chassi + ", motor=" + motor + ", renavam=" + renavam + ", comb=" + comb + ", potencia="
-				+ potencia + ", cor=" + cor + ", classificacao=" + classificacao + ", status=" + status + ", vendedor="
-				+ vendedor + "]";
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	@Override
@@ -253,9 +252,9 @@ public class EmplacamentoAvulso extends BaseEntity<Integer>{
 		result = prime * result + ((data == null) ? 0 : data.hashCode());
 		result = prime * result + ((descritivo == null) ? 0 : descritivo.hashCode());
 		result = prime * result + ((emplacamento == null) ? 0 : emplacamento.hashCode());
-		result = prime * result + ((estadoUF == null) ? 0 : estadoUF.hashCode());
-		result = prime * result + ((estoque == null) ? 0 : estoque.hashCode());
+		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
 		result = prime * result + ((motor == null) ? 0 : motor.hashCode());
+		result = prime * result + ((municipio == null) ? 0 : municipio.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((observacoes == null) ? 0 : observacoes.hashCode());
 		result = prime * result + ((placa == null) ? 0 : placa.hashCode());
@@ -321,20 +320,20 @@ public class EmplacamentoAvulso extends BaseEntity<Integer>{
 				return false;
 		} else if (!emplacamento.equals(other.emplacamento))
 			return false;
-		if (estadoUF == null) {
-			if (other.estadoUF != null)
+		if (estado == null) {
+			if (other.estado != null)
 				return false;
-		} else if (!estadoUF.equals(other.estadoUF))
-			return false;
-		if (estoque == null) {
-			if (other.estoque != null)
-				return false;
-		} else if (!estoque.equals(other.estoque))
+		} else if (!estado.equals(other.estado))
 			return false;
 		if (motor == null) {
 			if (other.motor != null)
 				return false;
 		} else if (!motor.equals(other.motor))
+			return false;
+		if (municipio == null) {
+			if (other.municipio != null)
+				return false;
+		} else if (!municipio.equals(other.municipio))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
@@ -378,6 +377,18 @@ public class EmplacamentoAvulso extends BaseEntity<Integer>{
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "EmplacamentoAvulso [emplacamento=" + emplacamento + ", codigo_cliente=" + codigo_cliente + ", nome="
+				+ nome + ", vlVec=" + vlVec + ", estado=" + estado + ", data=" + data + ", observacoes=" + observacoes
+				+ ", codigo=" + codigo + ", descritivo=" + descritivo + ", placa=" + placa + ", chassi=" + chassi
+				+ ", motor=" + motor + ", renavam=" + renavam + ", comb=" + comb + ", potencia=" + potencia + ", cor="
+				+ cor + ", classificacao=" + classificacao + ", status=" + status + ", vendedor=" + vendedor
+				+ ", municipio=" + municipio + "]";
+	}
+
+
 	
 
 
