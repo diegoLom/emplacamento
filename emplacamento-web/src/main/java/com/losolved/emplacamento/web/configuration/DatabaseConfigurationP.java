@@ -16,18 +16,25 @@ import com.zaxxer.hikari.HikariDataSource;
 public class DatabaseConfigurationP {
 	
 	
+	 @Value("${datasource.prod.username}")
+	  private String dbUsername;
+	
+	 @Value("${datasource.prod.password}")
+	  private String dbPassword;
+	
 	
 	 @Value("${datasource.prod.url}")
 	  private String dbUrl;
 	 
 	 
-
 	  @Bean
 	  public DataSource dataSource() {
 		  
 	      HikariConfig config = new HikariConfig();
 	      
 	      config.setJdbcUrl(dbUrl);
+	      config.setUsername(dbUsername);
+	      config.setPassword(dbPassword);
 	      
 	      return new HikariDataSource(config);
 	  }

@@ -8,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,8 +31,8 @@ public class BaseController<T extends BaseEntity<I> ,  I>  {
 	private BaseService<T, I> baseService;
   	
 	
-	
-	@GetMapping 
+	@CrossOrigin(origins = "*")
+	@GetMapping
 	public List<T> pegarTodos() {
 		return baseService.pegar();
 	};
@@ -39,7 +40,9 @@ public class BaseController<T extends BaseEntity<I> ,  I>  {
 	public Optional<T> pegar(I i) {
 		return baseService.pegar(i);
 	};
-	@GetMapping("{id}") 
+	
+	@CrossOrigin(origins = "*")
+	@GetMapping("{id}")
 	public ResponseEntity<T> pegarT(@PathVariable(value="id") I  id ){
 		
 	    Optional<T> retorno =  pegar(id);
@@ -51,12 +54,15 @@ public class BaseController<T extends BaseEntity<I> ,  I>  {
 		return ResponseEntity.notFound().build();
 	}
 	
+	
+	@CrossOrigin(origins = "*")
 	@RequestMapping(method=RequestMethod.DELETE)
 	public void deletarT(@RequestParam(required=true) I id){
 		deletar(id);
 	}
 	
-	@PostMapping 
+	@PostMapping
+	@CrossOrigin(origins = "*")
 	public ResponseEntity<Object> createT(@RequestBody T t){
 		T savedT = baseService.createT(t);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedT).toUri();
@@ -65,6 +71,7 @@ public class BaseController<T extends BaseEntity<I> ,  I>  {
 		
 	}
 	
+	@CrossOrigin(origins = "*")
 	@PutMapping("{id}")
 	public ResponseEntity<Object> atualizarT(@RequestBody T t, @PathVariable I id) {
 		Optional<T> studentOptional = baseService.pegar(id);

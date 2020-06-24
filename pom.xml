@@ -20,13 +20,38 @@
 		<java.version>1.8</java.version>
 		<project.version>0.0.1-SNAPSHOT</project.version>
 		 <start-class>com.losolved.emplacamento.web.controller.LoSolvedEmplacamentoApplication</start-class>
-		 	<spring.data.source>jdbc:postgres://apnptlywwgifag:998aac0ee1d5852a2c3a0c858afcb9bfa26fd8d30d00890ce5475b9940b4ac2c@ec2-18-213-176-229.compute-1.amazonaws.com:5432/d6b28q10ms6rtq</spring.data.source>
- 			<spring.data.username></spring.data.username>
-			<spring.data.password></spring.data.password>
+		 	<spring.data.source>jdbc:sqlserver://192.168.0.5:1433;databaseName=bd_indiana_matriz</spring.data.source>
+ 			<spring.data.username>quality</spring.data.username>
+			<spring.data.password>quality2020</spring.data.password>
+			
+			
+			
+			<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+			<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+			<java.version>1.8</java.version>
+	
+			<swagger.version>2.5.0</swagger.version>
+			<oi.commons.version>2.1.1-SNAPSHOT</oi.commons.version>
+			<oi.gateway.version>2.3.8</oi.gateway.version>
+			<oi.api.version>1.5.14-SNAPSHOT</oi.api.version>
+	
+			<!-- PARTNER -->
+			<oi.partner.api.version>2.4.4</oi.partner.api.version>
+	
+			<!-- RPM -->
+			<rpm.user>java</rpm.user>
+			<rpm.dest.dir>/opt/webapps/emplacamento</rpm.dest.dir>
+			
+			
+			<logging.level>INFO</logging.level>
+			<logging.config>classpath:logback.xml</logging.config>
+		
+			
+			
 	</properties>
 
 
-	<build>
+	<!--  <build>
 	
 		<plugins>
 			<plugin>
@@ -34,16 +59,82 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 	</plugins>
+	</build> -->
+	
+	
+		<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.2</version>
+				<configuration>
+					<tagNameFormat>v@{project.version}-RC</tagNameFormat>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<pushChanges>false</pushChanges>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.scm</groupId>
+						<artifactId>maven-scm-provider-gitexe</artifactId>
+						<version>1.9.4</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.7.201606060606</version>
+				<configuration>
+					<excludes>
+						<exclude>**/*WebProperties.*</exclude>
+						<exclude>**/*Config.*</exclude>
+						<exclude>**/*Dev.*</exclude>
+						<exclude>**/*Environment.*</exclude>
+						<exclude>*$jacocoData.*</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>post-unit-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
+	
+	
+	
+	
 	
 	<profiles>
 
  	<profile>
  		<id>prod</id>
  		<properties>
- 			<spring.data.source>jdbc:postgres://apnptlywwgifag:998aac0ee1d5852a2c3a0c858afcb9bfa26fd8d30d00890ce5475b9940b4ac2c@ec2-18-213-176-229.compute-1.amazonaws.com:5432/d6b28q10ms6rtq</spring.data.source>
- 			<spring.data.username></spring.data.username>
-			<spring.data.password></spring.data.password>
+ 			<spring.data.source>jdbc:sqlserver://192.168.0.5:1433;databaseName=bd_indiana_matriz</spring.data.source>
+ 			<spring.data.username>quality</spring.data.username>
+			<spring.data.password>quality2020</spring.data.password>
+		
  		</properties>	
  	</profile>
  	<profile>

@@ -26,9 +26,9 @@
 		<profile>
 			<id>prod</id>
 			<properties>
-				<spring.data.source>jdbc:postgres://apnptlywwgifag:998aac0ee1d5852a2c3a0c858afcb9bfa26fd8d30d00890ce5475b9940b4ac2c@ec2-18-213-176-229.compute-1.amazonaws.com:5432/d6b28q10ms6rtq</spring.data.source>
-				<spring.data.username></spring.data.username>
-				<spring.data.password></spring.data.password>
+				<spring.data.source>jdbc:sqlserver://192.168.0.5:1433;databaseName=bd_indiana_matriz</spring.data.source>
+				<spring.data.username>quality</spring.data.username>
+				<spring.data.password>quality2020</spring.data.password>
 			</properties>
 		</profile>
 		<profile>
@@ -106,128 +106,105 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
-		
-
 	</dependencies>
+	
+	
+	
+	 <build>
+        <finalName>${project.parent.artifactId}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <delimiters>
+                        <delimiter>${*}</delimiter><!-- to keep the default behavior -->
+                        <delimiter>@</delimiter><!-- to add Ant-like tokens style -->
+                    </delimiters>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>rpm-maven-plugin</artifactId>
+                <version>2.1.5</version>
+                <configuration>
+                    <name>${project.name}</name>
+                    <version>${project.version}</version>
+                    <description>${project.name}</description>
+                    <distribution>${project.name}</distribution>
+                    <needarch>noarch</needarch>
+                    <license>LoSolved</license>
+                    <group>Application/Internet</group>
+                    <changelogFile>${project.parent.basedir}/files/CHANGELOG</changelogFile>
+                    <defaultDirmode>755</defaultDirmode>
+                    <defaultFilemode>755</defaultFilemode>
+                    <defaultUsername>${rpm.user}</defaultUsername>
+                    <defaultGroupname>${rpm.group}</defaultGroupname>
+                    <autoRequires>true</autoRequires>
+                    <requires>
+                        <require>jre &gt;= 1.8</require>
+                    </requires>
+                    <mappings>
+                        <mapping>
+                            <directory>${rpm.dest.dir}</directory>
+                            <sources>
+                                <source>
+                                    <location>${project.build.directory}/${project.parent.artifactId}.${project.packaging}</location>
+                                </source>
+                                <source>
+                                    <location>${project.build.directory}/classes/logback.xml</location>
+                                    <filter>true</filter>
+                                </source>
+                                <source>
+                                    <location>${project.build.directory}/run.sh</location>
+                                </source>
+                            </sources>
+                        </mapping>
+                        <mapping>
+                            <directory>${rpm.dest.dir}/config</directory>
+                            <sources>
+                                <source>
+                                    <location>${project.build.directory}/classes/config/environment.properties</location>
+                                    <filter>true</filter>
+                                </source>
+                                <source>
+                                    <location>${project.build.directory}/classes/config/application.properties</location>
+                                    <filter>true</filter>
+                                </source>
+                                <source>
+                                    <location>${project.build.directory}/classes/messages.properties</location>
+                                    <filter>true</filter>
+                                </source>
+                            </sources>
+                        </mapping>
+                    </mappings>
+                    <postinstallScriptlet>
+                        <scriptFile>${project.parent.basedir}/files/${project.activeProfiles[0].id}/
+                        run-post-install.sh</scriptFile>
+                        <fileEncoding>utf-8</fileEncoding>
+                    </postinstallScriptlet>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
 
-	<build>
-
-		<finalName>${project.parent.artifactId}</finalName>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<includes>
-					<include>**/*.properties</include>
-					<include>**/*.xml</include>
-				</includes>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
-
-		<plugins>
-			<plugin>
-				<groupId>com.github.wvengen</groupId>
-				<artifactId>proguard-maven-plugin</artifactId>
-				<version>${proguard.maven.plugin.version}</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>proguard</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<proguardVersion>${proguard.version}</proguardVersion>
-					<injar>${project.build.finalName}.jar</injar>
-					<outjar>${project.build.finalName}.jar</outjar>
-					<obfuscate>true</obfuscate>
-					<options>
-						<option>-dontshrink</option>
-						<option>-dontoptimize</option>
-						<!-- This option will replace all strings in reflections method invocations 
-							with new class names. For example, invokes Class.forName('className') -->
-						<option>-adaptclassstrings</option>
-						<!-- This option will save all original annotations and etc. Otherwise 
-							all we be removed from files. -->
-						<option>-keepattributes
-							Exceptions,
-							InnerClasses,
-							Signature,
-							Deprecated,
-							SourceFile,
-							LineNumberTable,
-							*Annotation*,
-							EnclosingMethod
-						</option>
-						<!-- This option will save all original names in interfaces (without 
-							obfuscate). -->
-						<option>-keepnames interface **</option>
-						<!-- This option will save all original methods parameters in files 
-							defined in -keep sections, otherwise all parameter names will be obfuscate. -->
-						<option>-keepparameternames</option>
-						<!-- This option will save all original class files (without obfuscate) 
-							but obfuscate all in domain and service packages. -->
-						<option>-keep
-							class
-							com.losolved.emplacamento.web.**, 
-							com.losolved.emplacamento.web.controller.LoSolvedEmplacamentoApplication
-							{
-							public static void main(java.lang.String[]);
-							}
-							
-							
-							<!-- .controller.LoSolvedEmplacamentoApplication
-							{
-							public static void main(java.lang.String[]);
-							}-->  
-						</option>
-						<!-- This option ignore warnings such as duplicate class definitions 
-							and classes in incorrectly named files -->
-						<option>-ignorewarnings</option>
-						<!-- This option will save all original class files (without obfuscate) 
-							in service package -->
-						<!--<option>-keep class com.slm.proguard.example.spring.boot.service 
-							{ *; }</option> -->
-						<!-- This option will save all original interfaces files (without obfuscate) 
-							in all packages. -->
-						<option>-keep interface * extends * { *; }</option>
-						<!-- This option will save all original defined annotations in all 
-							class in all packages. -->
-						<option>-keepclassmembers class * {
-							@org.springframework.beans.factory.annotation.Autowired *;
-							@org.springframework.beans.factory.annotation.Value *;
-							}
-						</option>
-					</options>
-					<injarNotExistsSkip>true</injarNotExistsSkip>
-					<libs>
-						<!--Put here your libraries if required -->
-						<!--<lib>${java.home}/lib/rt.jar</lib> -->
-					</libs>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>net.sf.proguard</groupId>
-						<artifactId>proguard-base</artifactId>
-						<version>${proguard.version}</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-
-
-
-
-
-	</build>
+	
 
 
 
