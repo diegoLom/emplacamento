@@ -26,9 +26,9 @@
 		<profile>
 			<id>prod</id>
 			<properties>
-				<spring.data.source>jdbc:sqlserver://192.168.0.5:1433;databaseName=bd_indiana_matriz</spring.data.source>
+				<spring.data.source>jdbc:sqlserver://192.168.0.43:1433;databaseName=Emplacamento</spring.data.source>
 				<spring.data.username>quality</spring.data.username>
-				<spring.data.password>quality2020</spring.data.password>
+				<spring.data.password>Quality2020</spring.data.password>
 			</properties>
 		</profile>
 		<profile>
@@ -169,9 +169,7 @@
                                     <location>${project.build.directory}/classes/logback.xml</location>
                                     <filter>true</filter>
                                 </source>
-                                <source>
-                                    <location>${project.build.directory}/run.sh</location>
-                                </source>
+                                
                             </sources>
                         </mapping>
                         <mapping>
@@ -192,12 +190,7 @@
                             </sources>
                         </mapping>
                     </mappings>
-                    <postinstallScriptlet>
-                        <scriptFile>${project.parent.basedir}/files/${project.activeProfiles[0].id}/
-                        run-post-install.sh</scriptFile>
-                        <fileEncoding>utf-8</fileEncoding>
-                    </postinstallScriptlet>
-                </configuration>
+			</configuration>
             </plugin>
         </plugins>
     </build>

@@ -9,7 +9,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tipo_pagamento")
+@Table(name = "lo_tipo_pagamento")
 @SequenceGenerator(name = "default_seq", sequenceName = "TIPO_SEQ", initialValue = 1, allocationSize = 1)
 public class TipoPagamento extends BaseEntity<Integer> {
 	

@@ -8,7 +8,7 @@
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>/var/log/emplacamento/emplaca_eligibility.log</file>
+        <file>/var/log/emplacamento/emplaca.log</file>
         <encoder>
             <charset>UTF-8</charset>
             <pattern>%d{ISO8601} [%thread] %-5level %logger{35} - %msg%n
@@ -16,38 +16,6 @@
         </encoder>
     </appender>
 
-    <appender name="PROVIDER_AUDIT" class="ch.qos.logback.core.FileAppender">
-        <file>/var/log/emplacamento/emplaca_authorize_audit.log</file>
-        <encoder>
-            <charset>UTF-8</charset>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss};%msg%n
-            </pattern>
-        </encoder>
-    </appender>
-
-    <appender name="CHANNEL_AUDIT" class="ch.qos.logback.core.FileAppender">
-        <file>/var/log/emplacamento/emplaca_channel_audit.log</file>
-        <encoder>
-            <charset>UTF-8</charset>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss};%msg%n
-            </pattern>
-        </encoder>
-    </appender>
-
-    <appender name="SYSLOG" class="net.logstash.logback.appender.LogstashSocketAppender">
-        <host>localhost</host>
-        <port>514</port>
-        <customFields>{"app_name":"@parent.artifactId@","app_version":"@project.parent.version@"}</customFields>
-    </appender>
-
-    <logger name="br.com.oi.oicommons.log" level="INFO">
-        <appender-ref ref="SYSLOG" />
-    </logger>
-
-    <logger name="br.com.oiinternet" level="${logging.level}" additivity="true">
-        <appender-ref ref="FILE" />
-        <appender-ref ref="CONSOLE" />
-    </logger>
 
     <logger name="org.springframework" level="${logging.level}" additivity="true">
         <appender-ref ref="FILE" />

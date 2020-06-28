@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name = "taxa")
+@Table(name = "lo_taxa")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @SequenceGenerator(name = "default_seq", sequenceName = "TAXA_SEQ", initialValue = 1, allocationSize = 1)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")

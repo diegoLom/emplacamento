@@ -8,7 +8,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "veiculo")
+@Table(name = "lo_veiculo")
 @SequenceGenerator(name = "default_seq", sequenceName = "VEICULO_SEQ", initialValue = 1, allocationSize = 1)
 public class Veiculo extends BaseEntity<Integer> {
 	
