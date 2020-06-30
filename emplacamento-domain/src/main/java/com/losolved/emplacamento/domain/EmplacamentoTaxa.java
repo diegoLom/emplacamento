@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name = "lo_emplacamento_taxas")
+@Table(name = "emplacamento_taxas")
 
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="taxaKey", scope = EmplacamentoTaxa.class)
 public class EmplacamentoTaxa {

@@ -13,7 +13,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "lo_municipio")
+@Table(name = "municipio")
 @SequenceGenerator(name = "default_seq", sequenceName = "MUNICIPIO_SEQ", initialValue = 1, allocationSize = 1)
 public class Municipio extends BaseEntity<Integer> {
 

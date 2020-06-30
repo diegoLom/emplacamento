@@ -61,8 +61,8 @@ public class BaseController<T extends BaseEntity<I> ,  I>  {
 		deletar(id);
 	}
 	
+	@CrossOrigin(origins = "*", methods = RequestMethod.POST)
 	@PostMapping
-	@CrossOrigin(origins = "*")
 	public ResponseEntity<Object> createT(@RequestBody T t){
 		T savedT = baseService.createT(t);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedT).toUri();

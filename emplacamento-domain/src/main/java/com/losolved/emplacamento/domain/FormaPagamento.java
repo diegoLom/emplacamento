@@ -22,10 +22,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "lo_forma_pagamento")
+@Table(name = "forma_pagamento")
 @SequenceGenerator(name = "default_seq", sequenceName = "PAGAMENTO_SEQ", initialValue = 1, allocationSize = 1)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-property = "id")
+property = "id",  scope = FormaPagamento.class)
 public class FormaPagamento extends BaseEntity<Integer> {
 	
 	

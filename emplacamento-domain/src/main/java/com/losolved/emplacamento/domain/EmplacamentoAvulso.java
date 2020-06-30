@@ -20,10 +20,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 //
 @Entity
-@Table(name = "lo_emplacamento_avulso")
+@Table(name = "emplacamento_avulso")
 @SequenceGenerator(name = "default_seq", sequenceName = "EMPLACAMENTA_SEQ", initialValue = 1, allocationSize = 1)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-property = "id")
+property = "id", scope = EmplacamentoAvulso.class)
 public class EmplacamentoAvulso extends BaseEntity<Integer>{
 
 	@OneToOne

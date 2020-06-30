@@ -11,7 +11,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "lo_comissao")
+@Table(name = "comissao")
 @SequenceGenerator(name = "default_seq", sequenceName = "COMISSAO_SEQ", initialValue = 1, allocationSize = 1)
 public class Comissao extends BaseEntity<Integer> {
 	

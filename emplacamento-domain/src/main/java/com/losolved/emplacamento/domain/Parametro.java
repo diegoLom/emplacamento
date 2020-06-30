@@ -28,11 +28,11 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name = "lo_parametro")
+@Table(name = "parametro")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @SequenceGenerator(name = "default_seq", sequenceName = "PARAMETRO_SEQ", initialValue = 1, allocationSize = 1)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-property = "id")
+property = "id" ,  scope = Parametro.class)
 public class Parametro extends BaseEntity<Integer> {
 	
 	@Column
