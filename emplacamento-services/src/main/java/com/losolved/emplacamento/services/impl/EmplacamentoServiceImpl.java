@@ -205,7 +205,7 @@ public class EmplacamentoServiceImpl extends BaseService<Emplacamento, Integer> 
 			JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(emplacamento.getTaxas());
 
 				JasperPrint jasperPrint = JasperFillManager.fillReport(
-						this.getClass().getClassLoader().getResource("orcamento.jasper").getPath(), parameters,
+						"/opt/webapps/emplacamento/orcamento.jasper", parameters,
 						ds);
 			
 			reportData = JasperExportManager.exportReportToPdf(jasperPrint);
