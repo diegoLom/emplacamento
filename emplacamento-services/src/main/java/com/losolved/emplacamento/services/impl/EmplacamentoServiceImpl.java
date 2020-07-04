@@ -90,6 +90,7 @@ public class EmplacamentoServiceImpl extends BaseService<Emplacamento, Integer> 
 				te.setTaxaKey(taxaKey);
 				te.setTaxa(new Taxa());
 				te.getTaxa().setId(te.getTaxa_Id());
+				te.setValor_final(te.getTaxa().getVl_final());
 			}else if(te.getTaxa() != null && te.getTaxa().getId() != null) {
 				taxaKey.setTaxaId(te.getTaxa().getId());
 				te.setValor_final(te.getValor_final());
