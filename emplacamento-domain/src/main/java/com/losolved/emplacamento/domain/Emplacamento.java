@@ -62,6 +62,7 @@ public class Emplacamento extends BaseEntity<Integer> {
 	private String cidadeplaca;
 	private String emp_cd;
 	private String emp_ds;
+	private String form_tp;
 	
 
 
@@ -87,6 +88,14 @@ public class Emplacamento extends BaseEntity<Integer> {
 	
 	
 	
+
+	public String getForm_tp() {
+		return form_tp;
+	}
+
+	public void setForm_tp(String form_tp) {
+		this.form_tp = form_tp;
+	}
 
 	public String getEstado() {
 		return estado;

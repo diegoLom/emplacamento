@@ -42,8 +42,8 @@
 	<field name="taxa.vl_final" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[taxa.vl_final]]></fieldDescription>
 	</field>
-	<field name="taxa.vl_final_formatado" class="java.lang.String">
-		<fieldDescription><![CDATA[taxa.vl_final_formatado]]></fieldDescription>
+	<field name="vl_final_formatado" class="java.lang.String">
+		<fieldDescription><![CDATA[vl_final_formatado]]></fieldDescription>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -245,7 +245,7 @@
 				<textElement>
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{taxa.vl_final_formatado}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{vl_final_formatado}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

@@ -27,6 +27,7 @@ import com.losolved.emplacamento.domain.EmplacamentoTaxa;
 import com.losolved.emplacamento.domain.EmplacamentoTaxaKey;
 import com.losolved.emplacamento.domain.FormaPagamento;
 import com.losolved.emplacamento.domain.Taxa;
+import com.losolved.emplacamento.integration.repository.EmplacamentoRepository;
 import com.losolved.emplacamento.integration.repository.EmplacamentoTaxaRepository;
 import com.losolved.emplacamento.integration.repository.FormaPagamentoRepository;
 import com.losolved.emplacamento.integration.repository.FormaPagamentoRepository.OnlyForma;
@@ -53,6 +54,12 @@ public class EmplacamentoServiceImpl extends BaseService<Emplacamento, Integer> 
 
 	@Autowired
 	TaxasRepository tRepository;
+	
+	public List<Emplacamento> getOnlyEmplacamento(){
+		
+		 
+		return ((EmplacamentoRepository) this.getRepository()).findOnlyEmplacamentoProposta();
+	}
 
 	public Emplacamento salvar(Emplacamento toSave) {
 
@@ -194,6 +201,9 @@ public class EmplacamentoServiceImpl extends BaseService<Emplacamento, Integer> 
 			parameters.put("vlr_proposta", new java.text.DecimalFormat("R$ #,##0.00").format( emplacamento.getValor_nf()));
 			parameters.put("obsv", emplacamento.getObservacao());
 			parameters.put("vlr_total", new java.text.DecimalFormat("R$ #,##0.00").format(emplacamento.getValorEmplacamento()));
+			
+			
+			parameters.put("hasCortesia", false);
 
 			
 			System.out.println(emplacamento.getValorEmplacamento());

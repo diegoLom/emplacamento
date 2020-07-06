@@ -120,7 +120,9 @@ public class EmplacamentoAvulsoServiceImpl extends BaseService<EmplacamentoAvuls
 				parameters.put("vlr_proposta", new java.text.DecimalFormat("R$ #,##0.00").format( emplacamento.getVlVec()));
 				parameters.put("obsv", emplacamento.getObservacoes());
 				parameters.put("vlr_total", new java.text.DecimalFormat("R$ #,##0.00").format(emplacamento.getEmplacamento().getValorEmplacamento()));
-
+				
+				parameters.put("hasCortesia", false);
+				
 				
 				JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(emplacamento.getEmplacamento().getTaxas());
 

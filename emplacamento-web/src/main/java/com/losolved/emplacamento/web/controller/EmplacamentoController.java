@@ -1,6 +1,7 @@
 package com.losolved.emplacamento.web.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -29,6 +30,13 @@ public class EmplacamentoController extends BaseController<Emplacamento, Integer
 		
 	
 	}
+	
+	@CrossOrigin(origins = "*")
+	@GetMapping(value =" /only")
+	public List<Emplacamento> pegarTodos() {
+		return   ((EmplacamentoServiceImpl) getBaseService()).getOnlyEmplacamento();
+	};
+
 	
 	@CrossOrigin(origins = "*")
 	@GetMapping(

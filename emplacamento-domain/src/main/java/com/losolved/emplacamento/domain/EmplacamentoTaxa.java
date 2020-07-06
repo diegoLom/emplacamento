@@ -46,14 +46,30 @@ public class EmplacamentoTaxa {
 	@Column
 	private BigDecimal valor_final; 
 	
+	@Transient
+	private String vl_final_formatado = "";
+
 	
 	
+
+	public String getVl_final_formatado() {
+		return vl_final_formatado;
+	}
+
+	public void setVl_final_formatado(String vl_final_formatado) {
+		this.vl_final_formatado = vl_final_formatado;
+	}
 
 	public BigDecimal getValor_final() {
 		return valor_final;
 	}
 
 	public void setValor_final(BigDecimal valor_final) {
+		
+		
+		if(valor_final != null)
+			setVl_final_formatado(new java.text.DecimalFormat("R$ #,##0.00").format(valor_final));
+	
 		this.valor_final = valor_final;
 	}
 
