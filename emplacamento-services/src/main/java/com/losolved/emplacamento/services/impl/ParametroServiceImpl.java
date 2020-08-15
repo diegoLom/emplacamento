@@ -1,5 +1,6 @@
 package com.losolved.emplacamento.services.impl;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.losolved.emplacamento.domain.Parametro;
 import com.losolved.emplacamento.domain.Taxa;
+import com.losolved.emplacamento.integration.repository.ParametroRepository;
 import com.losolved.emplacamento.integration.repository.TaxasRepository;
 import com.losolved.emplacamento.services.BaseService;
 
@@ -72,7 +74,26 @@ public class ParametroServiceImpl extends BaseService<Parametro, Integer> {
 
 		return oParametro;
 	}
+	
+	
+	
+	public BigDecimal pegarValorBase(String emp_cd) {
+		// TODO Auto-generated method stub
 
+		BigDecimal retorno = new BigDecimal(0);
+		Optional<Parametro> oParam = ((ParametroRepository) getRepository()).findPorEmpresa(emp_cd);
+		
+		
+		if(oParam.isPresent()) {
+			Parametro param = oParam.get(); 
+			
+			retorno = param.getValorBase();
+		}
+		
+		return retorno;
+
+	}
+	
 	@Override
 	public Optional<Parametro> atualizarT(Parametro t, Integer id) {
 		// TODO Auto-generated method stub
@@ -139,5 +160,26 @@ public class ParametroServiceImpl extends BaseService<Parametro, Integer> {
 
 		return Optional.of(t);
 	}
+
+	@Override
+	public Boolean deletar(Integer i) {
+		// TODO Auto-generated method stub
+		
+		
+		Optional<Parametro> oParam = this.pegar(i);
+		
+		if(oParam.isPresent()) {
+			Parametro param  = oParam.get();
+			tRepository.deleteAll(param.getTaxas());
+			super.deletar(i);
+			
+			return true;
+		}		
+
+		
+		return false;
+	}
+	
+	
 
 }

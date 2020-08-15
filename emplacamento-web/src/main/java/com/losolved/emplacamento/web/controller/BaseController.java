@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,9 +57,17 @@ public class BaseController<T extends BaseEntity<I> ,  I>  {
 	
 	
 	@CrossOrigin(origins = "*")
-	@RequestMapping(method=RequestMethod.DELETE)
-	public void deletarT(@RequestParam(required=true) I id){
-		deletar(id);
+	@DeleteMapping("{id}")
+	public ResponseEntity<Object> deletarT( @PathVariable I id){
+	   Boolean retorno =	deletar(id);
+	   
+	   
+	   if(retorno) {
+		   return ResponseEntity.ok().build();   
+	   }else {
+		   return ResponseEntity.notFound().build();   
+	   }
+	   
 	}
 	
 	@CrossOrigin(origins = "*", methods = RequestMethod.POST)
@@ -67,7 +76,7 @@ public class BaseController<T extends BaseEntity<I> ,  I>  {
 		T savedT = baseService.createT(t);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedT).toUri();
 		
-		return ResponseEntity.created(location).build();
+		return ResponseEntity.created(location).body(savedT);
 		
 	}
 	
@@ -85,6 +94,8 @@ public class BaseController<T extends BaseEntity<I> ,  I>  {
 
 		return ResponseEntity.noContent().build();
 	}
+	
+	
 	
 	public Boolean deletar(I i) {
 		Boolean retorno = false; 

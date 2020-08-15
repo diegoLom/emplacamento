@@ -2,6 +2,7 @@ package com.losolved.emplacamento.services.impl;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.swing.text.MaskFormatter;
 
 import org.apache.commons.collections.IteratorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +28,13 @@ import com.losolved.emplacamento.domain.EmplacamentoAvulso;
 import com.losolved.emplacamento.domain.EmplacamentoTaxa;
 import com.losolved.emplacamento.domain.EmplacamentoTaxaKey;
 import com.losolved.emplacamento.domain.FormaPagamento;
+import com.losolved.emplacamento.domain.Parametro;
 import com.losolved.emplacamento.domain.Taxa;
 import com.losolved.emplacamento.integration.repository.EmplacamentoRepository;
 import com.losolved.emplacamento.integration.repository.EmplacamentoTaxaRepository;
 import com.losolved.emplacamento.integration.repository.FormaPagamentoRepository;
 import com.losolved.emplacamento.integration.repository.FormaPagamentoRepository.OnlyForma;
+import com.losolved.emplacamento.integration.repository.ParametroRepository;
 import com.losolved.emplacamento.integration.repository.TaxasRepository;
 import com.losolved.emplacamento.services.BaseService;
 import com.losolved.emplacamento.services.EmplacamentoAvulsoService;
@@ -48,6 +52,9 @@ public class EmplacamentoServiceImpl extends BaseService<Emplacamento, Integer> 
 
 	@Autowired
 	FormaPagamentoRepository fRepository;
+	
+	@Autowired
+	ParametroRepository pRepository;
 
 	@Autowired
 	EmplacamentoTaxaRepository eRepository;
@@ -180,7 +187,7 @@ public class EmplacamentoServiceImpl extends BaseService<Emplacamento, Integer> 
 
 		return true;
 	}
-
+	BigDecimal valor_abate = new BigDecimal(0);
 	public byte[] generateReport(Integer id) throws IOException {
 
 		byte[] reportData = null;
@@ -201,16 +208,65 @@ public class EmplacamentoServiceImpl extends BaseService<Emplacamento, Integer> 
 			parameters.put("vlr_proposta", new java.text.DecimalFormat("R$ #,##0.00").format( emplacamento.getValor_nf()));
 			parameters.put("obsv", emplacamento.getObservacao());
 			parameters.put("vlr_total", new java.text.DecimalFormat("R$ #,##0.00").format(emplacamento.getValorEmplacamento()));
+			parameters.put("nome_cliente", emplacamento.getNome_cliente());
+			parameters.put("cpf", formataCpf(emplacamento.getCpf()) );
+			
+			BigDecimal valor_ipva = new BigDecimal(0);
+			
+			List<EmplacamentoTaxa> emplacaIpva = 
+			emplacamento.getTaxas().stream().filter( taxa -> taxa.getTaxa().getDescr().contains("IPVA")).collect(Collectors.toList());
 			
 			
-			parameters.put("hasCortesia", false);
+			emplacamento.getEmp_cd();
+			
+			Optional<Parametro> oParam = pRepository.findPorEmpresa(emplacamento.getEmp_cd()); 
+			
+			
+			BigDecimal valor_base = new BigDecimal(0);
+			
+			if(oParam.isPresent()) {
+				Parametro param =	oParam.get();
+				valor_base = param.getValorBase();
+			}
+			
+			
+		//	BigDecimal valor_abate = new BigDecimal(0); 
+			
+			emplacamento.getTaxas().forEach(empl_taxa ->{
+				
+				if(empl_taxa.getTaxa().getAbateBase()) {
+					valor_abate = valor_abate.add(empl_taxa.getValor_final());
+				}
+								
+			});
+			
+			
+			
+			
+			
+			
+		
+			
+			Boolean hasCortesia = false; 
+			int cortesia = 
+			emplacamento.getPagamentos().stream().filter(s -> 
+			s.getTipoPagamento().getNome().toUpperCase().indexOf("CORTESIA") > 0).collect(Collectors.toList()).size();
+			
+			parameters.put("hasCortesia", cortesia > 0);
 
 			
 			System.out.println(emplacamento.getValorEmplacamento());
 		//	parameters.put("vlr_proposta", emplacamento.getValor_proposta().toString());
 			
 //			parameters.put("obsv", emplacamento.getValorEmplacamento().toString());
-//
+//				int cortesia = 
+
+			
+			emplacamento.getTaxas().forEach(e -> {
+				
+					e.setValor_final(e.getValor_final());
+				
+			} );
 			
 			JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(emplacamento.getTaxas());
 
@@ -226,6 +282,23 @@ public class EmplacamentoServiceImpl extends BaseService<Emplacamento, Integer> 
 		}
 
 		return reportData;
+	}
+	
+	
+	public static String formataCpf(String numero) {
+		
+		MaskFormatter mf;
+		try {
+			mf = new MaskFormatter("###.###.###-##");
+			
+			mf.setValueContainsLiteralCharacters(false);  
+			
+			return mf.valueToString(numero);	
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+			return "";
 	}
 
 }

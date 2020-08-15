@@ -15,7 +15,7 @@ public interface EmplacamentoRepository extends CrudRepository<Emplacamento, Lon
 	
 	
 	
-		@Query("SELECT * FROM emplacamento WHERE form_tp = 1 ")
+		@Query(value = "SELECT * FROM emplacamento WHERE form_tp = '1' ", nativeQuery = true)
 		List<Emplacamento> findOnlyEmplacamentoProposta();
 		
 		

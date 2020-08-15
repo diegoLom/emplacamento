@@ -2,11 +2,15 @@ package com.losolved.emplacamento.services.impl;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.swing.text.MaskFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,8 +65,10 @@ public class EmplacamentoAvulsoServiceImpl extends BaseService<EmplacamentoAvuls
 		
 		Set<FormaPagamento> pagamentos =  toSave.getEmplacamento().getPagamentos();
 		
-		Optional<FormaPagamento> oPagamento = pagamentos.stream().filter(s -> 
-			s.getTipoPagamento().getNome().equalsIgnoreCase("CORTESIA")).findFirst();
+		Optional<FormaPagamento> oPagamento = 
+				pagamentos.stream()
+				.filter(s -> s.getTipoPagamento().getNome().equalsIgnoreCase("CORTESIA")).findFirst();
+
 		
 		BigDecimal valorCortesia =  oPagamento.isPresent() ? oPagamento.get().getValor() : new BigDecimal(0);
 		
@@ -119,10 +125,31 @@ public class EmplacamentoAvulsoServiceImpl extends BaseService<EmplacamentoAvuls
 				
 				parameters.put("vlr_proposta", new java.text.DecimalFormat("R$ #,##0.00").format( emplacamento.getVlVec()));
 				parameters.put("obsv", emplacamento.getObservacoes());
+				
+				
+				
 				parameters.put("vlr_total", new java.text.DecimalFormat("R$ #,##0.00").format(emplacamento.getEmplacamento().getValorEmplacamento()));
 				
-				parameters.put("hasCortesia", false);
+				parameters.put("nome_cliente", emplacamento.getEmplacamento().getNome_cliente());
+				parameters.put("cpf", formataCpf(emplacamento.getEmplacamento().getCpf()) );
 				
+				
+				Boolean hasCortesia = false; 
+				int cortesia = 
+						emplacamento.getEmplacamento().getPagamentos().stream().filter(s -> 
+				s.getTipoPagamento().getNome().toUpperCase().indexOf("CORTESIA") > 0).collect(Collectors.toList()).size();
+				
+				parameters.put("hasCortesia", cortesia > 0);
+
+								emplacamento.getEmplacamento().getTaxas().forEach(e -> {
+					
+						e.setValor_final(e.getValor_final());
+					
+				} );
+								
+						
+								
+							
 				
 				JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(emplacamento.getEmplacamento().getTaxas());
 
@@ -141,13 +168,23 @@ public class EmplacamentoAvulsoServiceImpl extends BaseService<EmplacamentoAvuls
 	   }
 
 
-
-
-	   
-	   
-	  
-
+public static String formataCpf(String numero) {
+	
+	MaskFormatter mf;
+	try {
+		mf = new MaskFormatter("###.###.###-##");
+		
+		mf.setValueContainsLiteralCharacters(false);  
+		
+		return mf.valueToString(numero);	
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}  
+		return "";
 }
+
+		}
 
 
 

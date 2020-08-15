@@ -63,10 +63,8 @@ public class Emplacamento extends BaseEntity<Integer> {
 	private String emp_cd;
 	private String emp_ds;
 	private String form_tp;
-	
+	private String cpf;
 
-
-//	@OneToMany(targetEntity = com.losolved.emplacamento.domain.FormaPagamento.class, mappedBy = "emplacamento" , fetch = FetchType.LAZY)
 	@Transient
 	private Set<FormaPagamento> pagamentos;
 
@@ -85,9 +83,14 @@ public class Emplacamento extends BaseEntity<Integer> {
 	private java.util.Date dtemissao_nf;
 	
 	
-	
-	
-	
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
 	public String getForm_tp() {
 		return form_tp;
@@ -136,7 +139,7 @@ public class Emplacamento extends BaseEntity<Integer> {
 		
 		for (EmplacamentoTaxa empl_taxa : taxas) {
 			if(empl_taxa != null && empl_taxa.getTaxa() != null)
-				valorEmplacamento = valorEmplacamento.add(empl_taxa.getTaxa().getVl_final());
+				valorEmplacamento = valorEmplacamento.add(empl_taxa.getValor_final());
 		}
 	
 		this.taxas = taxas;

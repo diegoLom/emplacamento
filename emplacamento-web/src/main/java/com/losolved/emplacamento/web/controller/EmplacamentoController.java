@@ -32,11 +32,12 @@ public class EmplacamentoController extends BaseController<Emplacamento, Integer
 	}
 	
 	@CrossOrigin(origins = "*")
-	@GetMapping(value =" /only")
-	public List<Emplacamento> pegarTodos() {
+	@GetMapping(value ="/propostas")
+	public List<Emplacamento> pegarSomente() {
 		return   ((EmplacamentoServiceImpl) getBaseService()).getOnlyEmplacamento();
-	};
+	}
 
+	
 	
 	@CrossOrigin(origins = "*")
 	@GetMapping(

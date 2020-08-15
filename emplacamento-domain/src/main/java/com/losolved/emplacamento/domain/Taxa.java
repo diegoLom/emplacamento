@@ -74,10 +74,30 @@ public class Taxa extends BaseEntity<Integer> {
 	@JsonInclude
 	private Boolean atualiza;
 	
+	@Column(name = "obrigatorio", columnDefinition="BIT")
+	private Boolean obrigatorio;
 	
 	
-	
-	
+	@Column(name = "abate_base", columnDefinition="BIT")
+	private Boolean abateBase;
+		
+	public Boolean getAbateBase() {
+		
+		return abateBase;
+	}
+
+	public void setAbateBase(Boolean abateBase) {
+		this.abateBase = abateBase;
+	}
+
+	public Boolean getObrigatorio() {
+		return obrigatorio;
+	}
+
+	public void setObrigatorio(Boolean obrigatorio) {
+		this.obrigatorio = obrigatorio;
+	}
+
 	public Boolean getAtualiza() {
 		return atualiza;
 	}
@@ -203,9 +223,11 @@ public class Taxa extends BaseEntity<Integer> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
+		result = prime * result + ((abateBase == null) ? 0 : abateBase.hashCode());
 		result = prime * result + ((atualiza == null) ? 0 : atualiza.hashCode());
 		result = prime * result + ((descr == null) ? 0 : descr.hashCode());
 		result = prime * result + ((emplacamentos == null) ? 0 : emplacamentos.hashCode());
+		result = prime * result + ((obrigatorio == null) ? 0 : obrigatorio.hashCode());
 		result = prime * result + ((parametro == null) ? 0 : parametro.hashCode());
 		result = prime * result + ((per_taxa == null) ? 0 : per_taxa.hashCode());
 		result = prime * result + ((tp_valor == null) ? 0 : tp_valor.hashCode());
@@ -214,9 +236,12 @@ public class Taxa extends BaseEntity<Integer> {
 		result = prime * result + ((vl_calculado == null) ? 0 : vl_calculado.hashCode());
 		result = prime * result + ((vl_custo == null) ? 0 : vl_custo.hashCode());
 		result = prime * result + ((vl_final == null) ? 0 : vl_final.hashCode());
+		result = prime * result + ((vl_final_formatado == null) ? 0 : vl_final_formatado.hashCode());
 		result = prime * result + ((vl_iof == null) ? 0 : vl_iof.hashCode());
 		return result;
 	}
+	
+	
 
 	@Override
 	public boolean equals(Object obj) {
@@ -227,6 +252,11 @@ public class Taxa extends BaseEntity<Integer> {
 		if (getClass() != obj.getClass())
 			return false;
 		Taxa other = (Taxa) obj;
+		if (abateBase == null) {
+			if (other.abateBase != null)
+				return false;
+		} else if (!abateBase.equals(other.abateBase))
+			return false;
 		if (atualiza == null) {
 			if (other.atualiza != null)
 				return false;
@@ -241,6 +271,11 @@ public class Taxa extends BaseEntity<Integer> {
 			if (other.emplacamentos != null)
 				return false;
 		} else if (!emplacamentos.equals(other.emplacamentos))
+			return false;
+		if (obrigatorio == null) {
+			if (other.obrigatorio != null)
+				return false;
+		} else if (!obrigatorio.equals(other.obrigatorio))
 			return false;
 		if (parametro == null) {
 			if (other.parametro != null)
@@ -282,6 +317,11 @@ public class Taxa extends BaseEntity<Integer> {
 				return false;
 		} else if (!vl_final.equals(other.vl_final))
 			return false;
+		if (vl_final_formatado == null) {
+			if (other.vl_final_formatado != null)
+				return false;
+		} else if (!vl_final_formatado.equals(other.vl_final_formatado))
+			return false;
 		if (vl_iof == null) {
 			if (other.vl_iof != null)
 				return false;
@@ -293,9 +333,10 @@ public class Taxa extends BaseEntity<Integer> {
 	@Override
 	public String toString() {
 		return "Taxa [descr=" + descr + ", per_taxa=" + per_taxa + ", tp_veic=" + tp_veic + ", tp_valor=" + tp_valor
-				+ ", vl_custo=" + vl_custo + ", vl_final=" + vl_final + ", vl_iof=" + vl_iof + ", vl_bilhete="
-				+ vl_bilhete + ", atualiza=" + atualiza + ", vl_calculado=" + vl_calculado + ", parametro=" + parametro
-				+ ", emplacamentos=" + emplacamentos + "]";
+				+ ", vl_custo=" + vl_custo + ", vl_final=" + vl_final + ", vl_final_formatado=" + vl_final_formatado
+				+ ", vl_iof=" + vl_iof + ", vl_bilhete=" + vl_bilhete + ", atualiza=" + atualiza + ", obrigatorio="
+				+ obrigatorio + ", abateBase=" + abateBase + ", vl_calculado=" + vl_calculado + ", parametro="
+				+ parametro + ", emplacamentos=" + emplacamentos + "]";
 	}
 
 }

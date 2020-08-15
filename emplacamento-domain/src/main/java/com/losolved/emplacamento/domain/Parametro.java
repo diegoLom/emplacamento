@@ -1,5 +1,6 @@
 package com.losolved.emplacamento.domain;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -47,6 +48,9 @@ public class Parametro extends BaseEntity<Integer> {
 	private Uf uf;
 	
 	@Column
+	private BigDecimal valorBase; 
+	
+	@Column
 	@Temporal(value = TemporalType.DATE)
 	private java.util.Date data_per;
 	
@@ -81,6 +85,16 @@ public class Parametro extends BaseEntity<Integer> {
 
 	public java.util.Date getData_per() {
 		return data_per;
+	}
+	
+	
+
+	public BigDecimal getValorBase() {
+		return valorBase;
+	}
+
+	public void setValorBase(BigDecimal valorBase) {
+		this.valorBase = valorBase;
 	}
 
 	public void setData_per(java.util.Date data_per) {
