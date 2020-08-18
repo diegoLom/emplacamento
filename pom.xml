@@ -153,8 +153,9 @@
 
 			<dependencies>
 				<dependency>
-					<groupId>org.postgresql</groupId>
-				</dependency>
+				<groupId>org.postgresql</groupId>
+				<artifactId>postgresql</artifactId> 
+				</dependency> 
 			</dependencies>
 			
 
