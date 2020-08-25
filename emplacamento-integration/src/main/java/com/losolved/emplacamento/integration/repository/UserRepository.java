@@ -11,6 +11,6 @@ import com.losolved.emplacamento.domain.User;
 public interface UserRepository extends CrudRepository<User, String>  {
 	
 	
-	Optional<User> findById(String username);
+
 
 }

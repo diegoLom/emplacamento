@@ -80,7 +80,21 @@ public class Taxa extends BaseEntity<Integer> {
 	
 	@Column(name = "abate_base", columnDefinition="BIT")
 	private Boolean abateBase;
+	
+	@Transient
+	private Set<TaxaVec> taxasVec = new HashSet<TaxaVec>();
+	
+	
+
 		
+	public Set<TaxaVec> getTaxasVec() {
+		return taxasVec;
+	}
+
+	public void setTaxasVec(Set<TaxaVec> taxasVec) {
+		this.taxasVec = taxasVec;
+	}
+
 	public Boolean getAbateBase() {
 		
 		return abateBase;
