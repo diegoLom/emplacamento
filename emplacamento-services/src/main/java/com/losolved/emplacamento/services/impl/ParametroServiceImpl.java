@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.losolved.emplacamento.domain.Parametro;
 import com.losolved.emplacamento.domain.Taxa;
 import com.losolved.emplacamento.integration.repository.ParametroRepository;
+import com.losolved.emplacamento.integration.repository.TaxaVecRepository;
 import com.losolved.emplacamento.integration.repository.TaxasRepository;
 import com.losolved.emplacamento.services.BaseService;
 
@@ -21,7 +22,8 @@ import com.losolved.emplacamento.services.BaseService;
 public class ParametroServiceImpl extends BaseService<Parametro, Integer> {
 
 	@Autowired
-	TaxasRepository tRepository;
+	TaxasServiceImpl taxasService;
+
 
 	public Parametro salvar(Parametro toSave) {
 		return toSave;
@@ -37,8 +39,10 @@ public class ParametroServiceImpl extends BaseService<Parametro, Integer> {
 			te.setParametro(new Parametro());
 			te.getParametro().setId(id);
 			;
-
-			tRepository.save(te);
+			
+			taxasService.createT(te);
+			 
+			 
 		});
 
 		return p;
@@ -51,7 +55,7 @@ public class ParametroServiceImpl extends BaseService<Parametro, Integer> {
 		List<Parametro> params = IteratorUtils.toList(getRepository().findAll().iterator());
 
 		params.forEach(e -> {
-			Set<Taxa> taxas = tRepository.findByParametro(e);
+			Set<Taxa> taxas = taxasService.pegar(e);
 			e.setTaxas(taxas);
 			e.setUfnome(e.getUf() != null ? e.getUf().getNome() : "");
 		});
@@ -67,7 +71,7 @@ public class ParametroServiceImpl extends BaseService<Parametro, Integer> {
 		if (oParametro.isPresent()) {
 
 			Parametro parametro = oParametro.get();
-			Set<Taxa> taxas = tRepository.findByParametro(parametro);
+			Set<Taxa> taxas = taxasService.pegar(parametro);
 			parametro.setTaxas(taxas);
 			parametro.setUfnome(parametro.getUf() != null ? parametro.getUf().getNome() : "");
 		}
@@ -105,7 +109,7 @@ public class ParametroServiceImpl extends BaseService<Parametro, Integer> {
 			Parametro param = t;
 
 
-			Set<Taxa> taxasPersistidas = tRepository.findByParametro(param);
+			Set<Taxa> taxasPersistidas = taxasService.pegar(param);
 
 			Set<Taxa> taxasRemover = new HashSet<Taxa>();
 			Set<Taxa> taxasAtualizar = new HashSet<Taxa>();
@@ -130,12 +134,12 @@ public class ParametroServiceImpl extends BaseService<Parametro, Integer> {
 			});
 
 			taxasRemover.forEach(taxa -> {
-				tRepository.delete(taxa);
+				taxasService.deletar(taxa.getId());
 			});
 			taxasInserir.forEach(taxa -> {
 				taxa.setParametro(new Parametro()); 
 				taxa.getParametro().setId(id); 
-				tRepository.save(taxa);
+				taxasService.createT(taxa);
 			});
 			
 			List<Integer> idRemover = taxasRemover.stream().map(ta -> ta.getId()).collect(Collectors.toList());
@@ -154,7 +158,7 @@ public class ParametroServiceImpl extends BaseService<Parametro, Integer> {
 				taxa.setId(taxa.getId());
 				taxa.setParametro(new Parametro()); 
 				taxa.getParametro().setId(id); 
-				tRepository.save(taxa);
+				taxasService.atualizarT(taxa, taxa.getId());
 			});
 		}
 
@@ -170,7 +174,7 @@ public class ParametroServiceImpl extends BaseService<Parametro, Integer> {
 		
 		if(oParam.isPresent()) {
 			Parametro param  = oParam.get();
-			tRepository.deleteAll(param.getTaxas());
+			taxasService.deletar(param.getTaxas());
 			super.deletar(i);
 			
 			return true;

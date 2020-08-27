@@ -79,6 +79,16 @@ public class TaxaVec extends BaseEntity<Integer> {
 	}
 	
 	
+	
+	
+
+	public String getTp_vec() {
+		return tp_vec;
+	}
+
+	public void setTp_vec(String tp_vec) {
+		this.tp_vec = tp_vec;
+	}
 
 	public Boolean getObrigatorio() {
 		return obrigatorio;
@@ -87,6 +97,8 @@ public class TaxaVec extends BaseEntity<Integer> {
 	public void setObrigatorio(Boolean obrigatorio) {
 		this.obrigatorio = obrigatorio;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -95,6 +107,7 @@ public class TaxaVec extends BaseEntity<Integer> {
 		result = prime * result + ((obrigatorio == null) ? 0 : obrigatorio.hashCode());
 		result = prime * result + ((taxa == null) ? 0 : taxa.hashCode());
 		result = prime * result + ((tp_valor == null) ? 0 : tp_valor.hashCode());
+		result = prime * result + ((tp_vec == null) ? 0 : tp_vec.hashCode());
 		result = prime * result + ((vl_final == null) ? 0 : vl_final.hashCode());
 		return result;
 	}
@@ -123,6 +136,11 @@ public class TaxaVec extends BaseEntity<Integer> {
 				return false;
 		} else if (!tp_valor.equals(other.tp_valor))
 			return false;
+		if (tp_vec == null) {
+			if (other.tp_vec != null)
+				return false;
+		} else if (!tp_vec.equals(other.tp_vec))
+			return false;
 		if (vl_final == null) {
 			if (other.vl_final != null)
 				return false;
@@ -133,8 +151,8 @@ public class TaxaVec extends BaseEntity<Integer> {
 
 	@Override
 	public String toString() {
-		return "TaxaVec [vl_final=" + vl_final + ", obrigatorio=" + obrigatorio + ", tp_valor=" + tp_valor + ", taxa="
-				+ taxa + "]";
+		return "TaxaVec [tp_vec=" + tp_vec + ", vl_final=" + vl_final + ", obrigatorio=" + obrigatorio + ", tp_valor="
+				+ tp_valor + ", taxa=" + taxa + "]";
 	}
 
 
