@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -30,6 +31,7 @@ import org.springframework.web.filter.GenericFilterBean;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.losolved.emplacamento.domain.User;
 import com.losolved.emplacamento.integration.repository.UserRepository;
+import com.losolved.emplacamento.integration.sdk.UsuarioResult;
 import com.losolved.emplacamento.services.BaseService;
 import com.losolved.emplacamento.services.impl.AuthoritiesServiceImpl;
 import com.losolved.emplacamento.services.impl.EmplacamentoServiceImpl;
@@ -72,15 +74,18 @@ public  class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 		
 		// oUser =  userServices.pegar(credentials.getUsername());
 		
-		if(uService == null) {
-		   ServletContext servletContext = request.getServletContext();
+		
+		  ServletContext servletContext = request.getServletContext();
 		   WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
-		  uService  = webApplicationContext.getBean(UserServiceImpl.class);
-				 
-				 //
-		 //AuthoritiesServiceImpl  authS = webApplicationContext.getBean(AuthoritiesServiceImpl.class);
 		 
-	//	 uService = new UserServiceImpl(uRep, authS);
+		if(uService == null) {
+		  uService  = webApplicationContext.getBean(UserServiceImpl.class);
+	
+		}
+		
+		if(de == null) {
+			  de  = webApplicationContext.getBean(DeController.class);
+				
 		}
 		
 		Optional<User> oUser = uService.pegar(credentials.getUsername());
@@ -106,13 +111,14 @@ public  class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 		
 		
 		
-		//de.getUsuario(credentials.getUsername()); 
+		ResponseEntity<UsuarioResult> responseResult = de.getUsuario(credentials.getUsername()); 
 		
 
 		return getAuthenticationManager().   authenticate(
-				new UsernamePasswordAuthenticationToken(
+				new CustomAuthenticationFilter(
 						credentials.getUsername(), 
-						credentials.getPassword(), 
+						credentials.getPassword(),
+						responseResult.getBody().getEmpresa(),
 						Collections.emptyList()
 						)
 				);

@@ -25,7 +25,7 @@ public class DeController {
 	private RestTemplate restTemplate;
 	
 	
-	private String url = "http://200.151.208.131:9099/de/";
+	private String url = "http://localhost:9099/de/";
 		
 	
 	@GetMapping(path = "proposta/{numeroProposta}/{empresa}" )

@@ -13,6 +13,22 @@ public class UsuarioResult {
 	private String senha;
 	private String tipo;
 	private String supervisor;
+	private String empresa;
+	
+	
+	
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	public String getEmpresa() {
+		return empresa;
+	}
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
+	}
 	public String getCodigo_funcionario() {
 		return codigo_funcionario;
 	}
