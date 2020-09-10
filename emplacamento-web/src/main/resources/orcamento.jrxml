@@ -54,12 +54,17 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="30" width="550" height="30" uuid="da2ac3e2-3495-4e74-829b-b06b1b762345"/>
+				<reportElement x="0" y="30" width="550" height="30" uuid="6d81b43b-fd79-42bb-b39f-74650b73bd3c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Center">
-					<font fontName="SansSerif" size="12" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["ORÇAMENTO PARA SERVIÇO DE EMPLACAMENTO \n"+
-"Veículo Novo"]]></textFieldExpression>
+$P{setor}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -69,7 +74,7 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="99" splitType="Stretch">
+		<band height="104" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<rectangle>
 				<reportElement x="0" y="0" width="554" height="98" uuid="955cfad4-a26b-40bb-adf7-91b7190c0902">
@@ -449,13 +454,17 @@
 "VALOR:"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="104" y="313" width="90" height="40" uuid="f9f6c332-8981-4fd2-8837-e25ad8b51a9a">
+				<reportElement x="104" y="313" width="236" height="40" uuid="f9f6c332-8981-4fd2-8837-e25ad8b51a9a">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[$P{hasCortesia} == true]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Left">
 					<font size="7"/>
 				</textElement>
+				<textFieldExpression><![CDATA[$P{loja}+"\n"+
+$P{responsavel}+"\n"+
+$P{cliente}+"\n"+
+$P{valor}+" \n"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="369" y="313" width="90" height="40" uuid="c79d9e19-b686-4a2a-8a63-686b8b4f27a0">
@@ -467,7 +476,6 @@
 				</textElement>
 				<textFieldExpression><![CDATA["DATA:\n"+
 "SETOR:\n"+           
-"CÓDIGO (DEALER):\n"+  
 "PLACA:"]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -478,9 +486,12 @@
 				<textElement textAlignment="Left">
 					<font size="7"/>
 				</textElement>
+				<textFieldExpression><![CDATA[$P{data}+"\n"+
+$P{setor}+" \n"+
+$P{placa}+"\n"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="160" y="372" width="232" height="12" uuid="86a589bc-c881-48e3-b13a-34d63d44ec16">
+				<reportElement x="160" y="375" width="232" height="12" uuid="86a589bc-c881-48e3-b13a-34d63d44ec16">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -490,7 +501,7 @@
 				<textFieldExpression><![CDATA["Assinatura Gerente"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="150" y="361" width="242" height="12" uuid="5c43dd0f-5461-4446-b713-47f0b7acbd9c">
+				<reportElement x="150" y="364" width="242" height="12" uuid="5c43dd0f-5461-4446-b713-47f0b7acbd9c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>

@@ -113,15 +113,19 @@ public  class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 		
 		ResponseEntity<UsuarioResult> responseResult = de.getUsuario(credentials.getUsername()); 
 		
-
-		return getAuthenticationManager().   authenticate(
+		Object user =	getAuthenticationManager().   authenticate(
 				new CustomAuthenticationFilter(
 						credentials.getUsername(), 
 						credentials.getPassword(),
 						responseResult.getBody().getEmpresa(),
 						Collections.emptyList()
 						)
-				);
+				); 
+		
+		
+		((UsernamePasswordAuthenticationToken ) user).setDetails(responseResult.getBody().getEmpresa());
+		
+		return (UsernamePasswordAuthenticationToken) user;
 	}
 	
 	@Override
@@ -130,8 +134,7 @@ public  class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 			HttpServletResponse response,
 			FilterChain filterChain,
 			Authentication auth) throws IOException, ServletException {
-		
-		TokenAuthenticationService.addAuthentication(response, auth.getName());
+		TokenAuthenticationService.addAuthentication(response, auth.getName(), auth.getDetails().toString());
 	}
 
 }

@@ -200,8 +200,8 @@ public class EmplacamentoServiceImpl extends BaseService<Emplacamento, Integer> 
 			Emplacamento emplacamento = oEmplacamento.get(); 
 			
 			
-			parameters.put("dept_venda", "Indiana");
-			parameters.put("data_solicitacao", "16/05/2020");
+			parameters.put("dept_venda", emplacamento.getEstado().equals("VN")  ? "NOVOS" :  emplacamento.getEstado().equals("VU") ?  "SEMI-NOVOS" : "VENDA DIRETA");
+			parameters.put("data_solicitacao", emplacamento.getPropdata());
 			parameters.put("model_veiculo", emplacamento.getModelo_veiculo());
 			parameters.put("munc_veiculo", "Salvador");
 			
@@ -210,6 +210,18 @@ public class EmplacamentoServiceImpl extends BaseService<Emplacamento, Integer> 
 			parameters.put("vlr_total", new java.text.DecimalFormat("R$ #,##0.00").format(emplacamento.getValorEmplacamento()));
 			parameters.put("nome_cliente", emplacamento.getNome_cliente());
 			parameters.put("cpf", formataCpf(emplacamento.getCpf()) );
+			
+			
+			parameters.put("obsv", emplacamento.getObservacao() != null ?  emplacamento.getObservacao() : "");
+			
+			
+			parameters.put("loja", emplacamento.getEmp_ds() );
+			parameters.put("responsavel", emplacamento.getVendedor_proposta() );
+			parameters.put("cliente", emplacamento.getNome_cliente() );
+			parameters.put("data", emplacamento.getPropdata() );
+			parameters.put("setor", emplacamento.getEstado().equals("VN") ? "VEÍCULOS NOVOS" :  emplacamento.getEstado().equals("VU") ?  "SEMI-NOVOS" : "VENDA DIRETA"    );
+			parameters.put("codigo", "" );
+			parameters.put("placa", emplacamento.getPlaca() );
 			
 			BigDecimal valor_ipva = new BigDecimal(0);
 			
@@ -240,33 +252,34 @@ public class EmplacamentoServiceImpl extends BaseService<Emplacamento, Integer> 
 								
 			});
 			
-			
-			
-			
-			
-			
-		
-			
 			Boolean hasCortesia = false; 
-			int cortesia = 
-			emplacamento.getPagamentos().stream().filter(s -> 
-			s.getTipoPagamento().getNome().toUpperCase().indexOf("CORTESIA") > 0).collect(Collectors.toList()).size();
+			Optional<FormaPagamento> oFormas =
+					
+			emplacamento.getPagamentos().stream().filter(
+					s -> 
+			s.getTipoPagamento().getNome().toUpperCase().indexOf("CORTESIA") >= 0
 			
-			parameters.put("hasCortesia", cortesia > 0);
+					).findFirst();
+			
+			
+			if(oFormas.isPresent()) {
+				 hasCortesia = true ;
+				parameters.put("valor", new java.text.DecimalFormat("R$ #,##0.00").format(oFormas.get().getValor())  );
+			}		
+			
+			
+			
+			
+			
+			parameters.put("hasCortesia", hasCortesia);
 
 			
 			System.out.println(emplacamento.getValorEmplacamento());
-		//	parameters.put("vlr_proposta", emplacamento.getValor_proposta().toString());
-			
-//			parameters.put("obsv", emplacamento.getValorEmplacamento().toString());
-//				int cortesia = 
-
-			
+	
 			emplacamento.getTaxas().forEach(e -> {
 				
 					e.setValor_final(e.getValor_final());
-				
-			} );
+			});
 			
 			JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(emplacamento.getTaxas());
 

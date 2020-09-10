@@ -2,6 +2,7 @@ package com.losolved.emplacamento.services.impl;
 
 
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -59,18 +60,46 @@ public class TaxasServiceImpl extends BaseService<Taxa, Integer> {
 	@Override
 	public Taxa createT(Taxa t) {
 		// TODO Auto-generated method stub
-		t = super.createT(t);
-		final Integer id = ((Taxa) t).getId();
+		Taxa saved = super.createT(t);
+		final Integer id = ((Taxa) saved).getId();
+		
+		final BigDecimal vl_final = ((Taxa) saved).getVl_final();
+		final Boolean obrigatorio = ((Taxa) saved).getObrigatorio();
+
 
 		t.getTaxasVec().forEach(te -> {
 			te.setTaxa(new Taxa());
 			te.getTaxa().setId(id);
 			;
+			
+			if(te.getVl_final() == null || te.getVl_final().compareTo(new BigDecimal(0))  <= 0) {
+				te.setVl_final(vl_final);
+			}
+			
+			if(te.getObrigatorio() == null) {
+				te.setObrigatorio(obrigatorio);
+			}
 
 			tRepository.save(te);
 		});
 
 		return t;
+	}
+	
+	
+	public Set<Taxa> pegar(Parametro p) {
+		
+		Set<Taxa> taxas = taxaRepository.findByParametro(p);
+
+		taxas.forEach(e -> {
+			Set<TaxaVec> taxasVec = tRepository.findByTaxa(e);
+			e.setTaxasVec(taxasVec);
+		
+		});
+
+		return taxas;
+
+		
 	}
 	
 	@Override
@@ -110,7 +139,7 @@ public class TaxasServiceImpl extends BaseService<Taxa, Integer> {
 	public Optional<Taxa> atualizarT(Taxa t, Integer id) {
 		// TODO Auto-generated method stub
 
-	//	Optional<Taxa> oTaxa = super.atualizarT(t, id);
+		Optional<Taxa> oTaxa = super.atualizarT(t, id);
 
 		if (true) {
 
@@ -173,6 +202,24 @@ public class TaxasServiceImpl extends BaseService<Taxa, Integer> {
 		return Optional.of(t);
 	}
 	
+	
+
+	public void deletar(Set<Taxa> taxas ) {
+		// TODO Auto-generated method stub
+		
+		
+		
+		if(taxas != null) {
+			taxas.forEach(t -> {
+				tRepository.deleteAll(t.getTaxasVec());
+				super.deletar(t.getId());
+				
+			});
+			
+		}
+		
+		
+	}
 
 	@Override
 	public Boolean deletar(Integer i) {
@@ -197,7 +244,4 @@ public class TaxasServiceImpl extends BaseService<Taxa, Integer> {
 	  
 
 }
-
-
-
 

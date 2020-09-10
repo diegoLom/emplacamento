@@ -23,12 +23,15 @@ public class TokenAuthenticationService {
 	static final String TOKEN_PREFIX = "Bearer";
 	static final String HEADER_STRING = "Authorization";
 	
-	static void addAuthentication(HttpServletResponse response, String username) {
+	static void addAuthentication(HttpServletResponse response, String username, String empresa) {
 		String JWT = Jwts.builder()
-				.setSubject(username)
+				.setSubject(username).setAudience(empresa)
 				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
 				.signWith(SignatureAlgorithm.HS512, SECRET)
 				.compact();
+		
+		
+		
 		response.addHeader("access-control-expose-headers", "Authorization");
 		response.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
 	}
