@@ -38,7 +38,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Table(name = "taxa")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @SequenceGenerator(name = "default_seq", sequenceName = "TAXA_SEQ", initialValue = 1, allocationSize = 1)
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Taxa.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "descr", scope = Taxa.class)
 public class Taxa extends BaseEntity<Integer> {
 
 	@Column

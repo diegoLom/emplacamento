@@ -142,6 +142,7 @@
 			</dependencies>
 
 		</profile>
+		
 		<profile>
 			<id>dev</id>
 			<properties>
@@ -157,11 +158,13 @@
 				<artifactId>postgresql</artifactId> 
 				</dependency> 
 			</dependencies>
-			
-
+					
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
+			
+			
+
 		</profile>
 
 	</profiles>

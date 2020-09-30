@@ -76,6 +76,8 @@ public class TaxasServiceImpl extends BaseService<Taxa, Integer> {
 				te.setVl_final(vl_final);
 			}
 			
+			te.setTp_valor("FIXO");
+			
 			if(te.getObrigatorio() == null) {
 				te.setObrigatorio(obrigatorio);
 			}
