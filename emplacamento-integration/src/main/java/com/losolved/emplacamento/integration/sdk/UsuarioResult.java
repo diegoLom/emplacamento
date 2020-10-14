@@ -15,6 +15,8 @@ public class UsuarioResult {
 	private String supervisor;
 	private String empresa;
 	
+	private String email;
+	
 	
 	
 	public String getSenha() {
@@ -64,6 +66,12 @@ public class UsuarioResult {
 	public String toString() {
 		return "UsuarioResult [codigo_funcionario:" + codigo_funcionario + ", nome:" + nome + ", login_funcionario:"
 				+ login_funcionario + ", tipo:" + tipo + ", supervisor:" + supervisor + "]";
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

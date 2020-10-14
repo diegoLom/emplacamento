@@ -55,6 +55,32 @@ public class UserServiceImpl {
 	}
 	
 	
+	public User atualizar(User u) {
+		
+		
+		Optional<User> oUser = repository.findById(u.getUsername());
+		
+		if(oUser.isPresent()) {
+			User toUpdate = oUser.get();
+			toUpdate.setPassword(u.getPassword());
+			
+			toUpdate = repository.save(toUpdate);
+			
+			return toUpdate;
+			
+		}else{
+			
+			User toCreate = create(u);
+			
+			return toCreate;
+			
+		}
+		
+		
+		
+	}
+	
+	
 	public UserServiceImpl(UserRepository repository, AuthoritiesServiceImpl authService) {
 		super();
 		this.repository = repository;

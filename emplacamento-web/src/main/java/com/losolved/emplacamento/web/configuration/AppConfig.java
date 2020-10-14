@@ -1,5 +1,6 @@
 package com.losolved.emplacamento.web.configuration;
 
+import java.util.Properties;
 import java.util.TimeZone;
 
 import javax.sql.DataSource;
@@ -12,6 +13,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
@@ -53,6 +56,30 @@ public class AppConfig {
 		public RestTemplate restTemplate(RestTemplateBuilder builder) {
 			return builder.build();
 		}
+	 
+	 
+	 @Bean
+	 public JavaMailSender getJavaMailSender() {
+	     JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+	   
+	     mailSender.setUsername("losolvedcorp@yahoo.com");
+	     mailSender.setPassword("rjytwuogojhbfbpz");
+	     
+	     Properties props = mailSender.getJavaMailProperties();
+	     props.put("mail.transport.protocol", "smtp");
+	     props.put("mail.smtp.auth", "true");
+	     props.put("mail.smtp.starttls.enable", "true");
+	     props.put("mail.debug", "true");
+	     
+	     
+         props.put("mail.smtp.host", "smtp.mail.yahoo.com");
+         props.put("mail.smtp.socketFactory.port", "465");
+         props.put("mail.smtp.auth", "true");
+         props.put("mail.smtp.port", "25");
+
+	     
+	     return mailSender;
+	 }
 
 
 }
