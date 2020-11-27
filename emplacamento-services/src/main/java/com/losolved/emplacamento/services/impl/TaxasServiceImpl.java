@@ -49,6 +49,15 @@ public class TaxasServiceImpl extends BaseService<Taxa, Integer> {
 			Parametro parametro = oParametro.get();
 			taxas = taxaRepository.findByParametro(parametro);
 			
+			
+
+			taxas.forEach(e -> {
+				Set<TaxaVec> taxasVec = tRepository.findByTaxa(e);
+				e.setTaxasVec(taxasVec);
+			
+			});
+
+			
 			return taxas;
 		}
 		

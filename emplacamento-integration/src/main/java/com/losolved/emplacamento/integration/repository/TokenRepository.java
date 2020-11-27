@@ -19,9 +19,9 @@ public interface TokenRepository extends CrudRepository<Token, String> {
 	Optional<Token> findByTokenAndUserName(String token, String userName);
 	
 	
-	 @Query(value = "select * from token  where token.token = ?1 AND token.user_name = ?2 AND  token.dt_expiracao BETWEEN ?3 AND ?4 " 
+	 @Query(value = "select * from token  where token.token = ?1 AND  token.dt_expiracao BETWEEN ?2 AND ?3 " 
 		 		, nativeQuery = true)
-	Optional<Token> findTokenValid(String token, String userName, java.util.Date today , java.util.Date yesterday);
+	Optional<Token> findTokenValid(String token,java.util.Date today , java.util.Date yesterday);
 	
 	 
 	 

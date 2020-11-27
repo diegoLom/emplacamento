@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -29,7 +30,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name = "parametro")
+@Table(name = "parametro", uniqueConstraints = 
+@UniqueConstraint(columnNames= {"EMP_CD","DATA_PER"} , name = "empresa_periodo"))
 @JsonIgnoreProperties(ignoreUnknown = true)
 @SequenceGenerator(name = "default_seq", sequenceName = "PARAMETRO_SEQ", initialValue = 1, allocationSize = 1)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,

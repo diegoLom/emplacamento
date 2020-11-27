@@ -1,6 +1,10 @@
 package com.losolved.emplacamento.services.impl;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +36,17 @@ public class ParametroServiceImpl extends BaseService<Parametro, Integer> {
 	@Override
 	public Parametro createT(Parametro p) {
 		// TODO Auto-generated method stub
+		
+		LocalDate a = LocalDate.now();
+		
+		
+		a = a.minusDays( (a.getDayOfMonth() - 1) );
+		a = a.minusMonths(a.getMonthValue() - 1);
+		
+		p.setData_per(Date.from(a.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		
 		p = super.createT(p);
+		
 		final Integer id = ((Parametro) p).getId();
 
 		p.getTaxas().forEach(te -> {

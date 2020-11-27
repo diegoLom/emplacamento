@@ -33,8 +33,6 @@ public class AuthController {
 //	/auth/reset  setar a senha do usuario
 //	/auth/check  checar se o token informado é valido 
 	
-	
-	
 	@Autowired
 	private TokenServiceImpl tokenService;
 	
@@ -94,8 +92,10 @@ public class AuthController {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hashedPassword = passwordEncoder.encode(t.getNewPassword());
 		
+		Token token = tokenService.check(t.getToken(), "");
+		
 		User u = new User();
-		u.setUsername(t.getUser());
+		u.setUsername(token.getUserName());
 		u.setPassword(hashedPassword);
 	
 		u = userService.atualizar(u); 

@@ -40,8 +40,18 @@ public class TokenServiceImpl {
 
 		Token token = new Token();
 
-		IntStream limitedIntStreamWithinARange = random.ints(6, 100000, 999999);
-		int number = limitedIntStreamWithinARange.findAny().getAsInt();
+		IntStream limitedIntStreamWithinARange = null;
+		int number =0;
+		Token exist = new Token();
+		exist.setToken("0");
+		
+		while(exist.getToken() != null) {
+			 limitedIntStreamWithinARange = random.ints(6, 100000, 999999);
+			 number = limitedIntStreamWithinARange.findAny().getAsInt();
+			 
+			 exist = check(number+"", "");
+		}
+		
 		
 		LocalDateTime date = LocalDateTime.now();
 
@@ -62,7 +72,7 @@ public class TokenServiceImpl {
 		LocalDateTime yesterday = today.minusDays(1);
 		
 		//TODO: corrigir o username
-		Optional<Token> oToken = tRepository.findTokenValid(token, "diego", Date.from(yesterday.atZone(ZoneId.systemDefault()).toInstant()),
+		Optional<Token> oToken = tRepository.findTokenValid(token, Date.from(yesterday.atZone(ZoneId.systemDefault()).toInstant()),
 				Date.from(today.atZone(ZoneId.systemDefault()).toInstant()) );
 
 			

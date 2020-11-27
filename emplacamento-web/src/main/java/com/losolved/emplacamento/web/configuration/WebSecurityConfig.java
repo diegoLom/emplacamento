@@ -53,24 +53,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return config;
     }
 }).and().csrf().disable().authorizeRequests()
-		.antMatchers("/home").permitAll()
 		
-		
-		.antMatchers(HttpMethod.OPTIONS).permitAll()
+			.antMatchers(new String[]{"/home","/auth/token","/auth/reset","/auth/check"}).
+		permitAll().antMatchers(HttpMethod.OPTIONS).permitAll()
 		.antMatchers(HttpMethod.POST, "/login").
-			permitAll().anyRequest().permitAll();
-			
-//			.anyRequest().authenticated().and()
-//		
-//		
-//		
-//		// filtra requisições de login
-//		.addFilterBefore(new JWTLoginFilter("/login", authenticationManager()),
-//                UsernamePasswordAuthenticationFilter.class)
-//		
-////		// filtra outras requisições para verificar a presença do JWT no header
-//				.addFilterBefore(new JWTAuthenticationFilter(),
-//		   UsernamePasswordAuthenticationFilter.class);
+			permitAll().anyRequest().authenticated().and()
+		
+		
+		
+		// filtra requisições de login
+		.addFilterBefore(new JWTLoginFilter("/login", authenticationManager()),
+                UsernamePasswordAuthenticationFilter.class)
+		
+//		// filtra outras requisições para verificar a presença do JWT no header
+		.addFilterBefore(new JWTAuthenticationFilter(),
+		   UsernamePasswordAuthenticationFilter.class);
 	}
 
 	
